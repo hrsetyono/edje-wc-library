@@ -22,7 +22,11 @@ function h_handlebars_template($views) {
   <script id="h-quick-form" type="text/x-handlebars-template">
 
     <div class="quick-form">
-      <label>{{ currency }}</label><input type="text" placeholder="Price" value="{{ price }}">
+      {{#if isEqualGlobalPrice }}
+        <label>{{ currency }}</label><input type="text" placeholder="{{ price }}">
+      {{else }}
+        <label>{{ currency }}</label><input type="text" placeholder="Price" value="{{ price }}">
+      {{/if }}
 
       <input type="number" placeholder="Stock" value="{{ stock }}">
     </div>
