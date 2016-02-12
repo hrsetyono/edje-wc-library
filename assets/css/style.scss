@@ -9,33 +9,8 @@
   display: none !important;
 }
 
-// Variation Header
-// need to be strong to override existing one
-.woocommerce_variations .woocommerce_variation.wc-metabox > h3 {
-  cursor: default !important;
-
-  .ui-sortable-handle,
-  .tips.sort,
-  strong { display: none; }
-
-  select {
-    cursor: pointer;
-    margin: 0;
-    padding: 0;
-    border: none;
-    background-color: transparent;
-
-    box-shadow: none;
-    transition: $g-transition;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-  }
-
-  select:nth-of-type(1) { @include variation-select($color-green); }
-  select:nth-of-type(2) { @include variation-select($color-purple); }
-  select:nth-of-type(3) { @include variation-select($color-orange); }
-
-  a.remove_variation.delete,
+.wc-metaboxes-wrapper .wc-metaboxes .wc-metabox > h3 {
+  a.delete,
   .handlediv {
     position: relative;
     width: 27px;
@@ -70,7 +45,7 @@
     }
   }
 
-  a.remove_variation.delete {
+  a.delete {
     font-size: 0;
     border-radius: 0 3px 3px 0;
     @include wp-button-error-on-hover();
@@ -83,6 +58,33 @@
       -webkit-font-smoothing: antialiased;
     }
   }
+}
+
+// Variation Header
+// need to be strong to override existing one
+.woocommerce_variations .woocommerce_variation.wc-metabox > h3 {
+  cursor: default !important;
+
+  .ui-sortable-handle,
+  .tips.sort,
+  strong { display: none; }
+
+  select {
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+
+    box-shadow: none;
+    transition: $g-transition;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+  }
+
+  select:nth-of-type(1) { @include variation-select($color-green); }
+  select:nth-of-type(2) { @include variation-select($color-purple); }
+  select:nth-of-type(3) { @include variation-select($color-orange); }
 }
 
 .wc-metabox.open h3,
@@ -140,7 +142,9 @@
   }
 
   input {
-    width: 100px;
+    position: relative;
+    z-index: 2;
+    width: 80px;
     vertical-align: middle;
     line-height: normal;
     font-weight: normal;
@@ -148,7 +152,7 @@
   }
 
   input[type="number"] {
-    width: 70px;
+    width: 60px;
   }
 
   label {
@@ -171,10 +175,40 @@
   }
 
   .dashicons {
-    color: #bbb;
+    width: auto;
     vertical-align: sub;
-    font-size: 16px;
+    font-size: 14px;
   }
+
+  // ---------
+  // SALE
+  // ---------
+
+  [name*="quick_price"] + label,
+  [name*="quick_sale"] {
+    display: none;
+  }
+
+  [name*="quick_price"] + label {
+    border-radius: 0;
+  }
+
+  [name*="sale_price"] {
+    border-radius: 0 $g-radius $g-radius 0;
+  }
+
+  &.has-sale {
+    [name*="quick_price"] {
+      margin-right: -4px;
+      border-radius: 0;
+    }
+
+    [name*="quick_price"] + label,
+    [name*="quick_sale"] {
+      display: inline-block;
+    }
+  }
+
 }
 
 .woocommerce_variable_attributes {
