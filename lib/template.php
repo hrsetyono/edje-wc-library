@@ -21,20 +21,20 @@ function h_handlebars_template($views) {
   <!-- Quick Form -->
   <script id="h-quick-form" type="text/x-handlebars-template">
 
-    <div class="quick-form {{#if sale }} has-sale {{/if }}">
+    <div class="quick-form {{#if _sale_price }} has-sale {{/if }}">
       {{#if isEqualGlobalPrice }}
-        <label>{{ currency }}</label><input type="text" placeholder="{{ price }}" name="quick_price">
+        <label>{{ currency }}</label><input type="text" placeholder="{{ _regular_price }}" name="quick_price">
       {{else }}
-        <label>{{ currency }}</label><input type="text" placeholder="{{ globalPrice }}" value="{{ price }}" name="quick_price">
+        <label>{{ currency }}</label><input type="text" placeholder="{{ globalPrice }}" value="{{ _regular_price }}" name="quick_price">
       {{/if }}
 
       {{#if isEqualGlobalSale }}
-        <label><i class="dashicons dashicons-arrow-right-alt2"></i></label><input type="text" placeholder="{{ sale }}" name="quick_sale">
+        <label><i class="dashicons dashicons-arrow-right-alt2"></i></label><input type="text" placeholder="{{ _sale_price }}" name="quick_sale">
       {{else }}
-        <label><i class="dashicons dashicons-arrow-right-alt2"></i></label><input type="text" placeholder="{{ globalSale }}" value="{{ sale }}" name="quick_sale">
+        <label><i class="dashicons dashicons-arrow-right-alt2"></i></label><input type="text" placeholder="{{ globalSale }}" value="{{ _sale_price }}" name="quick_sale">
       {{/if }}
 
-      <input type="number" placeholder="Stock" value="{{ stock }}" name="quick_stock">
+      <input type="number" placeholder="Stock" value="{{ _stock }}" name="quick_stock">
     </div>
 
   </script>

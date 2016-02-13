@@ -32,14 +32,24 @@
     stockField: "[name*='variable_stock[']",
     saleField: "[name*='variable_sale_price']",
 
+    globalPrice: 0,
+    globalSale: 0,
+
     init: function() {
-      var $variation = $(".woocommerce_variations");
-      $variation.on("DOMNodeInserted", this.onAdded.bind(this) );
+      var $variation = $("#variable_product_options");
+
+      // initiate global value
+      this.globalPrice = $("#_regular_price").val();
+      this.globalSale = $("#_sale_price").val();
+
+      // $variation.on("DOMNodeInserted", this.onAdded);
+      $("#woocommerce-product-data").on("woocommerce_variations_loaded", this.onVariationLoaded);
+      $("#woocommerce-product-data").on("woocommerce_variations_added", this.onVariationAdded);
 
       $variation.on("focus", "h3 input", this.highlightHeader);
       $variation.on("blur", "h3 input", this.removeHighlightHeader);
 
-      this.addGlobalForm();
+      // this.addGlobalForm();
       this.addListener();
     },
 
@@ -51,48 +61,67 @@
       $(this).closest(".woocommerce_variation").removeClass("active");
     },
 
-    // After loading the variation, add quick form at the header
-    onAdded: function(e) {
-      var $target = $(e.target);
+    onVariationLoaded: function(e) {
+      var that = variation;
+      that.addGlobalForm();
 
-      if($target.hasClass("woocommerce_variation") ) {
-        var $header = $target.closest(".woocommerce_variation").find("h3");
+      $(".woocommerce_variation").each(function() {
+        var index = $(this).index();
 
-        var data = this.getFormData($target);
-
-        // manage stock always on
-        $target.find("[name*='variable_manage_stock']").prop("checked", true).change();
-
-        // append template
-        var template = Handlebars.compile($("#h-quick-form").html() );
-        var html = template(data);
-        $header.append(html);
-      }
+        that.addQuickForm(index);
+      });
     },
 
-    getFormData: function($target) {
-      var that = this;
-      var $priceField = $target.find(that.priceField),
-          $stockField = $target.find(that.stockField),
-          $saleField = $target.find(that.saleField);
+    onVariationAdded: function(e) {
+      var that = variation;
 
-      var data = {
-        currency: woocommerce_admin_meta_boxes.currency_format_symbol,
-        price: $priceField.val(),
-        sale: $saleField.val(),
-        stock: $stockField.val(),
-        globalPrice: $("#global-price").val(),
-        globalSale: $("#global-sale").val(),
-      };
+      that.addQuickForm(index);
+    },
 
-      data.isEqualGlobalPrice = data.globalPrice === data.price;
-      data.isEqualGlobalSale = data.globalSale === data.sale;
+    /*
+      Add a Quick form on top of current variation
+
+      @param int index - The loop index of current variation
+    */
+    addQuickForm: function(index) {
+      var $target = $(".woocommerce_variation").eq(index);
+      var $header = $target.closest(".woocommerce_variation").find("h3");
+
+      var data = this.parseData($target);
+
+      // manage stock always on
+      $target.find("[name*='variable_manage_stock']").prop("checked", true).change();
+
+      // append template
+      var template = Handlebars.compile($("#h-quick-form").html() );
+      var html = template(data);
+      $header.append(html);
+    },
+
+    /*
+      Get the raw data and process it
+      @param dom $variation - The container of the variation
+
+      @return array - Parsed data ready to be used
+    */
+    parseData: function($variation) {
+      // parse data
+      var data = $variation.find(".h-variation-data").data("variation");
+
+      data.currency = woocommerce_admin_meta_boxes.currency_format_symbol;
+      data.globalPrice = this.globalPrice;
+      data.globalSale = this.globalSale;
+      data.isEqualGlobalPrice = data.globalPrice === data._regular_price;
+      data.isEqualGlobalSale = data.globalSale === data._sale_price;
 
       return data;
     },
 
     // Add global price and sale fields
     addGlobalForm: function() {
+      // remove existing global form
+      $(".quick-form.toolbar").remove();
+
       var data = { currency: woocommerce_admin_meta_boxes.currency_format_symbol };
 
       var template = Handlebars.compile($("#h-global-form").html() );
@@ -100,8 +129,8 @@
       $("#variable_product_options .toolbar-top").after(html);
 
       // copy the WC simple product's price to global form
-      $("#global-price").val( $("#_regular_price").val() ).change();
-      $("#global-sale").val( $("#_sale_price").val() ).change();
+      $("#global-price").val( $("#_regular_price").val() );
+      $("#global-sale").val( $("#_sale_price").val() );
     },
 
     addListener: function() {
@@ -113,7 +142,7 @@
   };
 
   /*
-    GLOBAL PRICE FIELD
+    GLOBAL + QUICK PRICE FIELD
   */
   var priceField = {
     main: "#global-price",
@@ -122,10 +151,10 @@
     quick: "h3 input[name*='quick_price']",
 
     init: function() {
-      $(".woocommerce_variations").on("change", this.target, this.onTargetChange);
-      $(".woocommerce_variations").on("change", this.quick, this.onQuickChange);
+      $("#variable_product_options").on("change", this.target, this.onTargetChange);
+      $("#variable_product_options").on("change", this.quick, this.onQuickChange);
 
-      $(this.main).on("change", this.onGlobalChange);
+      $("#variable_product_options").on("change", this.main, this.onGlobalChange);
     },
 
     onTargetChange: function(e) {
@@ -179,17 +208,20 @@
 
   };
 
+  /*
+    GLOBAL + QUICK SALE FIELD
+  */
   var saleField = {
     main: "#global-sale",
-    targets: ".woocommerce_variation [name*='variable_sale_price']",
+    targets: ".woocommerce_variation [name*='variable_sale_price[']",
     target: "[name*='variable_sale_price[']",
     quick: "h3 input[name*='quick_sale']",
 
     init: function() {
-      $(".woocommerce_variations").on("change", this.target, this.onTargetChange);
-      $(".woocommerce_variations").on("change", this.quick, this.onQuickChange);
+      $("#variable_product_options").on("change", this.target, this.onTargetChange);
+      $("#variable_product_options").on("change", this.quick, this.onQuickChange);
 
-      $(this.main).on("change", this.onGlobalChange);
+      $("#variable_product_options").on("change", this.main, this.onGlobalChange);
     },
 
     onTargetChange: function(e) {
@@ -259,14 +291,17 @@
     },
   };
 
+  /*
+    QUICK STOCK FIELD
+  */
   var stockField = {
     targets: ".woocommerce_variation [name*='variable_stock[']",
     target: "[name*='variable_stock[']",
     quick: "h3 input[name*='quick_stock']",
 
     init: function() {
-      $(".woocommerce_variations").on("change", this.target, this.onTargetChange);
-      $(".woocommerce_variations").on("change", this.quick, this.onQuickChange);
+      $("#variable_product_options").on("change", this.target, this.onTargetChange);
+      $("#variable_product_options").on("change", this.quick, this.onQuickChange);
     },
 
     onTargetChange: function(e) {
@@ -283,41 +318,6 @@
 
       var $target = $(this).closest(".woocommerce_variation").find(that.target);
       $target.val(val);
-    }
-  };
-
-  /*
-    FIELD
-  */
-  var field = {
-    // link two fields, one changed, the other one also changed
-    link: function($fieldA, $fieldB) {
-      $fieldA.on("change", function(e) {
-        $fieldB.val($(this).val() );
-      });
-
-      $fieldB.on("change", function(e) {
-        $fieldA.val($(this).val() );
-      });
-
-      // initially copy the value;
-      if($fieldA.val() ) {
-        $fieldB.val($fieldA.val() );
-      }
-    },
-
-    // link between the quick form at the header with the main form
-    quickLink: function($fieldMain, $fieldQuick) {
-      $fieldMain.on("change", function(e) {
-        var val = $(this).val();
-
-        // if same as global price, change the placeholder
-        if($("#global-price").val() === val) {
-          $fieldQuick.attr("placeholder", val);
-        } else {
-          $fieldQuick.val(val);
-        }
-      });
     }
   };
 

@@ -60,6 +60,15 @@
   }
 }
 
+// Pricing
+#general_product_data .options_group.pricing {
+  display: block !important;
+
+  .sale_schedule {
+    display: none;
+  }
+}
+
 // Variation Header
 // need to be strong to override existing one
 .woocommerce_variations .woocommerce_variation.wc-metabox > h3 {

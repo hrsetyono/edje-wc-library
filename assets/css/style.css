@@ -24,6 +24,10 @@
 
 .wc-metaboxes-wrapper .wc-metaboxes .wc-metabox > h3 a.delete::before { content: "\f182"; font-family: dashicons; font-size: initial; vertical-align: top; -webkit-font-smoothing: antialiased; }
 
+#general_product_data .options_group.pricing { display: block !important; }
+
+#general_product_data .options_group.pricing .sale_schedule { display: none; }
+
 .woocommerce_variations .woocommerce_variation.wc-metabox > h3 { cursor: default !important; }
 
 .woocommerce_variations .woocommerce_variation.wc-metabox > h3 .ui-sortable-handle, .woocommerce_variations .woocommerce_variation.wc-metabox > h3 .tips.sort, .woocommerce_variations .woocommerce_variation.wc-metabox > h3 strong { display: none; }
