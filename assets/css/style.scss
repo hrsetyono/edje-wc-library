@@ -2,18 +2,6 @@
 @import "edje/helper";
 
 // -----------
-// ATTRIBUTE
-// -----------
-
-.wc-metabox .woocommerce_attribute_data.wc-metabox-content {
-  td label,
-  .attribute_name strong {
-    // display: none;
-  }
-}
-
-
-// -----------
 // VARIATION
 // -----------
 
@@ -224,20 +212,5 @@
 
   input {
     margin-right: 15px;
-  }
-}
-
-.woocommerce_variable_attributes {
-
-  .sku {
-    display: none;
-  }
-
-  .data {
-    > p:nth-child(1),
-    > p:nth-child(3),
-    div:nth-child(7),
-    div:nth-child(8),
-    div:nth-child(9) { display: none; }
   }
 }
