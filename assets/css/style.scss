@@ -1,6 +1,22 @@
 @import "setting";
 @import "edje/helper";
 
+// -----------
+// ATTRIBUTE
+// -----------
+
+.wc-metabox .woocommerce_attribute_data.wc-metabox-content {
+  td label,
+  .attribute_name strong {
+    // display: none;
+  }
+}
+
+
+// -----------
+// VARIATION
+// -----------
+
 .woocommerce_variation.wc-metabox {
   position: relative;
 }

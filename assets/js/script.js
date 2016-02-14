@@ -262,9 +262,9 @@ var MAIN = {
   sale: "#_sale_price",
 };
 
-/*
-  VARIATION
-*/
+/* -----------------
+  VARIATION Handler
+----------------- */
 var variation = {
   init: function() {
     var $variationTab = $("#variable_product_options");
@@ -376,9 +376,27 @@ var variation = {
 };
 
 
+/* -------------------
+  ATTRIBUTE Handler
+------------------ */
+var attribute = {
+  init: function() {
+    $(document.body).on("woocommerce_added_attribute", this.onAdded);
+  },
+
+  /*
+    After adding new attribute, auto check the "Used for variations"
+  */
+  onAdded: function(e) {
+    console.log($(this) );
+    $("#product_attributes").find("[name*='attribute_variation[']").prop("checked", true).change();
+  }
+};
+
 var start = function() {
   changeDefault.init();
   variation.init();
+  attribute.init();
 };
 
 $(document).ready(start);

@@ -14,8 +14,8 @@ function h_product_update($post_id) {
 /*
   Add Quick Form to each Variation
 */
-add_action("woocommerce_product_after_variable_attributes", "hw_add_quick_form", 10, 3);
-function hw_add_quick_form($index, $variation_data, $variation) {
+add_action("woocommerce_product_after_variable_attributes", "hw_add_variation_data", 10, 3);
+function hw_add_variation_data($index, $variation_data, $variation) {
   ?>
   <div class="h-variation-data" data-variation="<?php echo htmlspecialchars(json_encode($variation_data), ENT_QUOTES, 'UTF-8'); ?>"></div>
   <?php
