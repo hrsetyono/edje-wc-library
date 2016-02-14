@@ -44,11 +44,17 @@
 
 .wc-metabox.open h3, .wc-metabox h3:hover, .wc-metabox.active { background-color: #eff9fd; }
 
-.woocommerce_variation h3 .quick-form { display: inline-block; }
+.hwc-form input { position: relative; z-index: 2; width: 80px; vertical-align: middle; line-height: normal; font-weight: normal; border-radius: 3px; }
 
-.woocommerce_variation h3 .quick-form input { border-color: transparent; box-shadow: none; }
+.hwc-form input[type="number"] { width: 60px; }
 
-.woocommerce_variation h3 .quick-form label { border-color: transparent; background-color: transparent; }
+.hwc-form label { display: inline-block; background: #f4f4f4; padding: 3.5px 7px; border: #dfdfdf solid 1px; height: 27px; font-size: 13px; font-weight: bold; line-height: normal; border-radius: 3px 0 0 3px; box-sizing: border-box; }
+
+.hwc-form label + input { margin: 0 5px 0 -1px; border-radius: 0 3px 3px 0; }
+
+.hwc-form .dashicons { width: auto; vertical-align: sub; font-size: 14px; }
+
+.quick-form { display: inline-block; }
 
 .woocommerce_variation h3:hover .quick-form input, .woocommerce_variation.open .quick-form input, .woocommerce_variation.active .quick-form input { border: 1px solid #ddd; box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07); }
 
@@ -56,29 +62,23 @@
 
 .woocommerce_variation h3:hover .quick-form label, .woocommerce_variation.open .quick-form label, .woocommerce_variation.active .quick-form label { background: #f4f4f4; border: #dfdfdf solid 1px; }
 
-.quick-form.toolbar span { margin-right: 5px; }
+.quick-form input { border-color: transparent; box-shadow: none; }
 
-.quick-form.toolbar input { margin-right: 15px; }
-
-.quick-form input { position: relative; z-index: 2; width: 80px; vertical-align: middle; line-height: normal; font-weight: normal; border-radius: 3px; }
-
-.quick-form input[type="number"] { width: 60px; }
-
-.quick-form label { display: inline-block; background: #f4f4f4; padding: 3.5px 7px; border: #dfdfdf solid 1px; height: 27px; font-size: 13px; font-weight: bold; line-height: normal; border-radius: 3px 0 0 3px; box-sizing: border-box; }
-
-.quick-form label + input { margin: 0 5px 0 -1px; border-radius: 0 3px 3px 0; }
-
-.quick-form .dashicons { width: auto; vertical-align: sub; font-size: 14px; }
-
-.quick-form [name*="quick_price"] + label, .quick-form [name*="quick_sale"] { display: none; }
-
-.quick-form [name*="quick_price"] + label { border-radius: 0; }
-
-.quick-form [name*="sale_price"] { border-radius: 0 3px 3px 0; }
+.quick-form label { border-color: transparent; background-color: transparent; }
 
 .quick-form.has-sale [name*="quick_price"] { margin-right: -4px; border-radius: 0; }
 
 .quick-form.has-sale [name*="quick_price"] + label, .quick-form.has-sale [name*="quick_sale"] { display: inline-block; }
+
+.quick-form [name*="quick_price"] + label, .quick-form [name*="quick_sale"] { display: none; }
+
+.quick-form [name*="quick_price"] + label { border-radius: 0; margin-left: -1px; }
+
+.quick-form [name*="quick_sale"] { border-radius: 0 3px 3px 0; }
+
+.global-form span { margin-right: 5px; }
+
+.global-form input { margin-right: 15px; }
 
 .woocommerce_variable_attributes .sku { display: none; }
 

@@ -94,53 +94,7 @@
 }
 
 // custom form at variation header
-.quick-form {
-
-  // initial state, no background
-  .woocommerce_variation h3 & {
-    display: inline-block;
-
-    input {
-      border-color: transparent;
-      box-shadow: none;
-    }
-
-    label {
-      border-color: transparent;
-      background-color: transparent;
-    }
-  }
-
-  // hover / opened state, shows the fields border
-  .woocommerce_variation h3:hover &,
-  .woocommerce_variation.open &,
-  .woocommerce_variation.active & {
-    input {
-      border: 1px solid #ddd;
-      box-shadow: inset 0 1px 2px rgba(black, .07);
-
-      &:focus {
-        border-color: #5b9dd9;
-        box-shadow: 0 0 2px rgba(30, 140, 190, .8);
-      }
-    }
-
-    label {
-      background: #f4f4f4;
-      border: #dfdfdf solid 1px;
-    }
-  }
-
-  &.toolbar {
-    span {
-      margin-right: 5px;
-    }
-
-    input {
-      margin-right: 15px;
-    }
-  }
-
+.hwc-form {
   input {
     position: relative;
     z-index: 2;
@@ -179,23 +133,45 @@
     vertical-align: sub;
     font-size: 14px;
   }
+}
+
+// Form at the header of each variation
+.quick-form {
+  display: inline-block;
+
+  // hover / opened state, shows the fields border
+  .woocommerce_variation h3:hover &,
+  .woocommerce_variation.open &,
+  .woocommerce_variation.active & {
+    input {
+      border: 1px solid #ddd;
+      box-shadow: inset 0 1px 2px rgba(black, .07);
+
+      &:focus {
+        border-color: #5b9dd9;
+        box-shadow: 0 0 2px rgba(30, 140, 190, .8);
+      }
+    }
+
+    label {
+      background: #f4f4f4;
+      border: #dfdfdf solid 1px;
+    }
+  }
+
+  input {
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  label {
+    border-color: transparent;
+    background-color: transparent;
+  }
 
   // ---------
   // SALE
   // ---------
-
-  [name*="quick_price"] + label,
-  [name*="quick_sale"] {
-    display: none;
-  }
-
-  [name*="quick_price"] + label {
-    border-radius: 0;
-  }
-
-  [name*="sale_price"] {
-    border-radius: 0 $g-radius $g-radius 0;
-  }
 
   &.has-sale {
     [name*="quick_price"] {
@@ -209,6 +185,30 @@
     }
   }
 
+  [name*="quick_price"] + label,
+  [name*="quick_sale"] {
+    display: none;
+  }
+
+  [name*="quick_price"] + label {
+    border-radius: 0;
+    margin-left: -1px
+  }
+
+  [name*="quick_sale"] {
+    border-radius: 0 $g-radius $g-radius 0;
+  }
+}
+
+// Global Form at the top of all variations
+.global-form {
+  span {
+    margin-right: 5px;
+  }
+
+  input {
+    margin-right: 15px;
+  }
 }
 
 .woocommerce_variable_attributes {

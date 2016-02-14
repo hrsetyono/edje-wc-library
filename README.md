@@ -8,4 +8,8 @@ Visit our [WIKI](https://github.com/hrsetyono/edje-woo/wiki) for full documentat
 
 ## Sample Features
 
-...
+**NEW VARIATION INTERFACE**
+
+Important information in a glance, editable without toggling each variation.
+
+![Edje Woo - New Variation Interface](http://cdn.setyono.net/edjewoo/variation.jpg)
