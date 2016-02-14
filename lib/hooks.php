@@ -18,11 +18,17 @@ add_action("woocommerce_product_after_variable_attributes", "hw_add_quick_form",
 function hw_add_quick_form($index, $variation_data, $variation) {
   ?>
   <div class="h-variation-data" data-variation="<?php echo htmlspecialchars(json_encode($variation_data), ENT_QUOTES, 'UTF-8'); ?>"></div>
-  <script>
-    var hVariationIndex = "<?php echo $index; ?>";
-    var hVariationData = <?php echo json_encode($variation_data); ?>;
-
-    Hoo.addQuickForm(hVariationIndex, hVariationData);
-  </script>
   <?php
+}
+
+/*
+  Save Main regular and sale price when AJAX-saving the variations
+*/
+add_action("wp_ajax_h_after_save_variations", "hw_after_save_variations");
+function hw_after_save_variations() {
+  $data = $_POST["data"];
+
+  $post_id = $data["post_id"];
+  update_post_meta($post_id, "_regular_price", $data["global_price"]);
+  update_post_meta($post_id, "_sale_price", $data["global_sale"]);
 }

@@ -8,7 +8,7 @@ function h_handlebars_template($views) {
   <!-- Global Form -->
   <script id="h-global-form" type="text/x-handlebars-template">
 
-    <div class="toolbar quick-form">
+    <div class="toolbar quick-form global-form">
       <span>Regular Price</span>
       <label>{{ currency }}</label><input type="text" id="global-price" name="global_price">
 
