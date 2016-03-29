@@ -1,3 +1,9 @@
+## 0.4.0
+
+- Changing Main Backorder will change all variations too
+- Fixed a bug where global price are missing
+- Hide the attribute checkboxes
+
 ## 0.3.1
 
 - Automatically tick "Used for Variations" when adding new attribute

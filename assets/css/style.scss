@@ -2,6 +2,24 @@
 @import "edje/helper";
 
 // -----------
+// ATTRIBUTE
+// -----------
+
+.wc-metaboxes-wrapper .wc-metabox {
+  .woocommerce_attribute_data td label {
+    display: none;
+  }
+}
+
+.woocommerce_attribute {
+
+  &:nth-child(1) strong { color: $color-green; }
+  &:nth-child(2) strong { color: $color-purple; }
+  &:nth-child(3) strong { color: $color-orange; }
+}
+
+
+// -----------
 // VARIATION
 // -----------
 
@@ -76,10 +94,11 @@
   select {
     cursor: pointer;
     margin: 0;
-    padding: 0;
+    padding: 0 5px;
     border: none;
     background-color: transparent;
 
+    border-radius: $g-radius;
     box-shadow: none;
     transition: $g-transition;
     -moz-appearance: none;

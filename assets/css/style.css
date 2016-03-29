@@ -1,3 +1,11 @@
+.wc-metaboxes-wrapper .wc-metabox .woocommerce_attribute_data td label { display: none; }
+
+.woocommerce_attribute:nth-child(1) strong { color: #29bc94; }
+
+.woocommerce_attribute:nth-child(2) strong { color: #763eaf; }
+
+.woocommerce_attribute:nth-child(3) strong { color: #ff9517; }
+
 .woocommerce_variation.wc-metabox { position: relative; }
 
 .toolbar-variations-defaults { display: none !important; }
@@ -28,7 +36,7 @@
 
 .woocommerce_variations .woocommerce_variation.wc-metabox > h3 .ui-sortable-handle, .woocommerce_variations .woocommerce_variation.wc-metabox > h3 .tips.sort, .woocommerce_variations .woocommerce_variation.wc-metabox > h3 strong { display: none; }
 
-.woocommerce_variations .woocommerce_variation.wc-metabox > h3 select { cursor: pointer; margin: 0; padding: 0; border: none; background-color: transparent; box-shadow: none; transition: all 0.25s ease-in-out; -moz-appearance: none; -webkit-appearance: none; }
+.woocommerce_variations .woocommerce_variation.wc-metabox > h3 select { cursor: pointer; margin: 0; padding: 0 5px; border: none; background-color: transparent; border-radius: 3px; box-shadow: none; transition: all 0.25s ease-in-out; -moz-appearance: none; -webkit-appearance: none; }
 
 .woocommerce_variations .woocommerce_variation.wc-metabox > h3 select:nth-of-type(1) { color: #29bc94; }
 

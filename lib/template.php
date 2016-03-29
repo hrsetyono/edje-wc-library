@@ -1,8 +1,7 @@
 <?php
 
-add_filter("admin_head", "h_handlebars_template");
-
-function h_handlebars_template($views) {
+add_filter('admin_head', 'hoo_handlebars_template');
+function hoo_handlebars_template($views) {
   ?>
 
   <!-- Global Form -->
@@ -22,18 +21,26 @@ function h_handlebars_template($views) {
   <script id="h-quick-form" type="text/x-handlebars-template">
 
     <div class="hwc-form quick-form {{#if _sale_price }} has-sale {{/if }}">
-      <label>{{ currency }}</label><input type="text" name="quick_price" data-default-placeholder="Price"
-        {{#if isEqualGlobalPrice }}
-          placeholder="{{ globalPrice }}"
+      <label>{{ currency }}</label><input type="text" name="quick_price"
+        {{#if _regular_price }}
+          {{#if isEqualGlobalPrice }}
+            placeholder="{{ globalPrice }}"
+          {{else }}
+              placeholder="{{ globalPrice }}" value="{{ _regular_price }}"
+          {{/if }}
         {{else }}
-          placeholder="{{ globalPrice }}" value="{{ _regular_price }}"
+          placeholder="Price"
         {{/if }}>
 
-      <label><i class="dashicons dashicons-arrow-right-alt2"></i></label><input type="text" name="quick_sale" data-default-placeholder="Sale"
-        {{#if isEqualGlobalSale }}
-          placeholder="{{ globalSale }}"
+      <label><i class="dashicons dashicons-arrow-right-alt2"></i></label><input type="text" name="quick_sale"
+        {{#if _sale_price }}
+          {{#if isEqualGlobalSale }}
+            placeholder="{{ globalSale }}"
+          {{else }}
+            placeholder="{{ globalSale }}" value="{{ _sale_price }}"
+          {{/if }}
         {{else }}
-          placeholder="{{ globalSale }}" value="{{ _sale_price }}"
+          placeholder="Sale"
         {{/if }}>
 
       <input type="number" placeholder="Stock" value="{{ _stock }}" name="quick_stock" data-default-placeholder="Stock">
