@@ -87,8 +87,8 @@
 .woocommerce_variations .woocommerce_variation.wc-metabox > h3 {
   cursor: default !important;
 
-  .ui-sortable-handle,
-  .tips.sort,
+  .sort { margin-top: 1px; }
+
   strong { display: none; }
 
   select {

@@ -1,3 +1,8 @@
+## 0.4.1
+
+- Re-enable the variation manual sorting by drag-n-drop.
+- Fixed bug where additional variation isn't set the global price initially.
+
 ## 0.4.0
 
 - Changing Main Backorder will change all variations too

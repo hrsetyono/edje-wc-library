@@ -5,7 +5,7 @@ Description: Collection of code to help developers customize WooCommerce site.
 Plugin URI: http://github.com/hrsetyono/edje-woo
 Author: The Syne Studio
 Author URI: http://thesyne.com/
-Version: 0.4.0
+Version: 0.4.1
 */
 
 require_once 'lib/all.php';

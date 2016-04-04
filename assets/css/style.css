@@ -34,7 +34,9 @@
 
 .woocommerce_variations .woocommerce_variation.wc-metabox > h3 { cursor: default !important; }
 
-.woocommerce_variations .woocommerce_variation.wc-metabox > h3 .ui-sortable-handle, .woocommerce_variations .woocommerce_variation.wc-metabox > h3 .tips.sort, .woocommerce_variations .woocommerce_variation.wc-metabox > h3 strong { display: none; }
+.woocommerce_variations .woocommerce_variation.wc-metabox > h3 .sort { margin-top: 1px; }
+
+.woocommerce_variations .woocommerce_variation.wc-metabox > h3 strong { display: none; }
 
 .woocommerce_variations .woocommerce_variation.wc-metabox > h3 select { cursor: pointer; margin: 0; padding: 0 5px; border: none; background-color: transparent; border-radius: 3px; box-shadow: none; transition: all 0.25s ease-in-out; -moz-appearance: none; -webkit-appearance: none; }
 

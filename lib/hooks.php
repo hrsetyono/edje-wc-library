@@ -1,20 +1,20 @@
 <?php
 // Page save
-add_action('woocommerce_process_product_meta', 'hoo_edit_save', 100, 2);
+add_action('woocommerce_process_product_meta', 'hoo_edit_save', 100);
 // Quick Save
 add_action('woocommerce_product_quick_edit_save', 'hoo_quick_edit_save', 100);
 
 /*
   Update the variation data to follow the Main field
 */
-function hoo_edit_save($post_id, $post) {
+function hoo_edit_save($post_id) {
 
   // if variation product AND global price not empty
   if(!empty($_POST['global_price']) ):
     update_post_meta($post_id, '_regular_price', $_POST['global_price']);
     update_post_meta($post_id, '_sale_price', $_POST['global_sale']);
 
-    // if saved after toggling variation tag
+    // if saved after toggling variation tab
     if(isset($_POST['variable_post_id']) ) {
       _hoo_update_backorders(
         $_POST['variable_post_id'],
@@ -45,7 +45,13 @@ function _hoo_get_variation_and_update_backorders($product) {
 
   foreach($variations as $v) {
     $var_ids[] = $v['variation_id'];
-    $var_backorders[] = $v['backorders_allowed'] ? 'notify' : 'no';
+
+    if($v['backorders_allowed']) {
+      $var_backorders[] = (strpos($v['availability_html'], 'in-stock') > 0) ? 'yes' : 'notify';
+    }
+    else {
+      $var_backorders[] = 'no';
+    }
   }
 
   _hoo_update_backorders(

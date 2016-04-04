@@ -111,7 +111,7 @@ QuickForm.create = function($variation) {
   var data = _parseData($variation);
 
   // manage stock always on
-  $variation.find(TARGET.manageStock).prop('checked', true).change();
+  $variation.find(TARGET.manageStock).prop('checked', true); //.change();
 
   // append template
   var template = Handlebars.compile($('#h-quick-form').html() );
@@ -119,8 +119,11 @@ QuickForm.create = function($variation) {
   $header.append(html);
 
   // trigger change in target field
-  // $variation.find(TARGET.price).val(data._regular_price).change();
-  // $variation.find(TARGET.sale).val(data._sale_price).change();
+  $header.find(QUICK.price).change();
+  $header.find(QUICK.sale).change();
+
+  // $variation.find(TARGET.price).val(data._regular_price);
+  // $variation.find(TARGET.sale).val(data._sale_price);
 
   /*
     Get the raw data and process it
@@ -144,6 +147,10 @@ QuickForm.create = function($variation) {
     // if price empty
     if(!data._regular_price) {
       data._regular_price = data.globalPrice;
+    }
+
+    // if sale empty
+    if(!data._sale_price) {
       data._sale_price = data.globalSale;
     }
 
