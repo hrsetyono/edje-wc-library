@@ -1,6 +1,7 @@
 <?php
 
-add_filter('admin_head', 'hoo_handlebars_template');
+add_filter('admin_footer', 'hoo_handlebars_template');
+
 function hoo_handlebars_template($views) {
   ?>
 

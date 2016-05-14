@@ -1,4 +1,4 @@
 <?php
-require_once 'hooks.php';
-require_once 'javascript.php';
+require_once 'save.php';
+require_once 'admin-end.php';
 require_once 'template.php';

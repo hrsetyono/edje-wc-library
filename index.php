@@ -5,7 +5,7 @@ Description: Collection of code to help developers customize WooCommerce site.
 Plugin URI: http://github.com/hrsetyono/edje-woo
 Author: The Syne Studio
 Author URI: http://thesyne.com/
-Version: 0.4.1
+Version: 0.4.2
 */
 
 require_once 'lib/all.php';
@@ -13,6 +13,12 @@ require_once 'vendor/all.php';
 
 // constant
 define('HOO_PLUGIN_DIR', plugins_url('', __FILE__) );
+
+add_action('admin_init', 'hoo_admin_init');
+function hoo_admin_init() {
+  $hoo_save = new Hoo_Save();
+  $hoo_admin = new Hoo_Admin();
+}
 
 // Main portal for calling all methods
 class Hoo {
@@ -25,6 +31,7 @@ class Hoo {
   */
   static function get_post($query = false, $PostClass = 'TimberPost') {
     if($query) { $query['post_type'] = 'product'; }
+    else { $query = array('post_type' => 'product'); }
 
     $post = TimberPostGetter::get_post($query, $PostClass);
 		return self::attach_product_data($post);
@@ -38,6 +45,7 @@ class Hoo {
   */
   static function get_posts($query = false, $PostClass = 'TimberPost', $return_collection = false) {
     if($query) { $query['post_type'] = 'product'; }
+    else { $query = array('post_type' => 'product'); }
 
 		$posts = TimberPostGetter::get_posts($query, $PostClass, $return_collection);
 
