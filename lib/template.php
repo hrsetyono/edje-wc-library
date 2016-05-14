@@ -6,9 +6,9 @@ function hoo_handlebars_template($views) {
   ?>
 
   <!-- Global Form -->
-  <script id="h-global-form" type="text/x-handlebars-template">
+  <script id="hoo-global-form" type="text/x-handlebars-template">
 
-    <div class="toolbar hwc-form global-form">
+    <div class="toolbar hoo-form global-form">
       <span>Regular Price</span>
       <label>{{ currency }}</label><input type="text" id="global-price" name="global_price">
 
@@ -19,9 +19,9 @@ function hoo_handlebars_template($views) {
   </script>
 
   <!-- Quick Form -->
-  <script id="h-quick-form" type="text/x-handlebars-template">
+  <script id="hoo-quick-form" type="text/x-handlebars-template">
 
-    <div class="hwc-form quick-form {{#if _sale_price }} has-sale {{/if }}">
+    <div class="hoo-form quick-form {{#if _sale_price }} has-sale {{/if }}">
       <label>{{ currency }}</label><input type="text" name="quick_price"
         {{#if _regular_price }}
           {{#if isEqualGlobalPrice }}

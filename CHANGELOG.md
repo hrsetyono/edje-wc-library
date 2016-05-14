@@ -1,3 +1,9 @@
+## 0.5.0
+
+- *Manage Stock* is not ticked by default.
+- Putting 0 on Quick Stock field sets the status into *Out of Stock*.
+- Putting any number other than 0 on Quick Stock field will tick *Manage Stock*.
+
 ## 0.4.1
 
 - Re-enable the variation manual sorting by drag-n-drop.

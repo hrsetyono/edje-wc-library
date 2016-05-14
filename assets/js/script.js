@@ -52,7 +52,7 @@ GlobalForm.create = function() {
 
   var data = { currency: woocommerce_admin_meta_boxes.currency_format_symbol };
 
-  var template = Handlebars.compile($('#h-global-form').html() );
+  var template = Handlebars.compile($('#hoo-global-form').html() );
   var html = template(data);
   $('#variable_product_options .toolbar-top').after(html);
 
@@ -81,16 +81,37 @@ QuickForm.prototype = {
       var newVal = $(this).val();
       var $target = $(this).closest('.woocommerce_variation').find(TARGET[that.field]);
 
-      if(that.field === 'price' || that.field === 'sale') {
-        // if same as globalVal, empty out the quick field so it shows the placeholder
-        var globalVal = $(GLOBAL[that.field] ).val();
-        if(newVal === globalVal) {
-          $(this).val('');
-        }
-        // if empty but global val not empty, assign the globalVal to target
-        else if(!newVal && globalVal) {
-          newVal = globalVal;
-        }
+      switch(that.field) {
+        case 'price':
+        case 'sale':
+          // if same as globalVal, empty out the quick field so it shows the placeholder
+          var globalVal = $(GLOBAL[that.field] ).val();
+          if(newVal === globalVal) {
+            $(this).val('');
+          }
+          // if empty but global val not empty, assign the globalVal to target
+          else if(!newVal && globalVal) {
+            newVal = globalVal;
+          }
+          break;
+
+        // TODO: after entering 0 and delete it, the status is Out of Stock
+        case 'stock':
+          newVal = parseInt(newVal);
+          var $manage = $(this).closest('.woocommerce_variation').find(TARGET.manageStock);
+          var $status = $(this).closest('.woocommerce_variation').find(TARGET.stockStatus);
+
+          if(newVal > 0 || newVal < 0) {
+            $manage.prop('checked', true).change();
+          }
+          else if(newVal === 0) {
+            $manage.prop('checked', false).change();
+            $status.find('option:nth-child(2)').attr('selected', 'selected');
+          }
+          else {
+            $manage.prop('checked', false).change();
+            $status.find('option:nth-child(1)').attr('selected', 'selected');
+          }
       }
 
       // change the target field to be the same
@@ -111,10 +132,10 @@ QuickForm.create = function($variation) {
   var data = _parseData($variation);
 
   // manage stock always on
-  $variation.find(TARGET.manageStock).prop('checked', true); //.change();
+  // $variation.find(TARGET.manageStock).prop('checked', true);
 
   // append template
-  var template = Handlebars.compile($('#h-quick-form').html() );
+  var template = Handlebars.compile($('#hoo-quick-form').html() );
   var html = template(data);
   $header.append(html);
 
@@ -154,8 +175,8 @@ QuickForm.create = function($variation) {
       data._sale_price = data.globalSale;
     }
 
-    // if stock empty
-    if(!data._stock) {
+    // if no stock number AND out of stock
+    if(!data._stock && data._stock_status == 'outofstock') {
       data._stock = 0;
     }
 
@@ -255,6 +276,7 @@ var TARGET = {
   form: '.woocommerce_variation',
   price: '[name*="variable_regular_price"]',
   stock: '[name*="variable_stock["]',
+  stockStatus: '[name*="variable_stock_status"]',
   manageStock: '[name*="variable_manage_stock"]',
   sale: '[name*="variable_sale_price["]',
 };

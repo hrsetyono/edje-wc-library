@@ -1,5 +1,5 @@
 @import "setting";
-@import "edje/helper";
+@import "edje";
 
 // -----------
 // ATTRIBUTE
@@ -117,7 +117,7 @@
 }
 
 // custom form at variation header
-.hwc-form {
+.hoo-form {
   input {
     position: relative;
     z-index: 2;
@@ -139,7 +139,7 @@
     border: #dfdfdf solid 1px;
     height: 27px;
     font-size: 13px;
-    font-weight: bold;
+    font-weight: normal;
     line-height: normal;
 
     border-radius: 3px 0 0 3px;
