@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Edje WooCommerce Framework
+Plugin Name: Edje WooCommerce
 Description: Collection of code to help developers customize WooCommerce site.
 Plugin URI: http://github.com/hrsetyono/edje-woo
 Author: The Syne Studio
@@ -20,7 +20,7 @@ $hoo =  new Hoo();
 class Hoo {
   function __construct() {
     add_action('admin_init', array($this, 'init_admin_script') );
-    add_action('admin_init', array($this, 'init_updater') );
+    // add_action('admin_init', array($this, 'init_updater') );
   }
 
   function init_admin_script() {
@@ -32,7 +32,7 @@ class Hoo {
     Github Updater
   */
   function init_updater() {
-    require_once 'vendor/updater.php';
+    require_once 'updater.php';
 
     if (is_admin() ) {
       $plugin_repo = 'hrsetyono/edje-woo';
@@ -49,7 +49,8 @@ class Hoo {
         'readme' => 'README.md',
         'access_token' => '', // for private repo, authorize under Appearance > Github Update
        );
-       new WP_GitHub_Updater($config);
+
+      new WP_GitHub_Updater($config);
     }
   }
 }

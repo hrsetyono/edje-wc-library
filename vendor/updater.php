@@ -324,7 +324,8 @@ class WP_GitHub_Updater {
 	 */
 	public function get_plugin_data() {
 		include_once ABSPATH.'/wp-admin/includes/plugin.php';
-		$data = get_plugin_data( WP_PLUGIN_DIR.'/'.$this->config['slug'] );
+		// $data = get_plugin_data( WP_PLUGIN_DIR.'/'.$this->config['slug'] );
+		$data = get_plugin_data(plugins_url(__FILE__) );
 
 		return $data;
 	}

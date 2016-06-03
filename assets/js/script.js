@@ -167,16 +167,20 @@ QuickForm.create = function($variation) {
 
     // if price empty
     if(!data._regular_price) {
-      data._regular_price = data.globalPrice;
+      data._regular_price = parseInt(data.globalPrice);
     }
 
     // if sale empty
     if(!data._sale_price) {
-      data._sale_price = data.globalSale;
+      data._sale_price = parseInt(data.globalSale);
     }
 
-    // if no stock number AND out of stock
-    if(!data._stock && data._stock_status == 'outofstock') {
+    // if stock is 0 AND stock status is empty
+    if(data._stock === 0 && data._stock_status === '') {
+      data._stock = null;
+    }
+    // if stock is false AND out of stock
+    else if(!data._stock && data._stock_status === 'outofstock') {
       data._stock = 0;
     }
 
