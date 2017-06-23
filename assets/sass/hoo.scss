@@ -1,0 +1,146 @@
+@import "setting";
+@import "edje-framework";
+@import "hoo-checkout";
+
+@mixin button(
+  $color        : $color-main,
+  $font-color   : white,
+  $hover-shadow : 0 1px 3px rgba(black, .35) ) {
+
+  display: inline-block;
+  outline: none;
+  padding: 8px 14px;
+  border: 1px solid $color;
+  background-color: $color;
+  color: $font-color;
+  text-decoration: none;
+  font-weight: 400;
+
+  border-radius: $g-radius;
+  transition: none;
+
+  &:hover {
+    background-color: $color;
+    color: $font-color;
+    box-shadow: $hover-shadow;
+  }
+
+  &:active {
+    box-shadow: inset 0 0 0 1px white;
+  }
+}
+
+@mixin button-light($color: #c8c8c8) {
+  @include button($color, #252525, 0 1px 3px rgba(black, .2) ) ;
+}
+
+button,
+.button,
+a.button,
+[type="submit"], {
+  @include button;
+}
+
+///// INPUT /////
+
+label {
+  cursor: pointer;
+}
+
+[type="text"],
+[type="number"],
+[type="tel"],
+[type="password"],
+[type="email"],
+[type="search"],
+[type="url"],
+textarea,
+select {
+  display: block;
+  width: 100%;
+  padding: 0.5em 0.75em;
+  border: 1px solid $color-passive;
+  border-top-color: darken($color-passive, 5%);
+  border-radius: $g-radius;
+  line-height: normal;
+
+  &:hover {
+    border-color: darken($color-passive, 10%);
+    box-shadow: inset 0 0 3px $color-passive;
+  }
+
+  &:focus {
+    border-color: $color-main;
+    box-shadow: inset 0 1px 2px rgba(black, .2);
+  }
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  cursor: pointer;
+  border: 1px solid rgba(black, .2);
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+
+  transition: $g-transition;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+
+
+  &:hover {
+    border-color: $color-main;
+  }
+
+  &:checked {
+    border-color: $color-main;
+    box-shadow: inset 0 0 0 4.5px $color-main;
+  }
+
+  + label,
+  + span {
+    margin-left: 0.5em;
+  }
+}
+
+input[type="checkbox"] {
+  border-radius: $g-radius;
+}
+
+input[type="radio"] {
+  border-radius: 50%;
+}
+
+
+///// NOTICE BOX
+
+.woocommerce-info,
+.woocommerce-message,
+.woocommerce-error {
+  border-top: 3px solid transparent;
+  background-color: white;
+  list-style-type: none;
+
+  box-shadow: $shadow-z0;
+}
+
+.woocommerce-info {
+  border-top-color: $color-blue;
+}
+
+.woocommerce-message {
+  border-top-color: $color-green;
+
+  a.button {
+    border-color: $color-green;
+    color: $color-green;
+
+    &:hover { background-color: $color-green; color: white; }
+  }
+}
+
+.woocommerce-error {
+  border-top-color: $color-red;
+  color: $color-red;
+}

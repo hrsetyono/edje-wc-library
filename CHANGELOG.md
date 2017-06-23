@@ -1,3 +1,8 @@
+## 1.0.0-beta
+
+- Structure changes to follow WP recommendation.
+- [Checkout] Added major interface changes for Checkout page (under development)
+
 ## 0.5.0
 
 - *Manage Stock* is not ticked by default.

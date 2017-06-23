@@ -1,6 +1,9 @@
 <?php
+/*
+  Modify the WooCommerce metabox in Product edit page
+*/
 
-class Hoo_Admin {
+class Hoo_Metabox {
   function __construct() {
     add_action('admin_enqueue_scripts', array($this, 'enqueue_scripts'), 999);
 
@@ -12,18 +15,9 @@ class Hoo_Admin {
     Call the custom CSS and JS
   */
   function enqueue_scripts($hook) {
-    global $post;
-
-    // for single product only
-    if(isset($post->post_type) && $post->post_type == 'product') {
-      wp_register_style('hoo_style', HOO_PLUGIN_DIR . '/assets/css/style.css');
-      wp_register_script('hoo_script', HOO_PLUGIN_DIR . '/assets/js/script.js');
-      wp_register_script('hoo_handlebars', HOO_PLUGIN_DIR . '/assets/js/handlebars.js');
-
-      wp_enqueue_script('hoo_handlebars');
-      wp_enqueue_script('hoo_script');
-      wp_enqueue_style('hoo_style');
-    }
+    wp_enqueue_script('handlebars', HOO_DIR . '/assets/css/style.css');
+    wp_enqueue_script('hoo_script', HOO_DIR . '/assets/js/script.js', array('jquery') );
+    wp_enqueue_style('hoo_style', HOO_DIR . '/assets/js/handlebars.js');
   }
 
   /*

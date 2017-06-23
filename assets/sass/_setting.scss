@@ -1,0 +1,117 @@
+// Customize the framework by changing these variables
+// Put your custom variables and mixins here too
+$version: 1.0;
+
+// ----- FONT -----
+$font-family : Helvetica, Arial, "sans-serif";
+$font-family-header : Helvetica, Arial, "sans-serif";
+
+// ----- COLORS -----
+$color-main : #00aadc;
+$color-sub  : #607d8b;
+
+// $color-main-dark : darken($color-main, 10%);
+// $color-main-light : lighten($color-main, 10%);
+
+$color-link : $color-main;
+// $color-link-hover : lighten($color-main, 10%);
+
+// $color-passive : #e0e0e0;
+$color-red : #f45b4f;
+// $color-yellow : #ffeb3b;
+// $color-green : #4caf50;
+// $color-blue: #2196f3;
+
+// $body-background: #fff;
+// $text-highlight: null;
+
+
+// ----- SIZING -----
+// $size-mini   : 480px;
+// $size-small  : 767px;
+// $size-medium : 960px;
+// $size-large  : 1120px;
+
+// ----- RESPONSIVE -----
+// $responsive : true;
+// $adaptive   : false;
+// $adaptive-breakpoints : large, medium, small, mini;
+
+// ----- Z INDEX -----
+// .sample-usage { z-index: z(menu); }
+
+$z-indexes: (
+  checkout_sideform: 100,
+  checkout_login: 101,
+);
+
+// ----- GLOBAL VALUE -----
+$g-radius     : 4px;
+// $g-transition : all .25s ease-in-out;
+
+
+// ----- GRID -----
+// $grid-max-width : $size-large;
+// $grid-columns : 12;
+// $grid-gutter  : 20px; // distance between columns
+// $grid-rim     : $grid-gutter / 2; // min distance from edge of screen
+
+// ----- TILE -----
+// $tile-max    : 8;
+// $tile-gutter : 20px;
+
+
+// ----- TYPOGRAPHY -----
+$font-color  : #222;
+// $font-color-passive : #888;
+
+// $font-weight : 400;
+// $font-line : 1.65;
+$font-size : 14px;
+$font-size-small : 14px;
+
+
+// ----- HEADER -----
+// $header-color  : $font-color;
+// $header-weight : 700;
+// $header-line   : 1.25;
+// $header-spacing : 0;
+// $header-transform : none;
+
+$h1 : 44px;
+$h2 : 36px;
+$h3 : 30px;
+$h4 : 24px;
+$h5 : 20px;
+$h6 : $font-size;
+
+// ----- RESPONSIVE HEADER -----
+// the header size below that media query
+
+// $h1-sizes: (base: $h1, small: 30px);
+// $h2-sizes: (base: $h2, small: 26px);
+// $h3-sizes: (base: $h3, small: 22px);
+// $h4-sizes: (base: $h4, small: 20px);
+// $h5-sizes: (base: $h5, small: 18px);
+// $h6-sizes: (base: $h6, small: $h6);
+
+
+// ----- SHADOW -----
+// $shadow-z0: 0 0.5px 2px rgba(black, .18), 0 1.5px 6px rgba(black, .08);
+// $shadow-z1: 0 1.5px 4px rgba(black, .24), 0 1.5px 6px rgba(black, .12);
+// $shadow-z2: 0 3px 12px rgba(black, .23), 0 3px 12px rgba(black, .16);
+// $shadow-z3: 0 6px 12px rgba(black, .23), 0 10px 40px rgba(black, .19);
+
+
+// ----- PRINT -----
+// $include-print  : true;
+// $override-color : true;   // Override all text color to #000 black
+
+
+// ----- TEXT DIRECTION -----
+// $text-direction   : ltr;  // Global text direction, 'rtl' or 'ltr'
+
+
+// ----- CUSTOM MIXIN -----
+
+@mixin your-custom-mixin() { }
