@@ -243,7 +243,6 @@ div.woocommerce {
   right: 2em;
   border-top: 3px solid $color-main;
   background-color: white;
-  font-size: em(12px, 14px);
 
   box-shadow: $shadow-z1;
   border-radius: $checkout-radius;
@@ -252,6 +251,7 @@ div.woocommerce {
   @include below(mini) {
     top: -1em;
     right: 1em;
+    font-size: em(12px, 14px);
   }
 
   input[type="submit"] {

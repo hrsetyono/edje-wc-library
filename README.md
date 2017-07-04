@@ -20,4 +20,4 @@ Checkout page is very important to seal the deal. So we automatically transform 
 
 **Note**: You need to upload Featured Image to Checkout page first.
 
-![Edje Woo - New Checkout Page](http://cdn.setyono.net/edjewoo/checkout-revamped.jpg)
+![Edje Woo - New Checkout Page](http://cdn.setyono.net/edjewoo/checkout-02.jpg)
