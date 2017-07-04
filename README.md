@@ -6,17 +6,18 @@ WooCommerce is a fantastic shopping platform, but complicated to use. This **plu
 
 Visit our [WIKI](https://github.com/hrsetyono/edje-woo/wiki) for full documentation.
 
-## Features
 
-**NEW VARIATION INTERFACE**
+## Intuitive Variations UI
 
 Important information at a glance, editable without toggling each variation.
 
 ![Edje Woo - New Variation Interface](http://cdn.setyono.net/edjewoo/variation.jpg)
 
 
-**CLEAN CHECKOUT INTERFACE** (Coming Soon)
+## Clean Checkout Design
 
-Checkout page is always designed as an after-thought. But it's the most important step to seal the purchase. So we're bringing a very clear and concise UI, inspired by Shopify.
+Checkout page is very important to seal the deal. So we automatically transform yours into as seen below:
+
+**Note**: You need to upload Featured Image to Checkout page first.
 
 ![Edje Woo - New Checkout Page](http://cdn.setyono.net/edjewoo/checkout-revamped.jpg)
