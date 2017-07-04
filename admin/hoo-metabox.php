@@ -15,8 +15,8 @@ class Hoo_Metabox {
     Call the custom CSS and JS
   */
   function enqueue_scripts($hook) {
-    wp_enqueue_script('handlebars', HOO_DIR . '/assets/css/style.css');
-    wp_enqueue_script('hoo_script', HOO_DIR . '/assets/js/script.js', array('jquery') );
+    wp_enqueue_script('handlebars', HOO_DIR . '/assets/css/hoo-admin.css');
+    wp_enqueue_script('hoo_script', HOO_DIR . '/assets/js/hoo-admin.js', array('jquery') );
     wp_enqueue_style('hoo_style', HOO_DIR . '/assets/js/handlebars.js');
   }
 

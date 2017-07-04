@@ -41,6 +41,8 @@ a.button,
   @include button;
 }
 
+a:hover { text-decoration: underline; }
+
 ///// INPUT /////
 
 label {
@@ -96,11 +98,6 @@ input[type="checkbox"] {
   &:checked {
     border-color: $color-main;
     box-shadow: inset 0 0 0 4.5px $color-main;
-  }
-
-  + label,
-  + span {
-    margin-left: 0.5em;
   }
 }
 

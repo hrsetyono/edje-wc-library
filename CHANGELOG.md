@@ -1,3 +1,8 @@
+## 1.0.1-beta
+
+- [Checkout] Dequeued all other CSS so checkout page only contain CSS from this plugin.
+- [Checkout] Checkout template will use the one from this plugin.
+
 ## 1.0.0-beta
 
 - Structure changes to follow WP recommendation.

@@ -3,10 +3,15 @@
 */
 
 $checkout-bg: #fafafa;
-$checkout-font-size: 14px;
+$checkout-font-size: $font-size;
 $checkout-font-passive: #717171;
 $checkout-border: 1px solid rgba(black, .1);
 $checkout-radius: $g-radius;
+
+$banner-texts: (
+  banner_size: "Set 1600x200 featured image in Pages > Checkout",
+  banner_logo: "Set logo in \"Appearance > Customize\""
+);
 
 $checkout-password-meter: (
   too_short: "Please use longer password.",
@@ -18,13 +23,11 @@ $checkout-password-meter: (
 ///// GENERAL
 
 body.woocommerce-checkout {
-  font-size: em($checkout-font-size);
-
   h3 {
     font-weight: 400;
   }
 
-  #main-wrapper {
+  .woocommerce {
     overflow-x: hidden;
   }
 }
@@ -33,6 +36,11 @@ body.woocommerce-checkout {
   position: relative;
   padding-top: 5em;
   padding-bottom: 2em;
+
+  @include below(mini) {
+    padding-top: 1em;
+    padding-bottom: 7em;
+  }
 
   .custom-logo {
     max-height: 60px;
@@ -53,7 +61,7 @@ body.woocommerce-checkout {
   }
 
   &::after {
-    content: "Set 1600x200 Featured Image to replace this";
+    content: map-get($banner-texts, banner_size);
     top: 50%;
     width: 100%;
     text-align: center;
@@ -61,7 +69,7 @@ body.woocommerce-checkout {
   }
 
   &::before {
-    content: "Change logo in \"Appearance > Customize\"";
+    content: map-get($banner-texts, banner_logo);
     bottom: 0;
     left: 0;
     right: 0;
@@ -73,6 +81,7 @@ body.woocommerce-checkout {
 form.woocommerce-checkout {
   display: -webkit-flex;
   display: flex;
+  flex-wrap: wrap;
   @include clearfix;
 
   h3 {
@@ -171,13 +180,17 @@ label[for] {
 
 ///// COLUMN
 
-body.woocommerce-checkout div.woocommerce {
-  position: relative;
+div.woocommerce {
+  h-column { position: relative; }
 }
 
 .checkout-customer {
   width: 58%;
   padding: 2em 60px 0 0;
+
+  @include below(medium) {
+    padding-right: 20px;
+  }
 
   @include below(small) {
     width: 100%;
@@ -203,6 +216,22 @@ body.woocommerce-checkout div.woocommerce {
     background: $checkout-bg;
     border-left: $checkout-border;
   }
+
+  @include below(medium) {
+    padding-left: 15px;
+  }
+
+  @include below(small) {
+    width: 100%;
+    margin: 2em 0;
+    padding: 1em;
+    background-color: $checkout-bg;
+    border: $checkout-border;
+    border-radius: $g-radius;
+
+    &::after { display: none; }
+  }
+
 }
 
 ///// SIDE FORM (coupon and login)
@@ -211,13 +240,19 @@ body.woocommerce-checkout div.woocommerce {
   position: absolute;
   z-index: z(checkout_sideform);
   top: -2em;
-  right: 0;
+  right: 2em;
   border-top: 3px solid $color-main;
   background-color: white;
+  font-size: em(12px, 14px);
 
   box-shadow: $shadow-z1;
   border-radius: $checkout-radius;
   @include transform(translateY(-100%) );
+
+  @include below(mini) {
+    top: -1em;
+    right: 1em;
+  }
 
   input[type="submit"] {
     padding: 8px 6px;
@@ -230,7 +265,7 @@ body.woocommerce-checkout div.woocommerce {
   .woocommerce-info,
   .woocommerce-message,
   .woocommerce-error {
-    margin: 10px 1em;
+    margin: 1em;
     border: none;
     box-shadow: none;
   }
@@ -389,15 +424,30 @@ body.woocommerce-checkout div.woocommerce > .woocommerce-error {
 }
 
 #billing_country_field,
-#shipping_country_field,
+#shipping_country_field {
+  width: 37.5%;
+
+  @include below(mini) {
+    width: 100%;
+  }
+}
+
 #billing_state_field,
 #shipping_state_field {
   width: 37.5%;
+
+  @include below(mini) {
+    width: 66.667%;
+  }
 }
 
 #billing_postcode_field,
 #shipping_postcode_field {
   width: 25%;
+
+  @include below(mini) {
+    width: 33.333%;
+  }
 }
 
 
@@ -693,6 +743,10 @@ body.woocommerce-checkout div.woocommerce > .woocommerce-error {
   padding: 1em 0;
   font-size: em(12px);
   color: $checkout-font-passive;
+
+  span + span::before {
+    content: "• ";
+  }
 }
 
 
