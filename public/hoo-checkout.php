@@ -1,58 +1,49 @@
 <?php
 /*
-  Heavily customize part of Checkout page
+  Functions for Checkout page
 */
 
 class Hoo_Checkout {
 
   function __construct() {
+    // Template
+    add_filter('template_include', array($this, 'replace_page_template'), 100);
 
-    // Add banner and form wrapper
-    add_action('woocommerce_before_checkout_form', array($this, 'before_checkout_form'), 1);
+    // Wrapper
     add_action('woocommerce_before_checkout_form', array($this, 'wrap_side_form'), 8);
     add_action('woocommerce_before_checkout_form', array($this, 'wrap_side_form_close'), 12);
-    add_action('woocommerce_after_checkout_form', array($this, 'after_checkout_form') );
 
-    // Add column wrapper, legal footer, and breadcrumbs
+    // Order Review
     add_action('woocommerce_checkout_before_customer_details', array($this, 'before_customer_details') );
     add_action('woocommerce_checkout_after_customer_details', array($this, 'after_customer_details') );
     add_action('woocommerce_checkout_after_order_review', array($this, 'after_order_review') );
 
-
-    // Manage fields
+    // Form Fields
     add_filter('woocommerce_billing_fields', array($this, 'reorder_billing_fields'), 10, 1 );
     add_filter('woocommerce_default_address_fields', array($this, 'reorder_address_fields'), 10);
 
-    // Disable default CSS and add our own
+    // CSS JS
     add_filter('woocommerce_enqueue_styles', '__return_empty_array');
-    add_action('wp_enqueue_scripts', array($this, 'enqueue_script_style'), 110);
+    add_action('wp_enqueue_scripts', array($this, 'enqueue_script_style'), 1000);
 
-    // Replace the Checkout and Thank you page with ours
-    add_filter('template_include', array($this, 'modify_page_template'), 100);
-
-    // TODO: get the image using 'product_id'
-    add_filter('woocommerce_cart_item_name', function($name, $cart_item, $cart_item_key) {
-      return $name;
-    }, 10, 3);
-
-    // Send mail after order
+    // Email
     add_action('woocommerce_order_status_completed_notification', array($this, 'send_invoice_after_order') );
 
-    // Reduce password requirement
+    // Account
     add_filter('woocommerce_min_password_strength', array($this, 'reduce_password_requirement') );
   }
 
 
   /*
-    Switch the Page template when it's checkout or thank you page
+    Replace the Page template with the one provided by this plugin
 
     @filter template_include
 
     @param $page_template (str) - Path to the PHP template file
     @return str - The new path to PHP template file
   */
-  function modify_page_template($template) {
-    $file = 'checkout.php';
+  function replace_page_template($template) {
+    $file = 'page-checkout.php';
 
     if(file_exists(hoo_locate_template($file) ) ) {
   		$template = hoo_locate_template($file);
@@ -62,57 +53,8 @@ class Hoo_Checkout {
   }
 
   /*
-    Additional content for Customer Details and wrap Order Review
+    Add wrapper to Coupon Form and Login
 
-    @action woocommerce_checkout_before_customer_details
-    @action woocommerce_checkout_after_customer_details
-    @action woocommerce_checkout_after_order_review
-  */
-  function before_customer_details() {
-    echo '<div class="checkout-customer">';
-    jetpack_breadcrumbs();
-  }
-  function after_customer_details() {
-    $this->output_legal_terms();
-    echo '</div>';
-    echo '<div class="checkout-order">';
-  }
-  function after_order_review() {
-    echo '</div>';
-  }
-
-
-  /*
-    Add Banner above the Checkout form, use the Featured Image
-  */
-  function before_checkout_form($checkout) {
-    global $post;
-    $thumbnail_url = get_the_post_thumbnail_url($post->ID);
-
-    if($thumbnail_url) { ?>
-      <section class="checkout-banner" style="background: url('<?php echo $thumbnail_url ?>') center center;">
-    <?php } else { ?>
-      <section class="checkout-banner checkout-empty-banner">
-    <?php } ?>
-
-        <h-row><h-column class="large-12">
-          <?php if (function_exists('the_custom_logo') ) {
-            the_custom_logo();
-          } ?>
-        </h-column></h-row>
-      </section>
-
-      <h-row><h-column class="large-12">
-    <?php
-  }
-
-  function after_checkout_form($checkout) {
-    ?> <h-column></h-row> <?php
-  }
-
-
-  /*
-    Add wrapper to Coupon Form and Info
     @action woocommerce_before_checkout_form
     @action woocommerce_before_checkout_form
   */
@@ -123,6 +65,26 @@ class Hoo_Checkout {
     echo '</div>';
   }
 
+
+  /*
+    Additional content for Customer Details and wrap Order Review
+
+    @action woocommerce_checkout_before_customer_details
+    @action woocommerce_checkout_after_customer_details
+    @action woocommerce_checkout_after_order_review
+  */
+  function before_customer_details() {
+    echo '<div class="column-main">';
+      // jetpack_breadcrumbs();
+  }
+  function after_customer_details() {
+      $this->output_legal_terms();
+    echo '</div>';
+    echo '<div class="column-aside">';
+  }
+  function after_order_review() {
+    echo '</div>';
+  }
 
 
   /////
@@ -181,15 +143,19 @@ class Hoo_Checkout {
     @action wp_enqueue_scripts
   */
   function enqueue_script_style($hook) {
-    wp_dequeue_style('select2');
-    wp_dequeue_script('select2');
+    // remove all previous CSS
+    global $wp_styles;
+  	foreach ($wp_styles->registered as $handle => $data) {
+  		wp_dequeue_style($handle);
+  	}
+
+    wp_enqueue_style('admin-bar'); // requeue the admin bar
+    wp_dequeue_script('select2'); // disable select2
 
     // custom css and js
     wp_enqueue_style('hoo-style', HOO_DIR . '/assets/css/hoo.css');
+    wp_enqueue_style('hoo-font', 'https://fonts.googleapis.com/css?family=Open+Sans:400,700');
     wp_enqueue_script('hoo-script', HOO_DIR . '/assets/js/hoo.js');
-
-    wp_dequeue_style('my-framework');
-    wp_dequeue_style('my-app');
   }
 
 

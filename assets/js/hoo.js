@@ -7,12 +7,16 @@ $(window).load(startOnLoad);
 
 function start() {
   wooCheckout.init();
+  wooThankyou.init();
 }
 
 // functions that needs to run only after everything loads
 function startOnLoad() {
-  wooCheckout.moveAccountFields();
+  wooCheckout.moveEmailField();
 }
+
+
+///// CHECKOUT Page /////
 
 var wooCheckout = {
   init: function() {
@@ -27,16 +31,10 @@ var wooCheckout = {
   },
 
   /*
-    Move the Account Wrapper to top and insert the email field to it.
+    Move the Email field to Account fieldset
   */
-  moveAccountFields: function() {
+  moveEmailField: function() {
     var $field = $('.woocommerce-account-fields');
-    if(!$field) { return false; } // abort if not found
-
-    // put account wrapper at top
-    $field.insertBefore($('.woocommerce-billing-fields') );
-
-    // insert email field to account wrapper
     $('#billing_email_field').prependTo($field);
   },
 
@@ -79,8 +77,50 @@ var wooCheckout = {
   _moveErrorMessages: function(e) {
     var $notice = $('.woocommerce-NoticeGroup');
 
-    $notice.insertAfter($('.checkout-customer .entry-breadcrumbs') );
+    $notice.insertAfter($('.entry-breadcrumbs') );
   }
 };
+
+
+///// THANK YOU Page /////
+
+var wooThankyou = {
+  init: function() {
+    // Break if not in thank you page
+    if($('.woocommerce-order-received').length <= 0) { return false; }
+
+    if($('.woocommerce-bacs-bank-details').length > 0) {
+      this.bacsMoveName();
+      this.bacsDeleteColon();
+    }
+  },
+
+  /*
+    BACS Move Account name to within the <ul>
+  */
+  bacsMoveName: function() {
+    var $sources = $('.wc-bacs-bank-details-account-name');
+
+    $sources.each(function() {
+      var $destination = $(this).next('.wc-bacs-bank-details');
+
+      $(this).prependTo($destination);
+      $(this).wrap('<li class="account_name"></li>');
+    });
+  },
+
+  /*
+    Delete the colon that appears in Account Name
+  */
+  bacsDeleteColon: function() {
+    var $accountNames = $('.woocommerce-bacs-bank-details h3');
+
+    $accountNames.each(function() {
+      var name = $(this).text();
+      $(this).text(name.replace(':', '') );
+    });
+  },
+
+}
 
 })(jQuery);

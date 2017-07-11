@@ -1,3 +1,8 @@
+## 1.1.0
+
+- [Checkout] Fully responsive checkout page
+- [Thank You] Apply interface changes for Thank You page too
+
 ## 1.0.1-beta
 
 - [Checkout] Dequeued all other CSS so checkout page only contain CSS from this plugin.

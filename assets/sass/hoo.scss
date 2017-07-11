@@ -34,7 +34,6 @@
   @include button($color, #252525, 0 1px 3px rgba(black, .2) ) ;
 }
 
-button,
 .button,
 a.button,
 [type="submit"], {
@@ -61,6 +60,7 @@ select {
   display: block;
   width: 100%;
   padding: 0.5em 0.75em;
+  background-color: transparent;
   border: 1px solid $color-passive;
   border-top-color: darken($color-passive, 5%);
   border-radius: $g-radius;
@@ -116,7 +116,6 @@ input[type="radio"] {
 .woocommerce-message,
 .woocommerce-error {
   border-top: 3px solid transparent;
-  background-color: white;
   list-style-type: none;
 
   box-shadow: $shadow-z0;
@@ -124,10 +123,12 @@ input[type="radio"] {
 
 .woocommerce-info {
   border-top-color: $color-blue;
+  background-color: $color-blue-light;
 }
 
 .woocommerce-message {
   border-top-color: $color-green;
+  background-color: $color-green-light;
 
   a.button {
     border-color: $color-green;
@@ -139,5 +140,5 @@ input[type="radio"] {
 
 .woocommerce-error {
   border-top-color: $color-red;
-  color: $color-red;
+  background-color: $color-red-light;
 }

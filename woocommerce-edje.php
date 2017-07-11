@@ -14,12 +14,15 @@ if(!defined('ABSPATH') ) { exit; }
 require_once 'admin/all.php';
 require_once 'public/all.php';
 define('HOO_DIR', plugins_url('', __FILE__) );
+define('HOO_PATH', untrailingslashit(plugin_dir_path( __FILE__ )) );
 
 
 function run_hoo() {
   $hoo = new Hoo();
 }
 run_hoo();
+
+
 
 
 // Main portal for calling all methods
@@ -31,25 +34,31 @@ class Hoo {
       return false;
     }
 
-    // for product edit only
-    global $post;
-    if(isset($post->post_type) && $post->post_type == 'product') {
-      add_action('admin_init', array($this, 'init_admin') );
-    }
+    add_action('admin_init', array($this, 'admin_init') );
 
     // front end woocommerce page
-    add_action('template_redirect', array($this, 'init_public'));
+    add_action('init', array($this, 'general_init') );
+    add_action('template_redirect', array($this, 'public_init') );
   }
 
-  function init_admin() {
+  function admin_init() {
+    // TODO: add limitation on when this code run
     $hoo_save = new Hoo_Save();
     $hoo_metabox = new Hoo_Metabox();
     $hoo_template = new Hoo_Template();
   }
 
-  function init_public() {
+  function public_init() {
     if(is_checkout() ) {
       $hoo_checkout = new Hoo_Checkout();
     }
+
+    if(is_wc_endpoint_url('order-received') ) {
+      $hoo_thankyou = new Hoo_Thankyou();
+    }
+  }
+
+  function general_init() {
+    $hoo_general = new Hoo_General();
   }
 }

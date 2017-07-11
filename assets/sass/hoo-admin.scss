@@ -233,3 +233,35 @@
     margin-right: 15px;
   }
 }
+
+
+///// ORDER LISTING
+
+.widefat .column-order_status {
+  width: 80px;
+  text-align: center;
+}
+
+.widefat .column-order_status mark {
+  width: auto;
+  height: auto;
+  text-indent: 0;
+  padding: 0 0.5em;
+  font-size: 1em;
+  line-height: 1.75em;
+  white-space: nowrap;
+  border-radius: 2em;
+
+  &::after { display: none; }
+
+  &.completed { background-color: $color-green-light; }
+  &.processing { background-color: $color-yellow-light; }
+  &.on-hold { background-color: $color-passive-light; }
+  &.cancelled { background-color: $color-red-light; }
+}
+
+.widefat .column-order_actions {
+
+  .button.processing:hover { background-color: $color-yellow-light; }
+  .button.complete:hover { background-color: $color-green-light; }
+}

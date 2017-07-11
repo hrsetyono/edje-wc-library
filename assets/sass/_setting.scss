@@ -3,24 +3,29 @@
 $version: 1.0;
 
 // ----- FONT -----
-$font-family : Helvetica, Arial, "sans-serif";
-$font-family-header : Helvetica, Arial, "sans-serif";
+$font-family : "Open Sans", Arial, "sans-serif";
+$font-family-header : "Open Sans", Arial, "sans-serif";
 
 // ----- COLORS -----
-$color-main : #00aadc;
-$color-sub  : #607d8b;
+// $color-passive : #e0e0e0;
+$color-red : #ed6347;
+$color-yellow : #edc200;
+$color-green : #50b83c;
+$color-blue: #47c1bf;
 
-// $color-main-dark : darken($color-main, 10%);
-// $color-main-light : lighten($color-main, 10%);
+$color-red-light : #fcf0ec;
+$color-yellow-light : #fcf5db;
+$color-green-light : #ebf5e8;
+$color-blue-light: #e9f7f7;
+
+
+$color-main : $color-blue;
+$color-sub  : $color-green;
+$color-main-light : $color-blue-light;
 
 $color-link : $color-main;
 // $color-link-hover : lighten($color-main, 10%);
 
-// $color-passive : #e0e0e0;
-$color-red : #f45b4f;
-// $color-yellow : #ffeb3b;
-// $color-green : #4caf50;
-// $color-blue: #2196f3;
 
 // $body-background: #fff;
 // $text-highlight: null;
@@ -83,7 +88,7 @@ $h2 : 36px;
 $h3 : 30px;
 $h4 : 24px;
 $h5 : 20px;
-$h6 : $font-size;
+$h6 : 18px;
 
 // ----- RESPONSIVE HEADER -----
 // the header size below that media query
@@ -93,7 +98,7 @@ $h6 : $font-size;
 // $h3-sizes: (base: $h3, small: 22px);
 // $h4-sizes: (base: $h4, small: 20px);
 // $h5-sizes: (base: $h5, small: 18px);
-// $h6-sizes: (base: $h6, small: $h6);
+$h6-sizes: (base: $h6, small: 16px);
 
 
 // ----- SHADOW -----
