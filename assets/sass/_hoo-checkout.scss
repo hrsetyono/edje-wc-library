@@ -136,7 +136,8 @@ textarea {
   }
 
   .form-row.form-row--active &,
-  .woocommerce-form-login & { // appear by default on login form
+  .form-row.form-row--select &,
+  .woocommerce-form-login &, { // appear by default on login form
     padding-top: 21px;
     padding-bottom: 5px;
   }
@@ -169,7 +170,8 @@ label[for] {
   }
 
   .form-row.form-row--active &,
-  .woocommerce-form-login & {
+  .woocommerce-form-login &,
+  .form-row.form-row--select & {
     opacity: 1;
     visibility: visible;
     @include transform(none);
@@ -203,6 +205,7 @@ label[for] {
 ///// COLUMN
 
 div.woocommerce {
+  position: relative;
   max-width: $grid-max-width;
   margin: 0 auto;
 }
@@ -886,8 +889,8 @@ div.woocommerce .checkout-side-form + .woocommerce-message {
 }
 
 .woocommerce-order-overview {
-  display: flex;
   display: -webkit-flex;
+  display: flex;
   flex-wrap: wrap;
 
   border: $checkout-border-dark;

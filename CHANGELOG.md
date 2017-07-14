@@ -1,3 +1,7 @@
+## 1.1.1
+
+- [Checkout] Select field has its label always visible.
+
 ## 1.1.0
 
 - [Checkout] Fully responsive checkout page
