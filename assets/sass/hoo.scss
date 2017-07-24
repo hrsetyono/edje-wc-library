@@ -1,6 +1,5 @@
 @import "setting";
 @import "edje-framework";
-@import "hoo-checkout";
 
 @mixin button(
   $color        : $color-main,
@@ -56,9 +55,11 @@ label {
 [type="search"],
 [type="url"],
 textarea,
-select {
+select,
+.select2-container--default .select2-selection--single {
   display: block;
   width: 100%;
+  height: auto;
   padding: 0.5em 0.75em;
   background-color: transparent;
   border: 1px solid $color-passive;
@@ -142,3 +143,9 @@ input[type="radio"] {
   border-top-color: $color-red;
   background-color: $color-red-light;
 }
+
+
+
+/////
+
+@import "hoo-checkout";

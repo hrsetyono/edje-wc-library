@@ -243,20 +243,21 @@
 }
 
 .widefat .column-order_status mark {
-  width: auto;
+  display: inline-block;
+  width: 100%;
   height: auto;
   text-indent: 0;
-  padding: 0 0.5em;
+  padding: 0.5em;
   font-size: 1em;
-  line-height: 1.75em;
-  white-space: nowrap;
+  line-height: 1;
   border-radius: 2em;
 
   &::after { display: none; }
 
   &.completed { background-color: $color-green-light; }
   &.processing { background-color: $color-yellow-light; }
-  &.on-hold { background-color: $color-passive-light; }
+  &.on-hold,
+  &.pending { background-color: $color-passive-light; }
   &.cancelled { background-color: $color-red-light; }
 }
 

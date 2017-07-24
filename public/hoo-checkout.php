@@ -146,11 +146,10 @@ class Hoo_Checkout {
     // remove all previous CSS
     global $wp_styles;
   	foreach ($wp_styles->registered as $handle => $data) {
+      if(in_array($handle, array('admin-bar', 'select2') ) ) { continue; }
+
   		wp_dequeue_style($handle);
   	}
-
-    wp_enqueue_style('admin-bar'); // requeue the admin bar
-    wp_dequeue_script('select2'); // disable select2
 
     // custom css and js
     wp_enqueue_style('hoo-style', HOO_DIR . '/assets/css/hoo.css');

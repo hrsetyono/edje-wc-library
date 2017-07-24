@@ -1,3 +1,7 @@
+## 1.1.2
+
+- Re-enabled Select2 script and stylesheet.
+
 ## 1.1.1
 
 - [Checkout] Select field has its label always visible.

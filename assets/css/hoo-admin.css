@@ -92,7 +92,7 @@
 
 .widefat .column-order_status { width: 80px; text-align: center; }
 
-.widefat .column-order_status mark { width: auto; height: auto; text-indent: 0; padding: 0 0.5em; font-size: 1em; line-height: 1.75em; white-space: nowrap; border-radius: 2em; }
+.widefat .column-order_status mark { display: inline-block; width: 100%; height: auto; text-indent: 0; padding: 0.5em; font-size: 1em; line-height: 1; border-radius: 2em; }
 
 .widefat .column-order_status mark::after { display: none; }
 
@@ -100,7 +100,7 @@
 
 .widefat .column-order_status mark.processing { background-color: #ffea8a; }
 
-.widefat .column-order_status mark.on-hold { background-color: #ebeef0; }
+.widefat .column-order_status mark.on-hold, .widefat .column-order_status mark.pending { background-color: #ebeef0; }
 
 .widefat .column-order_status mark.cancelled { background-color: #ffc58b; }
 

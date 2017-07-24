@@ -127,7 +127,8 @@ input[type="tel"],
 input[type="email"],
 input[type="password"],
 select,
-textarea {
+textarea,
+.select2-container--default .select2-selection--single {
   .form-row & {
     padding: 13px 11px;
     -webkit-appearance: none;
@@ -284,7 +285,7 @@ div.woocommerce {
   position: absolute;
   z-index: z(checkout_sideform);
   top: -2em;
-  right: $grid-gutter;
+  right: 0;
   border-top: 3px solid $color-main;
   background-color: $color-main-light;
 
@@ -441,6 +442,30 @@ div.woocommerce .checkout-side-form + .woocommerce-message {
   }
 }
 
+// Select2
+
+.select2-container {
+  width: 100% !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  min-height: 19px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow,
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+  display: none;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: normal;
+  padding: 0;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: $color-main;
+}
+
 // Shipping address
 
 .woocommerce-shipping-fields {
@@ -574,6 +599,11 @@ div.woocommerce .checkout-side-form + .woocommerce-message {
 }
 
 
+#ship-to-different-address label {
+  display: inline-block;
+}
+
+
 
 
 ///// ORDER DETAILS
@@ -631,11 +661,12 @@ div.woocommerce .checkout-side-form + .woocommerce-message {
   }
 
   tfoot {
+    width: 100%;
     border-top: $checkout-border;
     color: $checkout-font-passive;
 
-    th { width: 30%; font-weight: $font-weight; }
-    td { width: 70%; }
+    th { width: 35%; font-weight: $font-weight; }
+    td { width: 65%; }
 
     tr:first-child > th,
     tr:first-child > td {
@@ -861,9 +892,10 @@ div.woocommerce .checkout-side-form + .woocommerce-message {
 }
 
 
-///// THANK YOU PAGE /////
+///// THANK YOU and PAYMENT INSTRUCTION Page /////
 
-.woocommerce-thankyou-order-received {
+.woocommerce-thankyou-order-received,
+.woocommerce-order-pay #payment-instruction {
   border: $checkout-border-dark;
   border-bottom: none;
   padding: em(28px 14px, 18px);
@@ -871,9 +903,28 @@ div.woocommerce .checkout-side-form + .woocommerce-message {
   background-size: cover;
 
   text-align: center;
-  font-size: em(18px, $checkout-font-size);
-
   border-radius: $g-radius $g-radius 0 0;
+
+  .button {
+    padding: 0;
+    margin-top: 0.5em;
+    margin-bottom: 1.5em;
+    border: none;
+
+    background-color: transparent;
+    text-decoration: underline;
+    color: $color-main;
+
+    &:hover,
+    &:active {
+      color: lighten($color-main, 20%);
+      box-shadow: none;
+    }
+  }
+}
+
+.woocommerce-thankyou-order-received {
+  font-size: em(18px, $checkout-font-size);
 }
 
 %order-overview-list {
@@ -888,7 +939,8 @@ div.woocommerce .checkout-side-form + .woocommerce-message {
   }
 }
 
-.woocommerce-order-overview {
+.woocommerce-order-overview,
+.woocommerce-order-pay .order_details {
   display: -webkit-flex;
   display: flex;
   flex-wrap: wrap;
@@ -1063,5 +1115,33 @@ div.woocommerce .checkout-side-form + .woocommerce-message {
   td {
     display: block;
     width: 100%;
+  }
+}
+
+
+///// MIDTRANS Awaiting Payment page
+
+.woocommerce-order-pay {
+  div.woocommerce {
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    padding: 0 10px;
+    margin-top: 3em;
+  }
+
+  #payment-instruction {
+    display: block !important;
+    order: 1;
+  }
+
+  .order_details {
+    order: 2;
+  }
+
+  #pay-button {
+    order: 3;
+    align-self: center;
   }
 }
