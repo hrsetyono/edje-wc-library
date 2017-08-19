@@ -24,7 +24,7 @@ class Hoo_Checkout {
 
     // CSS JS
     add_filter('woocommerce_enqueue_styles', '__return_empty_array');
-    add_action('wp_enqueue_scripts', array($this, 'enqueue_script_style'), 1000);
+    add_action('wp_enqueue_scripts', array($this, 'enqueue_script_style'), 999999);
 
     // Email
     add_action('woocommerce_order_status_completed_notification', array($this, 'send_invoice_after_order') );

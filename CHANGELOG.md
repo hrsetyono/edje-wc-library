@@ -1,3 +1,8 @@
+## 1.1.3
+
+- [Checkout] Set enqueue priorty to 999,999 to prevent overlapping from theme
+- [Admin] Fixed JS error on admin page
+
 ## 1.1.2
 
 - Re-enabled Select2 script and stylesheet.

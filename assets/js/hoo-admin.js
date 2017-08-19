@@ -452,11 +452,17 @@ var backorder = {
   }
 };
 
+
+///// RUNNER
+
 var start = function() {
-  changeDefault.init();
-  variation.init();
-  attribute.init();
-  // backorder.init();
+  // if in product edit page
+  if($('#woocommerce-product-data').length ) {
+    changeDefault.init();
+    variation.init();
+    attribute.init();
+    // backorder.init();
+  }
 };
 
 $(document).ready(start);
