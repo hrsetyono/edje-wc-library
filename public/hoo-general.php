@@ -7,7 +7,7 @@ class Hoo_General {
   function __construct() {
     // Order Review
     add_filter('woocommerce_cart_item_name', array($this, 'modify_cart_item_name'), 10, 3);
-    // add_filter('woocommerce_order_item_name', array($this, 'modify_cart_item_name'), 10, 3);
+    add_filter('woocommerce_order_item_name', array($this, 'modify_cart_item_name'), 10, 3);
 
     // Templating
     add_filter('woocommerce_locate_template', array($this, 'woocommerce_locate_template'), 1, 3);
