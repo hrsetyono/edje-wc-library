@@ -1,3 +1,7 @@
+## 1.1.4
+
+- [Cart] - Fixed duplicate thumbnail in Cart and Email.
+
 ## 1.1.3
 
 - [Checkout] Set enqueue priorty to 999,999 to prevent overlapping from theme

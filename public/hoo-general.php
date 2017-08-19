@@ -7,7 +7,7 @@ class Hoo_General {
   function __construct() {
     // Order Review
     add_filter('woocommerce_cart_item_name', array($this, 'modify_cart_item_name'), 10, 3);
-    add_filter('woocommerce_order_item_name', array($this, 'modify_cart_item_name'), 10, 3);
+    // add_filter('woocommerce_order_item_name', array($this, 'modify_cart_item_name'), 10, 3);
 
     // Templating
     add_filter('woocommerce_locate_template', array($this, 'woocommerce_locate_template'), 1, 3);
@@ -58,8 +58,12 @@ class Hoo_General {
     @return str - The HTML tag for item name
   */
   function modify_cart_item_name($name, $cart_item, $cart_item_key) {
-    $image = get_the_post_thumbnail($cart_item['product_id']);
-    return $image . $name;
+    if(is_checkout() ) {
+      $image = get_the_post_thumbnail($cart_item['product_id']);
+      return $image . $name;
+    } else {
+      return $name;
+    }
   }
 
 }
