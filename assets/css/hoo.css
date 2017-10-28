@@ -473,7 +473,7 @@ h2 { font-size: 1.71429em; margin-bottom: 0.5em; font-weight: 400; }
 
 .checkout-empty-banner { background: repeating-linear-gradient(45deg, #e0e0e0 0, #e0e0e0 5%, #f8f8f8 0, #f8f8f8 50%) 0/10px 10px; border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
 
-.checkout-empty-banner::before, .checkout-empty-banner::after { position: absolute; opacity: .5; font-weight: 700; text-transform: uppercase; }
+.checkout-empty-banner::before, .checkout-empty-banner::after { position: absolute; opacity: .5; font-weight: 700; }
 
 .checkout-empty-banner::after { content: "Set 1600x200 featured image in Pages > Checkout"; top: 50%; width: 100%; text-align: center; -webkit-transform: translateY(-50%); transform: translateY(-50%); }
 
@@ -496,6 +496,8 @@ form.woocommerce-checkout::after, div.woocommerce-order::after { clear: both; }
 .form-row.form-row--active input[type="text"], .form-row.form-row--select input[type="text"], .woocommerce-form-login input[type="text"], .form-row.form-row--active input[type="number"], .form-row.form-row--select input[type="number"], .woocommerce-form-login input[type="number"], .form-row.form-row--active input[type="tel"], .form-row.form-row--select input[type="tel"], .woocommerce-form-login input[type="tel"], .form-row.form-row--active input[type="email"], .form-row.form-row--select input[type="email"], .woocommerce-form-login input[type="email"], .form-row.form-row--active input[type="password"], .form-row.form-row--select input[type="password"], .woocommerce-form-login input[type="password"], .form-row.form-row--active select, .form-row.form-row--select select, .woocommerce-form-login select, .form-row.form-row--active textarea, .form-row.form-row--select textarea, .woocommerce-form-login textarea, .form-row.form-row--active .select2-container--default .select2-selection--single, .form-row.form-row--select .select2-container--default .select2-selection--single, .woocommerce-form-login .select2-container--default .select2-selection--single { padding-top: 21px; padding-bottom: 5px; }
 
 .form-row.woocommerce-invalid input[type="text"], .form-row.woocommerce-invalid input[type="number"], .form-row.woocommerce-invalid input[type="tel"], .form-row.woocommerce-invalid input[type="email"], .form-row.woocommerce-invalid input[type="password"], .form-row.woocommerce-invalid select, .form-row.woocommerce-invalid textarea, .form-row.woocommerce-invalid .select2-container--default .select2-selection--single { border-color: #ed6347; box-shadow: 0 0 0 1px #ed6347; }
+
+.form-row .select2-container--default .select2-selection--single { padding-right: 32px; }
 
 input[type="submit"] { font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
 
@@ -603,6 +605,10 @@ div.woocommerce .checkout-side-form + .woocommerce-message { position: absolute;
 @media only screen and (max-width: 480px) { #billing_address_2_field, #shipping_address_2_field { width: 100%; margin-bottom: 2em; } }
 
 #billing_country_field, #shipping_country_field { width: 37.5%; }
+
+#billing_country_field strong, #shipping_country_field strong { position: relative; display: block; padding: 21px 11px 5px; }
+
+#billing_country_field strong::after, #shipping_country_field strong::after { content: ""; position: absolute; top: 0; right: 0; bottom: 0; width: 35px; background-color: #fff; }
 
 @media only screen and (max-width: 480px) { #billing_country_field, #shipping_country_field { width: 100%; } }
 

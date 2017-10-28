@@ -1,3 +1,7 @@
+## 1.1.5
+
+- Fixed the interface when there's only 1 allowed country
+
 ## 1.1.4
 
 - [Cart] - Fixed duplicate thumbnail in Cart and Email.

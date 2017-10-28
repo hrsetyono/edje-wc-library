@@ -20,9 +20,11 @@ function startOnLoad() {
 
 var wooCheckout = {
   init: function() {
-    // add select wrapper
-    $('#billing_country_field, #shipping_country_field').on('change', 'select', this._onChangeCountry);
+    var self = this;
 
+    // add select wrapper
+    $(document).on('country_to_state_changed', self._onCountryChanged.bind(self) );
+    
     // add active state to field
     $('.form-row input').each(this._checkActiveField);
     $('.form-row').on('change', 'input, select, textarea', this._checkActiveField);
@@ -38,21 +40,19 @@ var wooCheckout = {
     $('#billing_email_field').prependTo($field);
   },
 
+
   /*
     Check whether the State of this country has dropdown, if it does, add extra class
   */
-  _onChangeCountry: function() {
-    var $country = $(this);
-    var $countryRow = $country.closest('.form-row');
-    var $stateRow = $countryRow.siblings('#billing_state_field, #shipping_state_field');
-
+  _onCountryChanged: function(e, country, $wrapper) {
+    var $stateFields = $wrapper.find('#billing_state_field, #shipping_state_field');
     setTimeout(afterDelay, 200);
 
     function afterDelay() {
-      if($stateRow.find('select').length ) {
-        $stateRow.addClass('form-row--select');
+      if($stateFields.find('select').length ) {
+        $stateFields.addClass('form-row--select');
       } else {
-        $stateRow.removeClass('form-row--select form-row--active');
+        $stateFields.removeClass('form-row--select form-row--active');
       }
     }
   },

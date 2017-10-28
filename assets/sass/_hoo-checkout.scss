@@ -74,7 +74,6 @@ h2 {
     position: absolute;
     opacity: .5;
     font-weight: $header-weight;
-    text-transform: uppercase;
   }
 
   &::after {
@@ -146,6 +145,12 @@ textarea,
   .form-row.woocommerce-invalid & {
     border-color: $color-red;
     box-shadow: 0 0 0 1px $color-red;
+  }
+}
+
+.select2-container--default .select2-selection--single {
+  .form-row & {
+    padding-right: 32px;
   }
 }
 
@@ -442,6 +447,7 @@ div.woocommerce .checkout-side-form + .woocommerce-message {
   }
 }
 
+
 // Select2
 
 .select2-container {
@@ -495,6 +501,22 @@ div.woocommerce .checkout-side-form + .woocommerce-message {
 #billing_country_field,
 #shipping_country_field {
   width: 37.5%;
+
+  strong {
+    position: relative;
+    display: block;
+    padding: 21px 11px 5px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 35px;
+      background-color: $body-background;
+    }
+  }
 
   @include below(mini) {
     width: 100%;
