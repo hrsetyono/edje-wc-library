@@ -105,9 +105,9 @@
     -webkit-appearance: none;
   }
 
-  select:nth-of-type(1) { @include variation-select($color-green); }
-  select:nth-of-type(2) { @include variation-select($color-purple); }
-  select:nth-of-type(3) { @include variation-select($color-orange); }
+  select:nth-of-type(1) { @include variation-select( $color-green ); }
+  select:nth-of-type(2) { @include variation-select( $color-purple ); }
+  select:nth-of-type(3) { @include variation-select( $color-orange ); }
 }
 
 .wc-metabox.open h3,

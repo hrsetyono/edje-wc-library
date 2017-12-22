@@ -1,3 +1,7 @@
+## 1.1.6
+
+- Wordpress 4.9 compatibility fix for admin CSS
+
 ## 1.1.5
 
 - Fixed the interface when there's only 1 allowed country
