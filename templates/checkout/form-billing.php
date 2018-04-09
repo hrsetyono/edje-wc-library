@@ -1,11 +1,11 @@
 <?php
 /*
-  WooCommerce Edje - Form Billing template
+WooCommerce Edje - Form Billing template
 
-  Changes from default template:
-  - Move Account fields to top
+Changes:
+1. Move Account fields to top
 
-  @from 3.0.0
+@from 3.0.0
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,6 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
+<?php #1 ?>
 <div class="woocommerce-account-fields">
 <?php if ( ! is_user_logged_in() && $checkout->is_registration_enabled() ) : ?>
 	<?php if ( ! $checkout->is_registration_required() ) : ?>

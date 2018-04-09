@@ -1,6 +1,6 @@
 <?php
 
-class Hoo_Template {
+class Hoo_Handlebars {
   function __construct() {
     add_filter('admin_footer', array($this, 'hoo_handlebars_template') );
   }

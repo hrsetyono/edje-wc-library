@@ -1,18 +1,18 @@
 <?php
 /*
-  WooCommerce Edje - Thank You Page
+WooCommerce Edje - Thank You Page
 
-  Changes from default template:
-  - Added Action 'woocommerce_before_thankyou' so we can add wrapper
+Changes:
+1. Added Action 'woocommerce_before_thankyou' so we can add wrapper
 
-  @from 3.0.0
+@from 3.0.0
 */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
 
-<?php do_action( 'woocommerce_before_thankyou', $order->get_id() ); ?>
+<?php do_action( 'woocommerce_before_thankyou', $order->get_id() ); #1 ?>
 	<?php if ( $order ) : ?>
 
 		<?php if ( $order->has_status( 'failed' ) ) : ?>

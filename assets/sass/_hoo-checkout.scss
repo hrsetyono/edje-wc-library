@@ -2,26 +2,7 @@
   Custom styling for Checkout page
 */
 
-$checkout-bg: #fafafa;
-$checkout-font-size: $font-size;
-$checkout-font-passive: #717171;
 
-$checkout-border: 1px solid rgba(black, .1);
-$checkout-border-dark: 1px solid #d9d9d9;
-
-$checkout-radius: $g-radius;
-
-$banner-texts: (
-  banner_size: "Set 1600x200 featured image in Pages > Checkout",
-  banner_logo: "Set logo in \"Appearance > Customize\""
-);
-
-$checkout-password-meter: (
-  too_short: "Please use longer password.",
-  bad: "Good, but can be stronger.",
-  good: "Great, that will do!",
-  strong: "Now, that's a strong password!"
-);
 
 ///// GENERAL
 
@@ -109,82 +90,6 @@ div.woocommerce-order {
 
   .woocommerce-error {
     padding: 1em;
-  }
-}
-
-///// INPUT
-
-.form-row {
-  position: relative;
-  padding: 0 0.5em;
-  margin-bottom: 1em;
-}
-
-input[type="text"],
-input[type="number"],
-input[type="tel"],
-input[type="email"],
-input[type="password"],
-select,
-textarea,
-.select2-container--default .select2-selection--single {
-  .form-row & {
-    padding: 13px 11px;
-    -webkit-appearance: none;
-    appearance: none;
-    transition: $g-transition;
-  }
-
-  .form-row.form-row--active &,
-  .form-row.form-row--select &,
-  .woocommerce-form-login &, { // appear by default on login form
-    padding-top: 21px;
-    padding-bottom: 5px;
-  }
-
-  .form-row.woocommerce-invalid & {
-    border-color: $color-red;
-    box-shadow: 0 0 0 1px $color-red;
-  }
-}
-
-.select2-container--default .select2-selection--single {
-  .form-row & {
-    padding-right: 32px;
-  }
-}
-
-input[type="submit"] {
-  font-weight: $header-weight;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-label[for] {
-  .form-row & {
-    position: absolute;
-    z-index: -1;
-    top: 5px;
-    left: 18.5px;
-    opacity: 0;
-    visibility: hidden;
-    font-size: em(12px, 14px);
-    color: lighten($checkout-font-passive, 10%);
-
-    transition: $g-transition;
-    @include transform(translateY(10px) );
-  }
-
-  .form-row.form-row--active &,
-  .woocommerce-form-login &,
-  .form-row.form-row--select & {
-    opacity: 1;
-    visibility: visible;
-    @include transform(none);
-  }
-
-  .form-row.woocommerce-invalid & {
-    color: $color-red;
   }
 }
 
@@ -305,6 +210,11 @@ div.woocommerce {
     font-size: em(13px, 14px);
   }
 
+  input[type="text"] {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
   input[type="submit"] {
     padding: 8px 6px;
   }
@@ -337,7 +247,7 @@ form.checkout_coupon {
 
   position: absolute;
   width: 100%;
-  padding: 10px 1em;
+  padding: 10px;
   margin-top: -2px;
   background-color: white;
 
@@ -452,6 +362,11 @@ div.woocommerce .checkout-side-form + .woocommerce-message {
 
 .select2-container {
   width: 100% !important;
+  vertical-align: baseline;
+}
+
+.select2-container .select2-selection--single {
+  margin: 0;
 }
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {
@@ -712,7 +627,7 @@ div.woocommerce .checkout-side-form + .woocommerce-message {
 .shop_table .cart_item,
 .shop_table .order_item {
   img {
-    margin-right: 1.5em;
+    margin-right: 0.5em;
     width: 65px;
     height: auto;
     border: $checkout-border;
@@ -726,12 +641,11 @@ div.woocommerce .checkout-side-form + .woocommerce-message {
     align-items: center;
 
     line-height: 1.3;
+    font-weight: 700;
   }
 
   .product-quantity {
-    position: absolute;
-    top: 0;
-    left: 60px;
+    margin-right: 0.5em;
     border: $checkout-border;
     background-color: white;
     padding: 0.25em;
@@ -739,6 +653,15 @@ div.woocommerce .checkout-side-form + .woocommerce-message {
     line-height: 1;
 
     border-radius: $g-radius;
+  }
+
+  .variation {
+    width: 100%;
+    font-weight: 400;
+
+    dt, dd {
+      display: inline-block;
+    }
   }
 }
 
@@ -882,11 +805,50 @@ div.woocommerce .checkout-side-form + .woocommerce-message {
 
 ///// Submit Order button
 
+.wc_payment_methods + .place-order {
+  padding: 0;
+}
+
+// body text
+.woocommerce-terms-and-conditions {
+  position: relative;
+  margin: 1em 0;
+  padding: 1em;
+  border: 1px solid rgba(black, .1);
+
+  text-align: left;
+  border-radius: $g-radius;
+
+  p, ul, blockquote {
+    font-size: em(12px);
+    margin-bottom: 1em;
+  }
+
+  *:last-child {
+    margin-bottom: 0;
+  }
+
+  ul {
+    margin-left: 1em;
+  }
+}
+
 .wc-terms-and-conditions {
   margin-bottom: 1em;
+  padding: 0;
+  text-align: left;
 
   input[type="checkbox"] {
     vertical-align: middle;
+    margin-right: 0.5em;
+  }
+
+  label span {
+    font-weight: 700;
+  }
+
+  label a {
+    text-decoration: underline;
   }
 }
 
@@ -894,7 +856,8 @@ div.woocommerce .checkout-side-form + .woocommerce-message {
   text-align: right;
 
   .button {
-    padding: 0.75em 1.5em;
+    padding: 0.5em 1.5em;
+    font-size: 16px;
   }
 }
 

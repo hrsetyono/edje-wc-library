@@ -1,3 +1,11 @@
+## 1.2.0
+
+- Rearrange the files and add conditional to only load when needed.
+- [Cart] Remove Subtotal table in CART and replace it with direct link to CHECKOUT page.
+- [Cart] Change the product image in ORDER TABLE to use "thumbnail" size.
+- [My Account] Hide "Downloads" menu if the customer has no item to download
+- [Checkout] In order review table, move the position of quantity to be inline
+
 ## 1.1.6
 
 - Wordpress 4.9 compatibility fix for admin CSS

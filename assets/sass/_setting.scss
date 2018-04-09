@@ -3,8 +3,8 @@
 $version: 1.0;
 
 // ----- FONT -----
-$font-family : "Open Sans", Arial, "sans-serif";
-$font-family-header : "Open Sans", Arial, "sans-serif";
+$font-family : -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+$font-family-header : $font-family;
 
 // ----- COLORS -----
 // $color-passive : #e0e0e0;
@@ -25,6 +25,7 @@ $color-main-light : $color-blue-light;
 
 $color-link : $color-main;
 // $color-link-hover : lighten($color-main, 10%);
+
 
 
 // $body-background: #fff;
@@ -116,6 +117,29 @@ $h6-sizes: (base: $h6, small: 16px);
 // ----- TEXT DIRECTION -----
 // $text-direction   : ltr;  // Global text direction, 'rtl' or 'ltr'
 
+
+///// CHECKOUT /////
+
+$checkout-bg: #fafafa;
+$checkout-font-size: $font-size;
+$checkout-font-passive: #717171;
+
+$checkout-border: 1px solid rgba(black, .1);
+$checkout-border-dark: 1px solid #d9d9d9;
+
+$checkout-radius: $g-radius;
+
+$banner-texts: (
+  banner_size: "Set 1600x200 featured image in Pages > Checkout",
+  banner_logo: "Set logo in \"Appearance > Customize\""
+);
+
+$checkout-password-meter: (
+  too_short: "Please use longer password.",
+  bad: "Good, but can be stronger.",
+  good: "Great, that will do!",
+  strong: "Now, that's a strong password!"
+);
 
 // ----- CUSTOM MIXIN -----
 

@@ -2,35 +2,34 @@
 @import "edje-framework";
 
 @mixin button(
-  $color        : $color-main,
-  $font-color   : white,
-  $hover-shadow : 0 1px 3px rgba(black, .35) ) {
+  $color : $color-main,
+  $font-color : white ) {
 
   display: inline-block;
   outline: none;
   padding: 8px 14px;
-  border: 1px solid $color;
+  border: solid darken( $color, 10% );
+  border-width: 1px 1px 2px;
   background-color: $color;
+
   color: $font-color;
   text-decoration: none;
-  font-weight: 400;
+  font-weight: 500;
 
   border-radius: $g-radius;
   transition: none;
 
   &:hover {
-    background-color: $color;
-    color: $font-color;
-    box-shadow: $hover-shadow;
+    border-color: darken( $color, 15% );
   }
 
   &:active {
-    box-shadow: inset 0 0 0 1px white;
+    border-width: 2px 1px 1px;
   }
 }
 
 @mixin button-light($color: #c8c8c8) {
-  @include button($color, #252525, 0 1px 3px rgba(black, .2) ) ;
+  @include button($color, #252525 ) ;
 }
 
 .button,
@@ -45,6 +44,42 @@ a:hover { text-decoration: underline; }
 
 label {
   cursor: pointer;
+}
+
+label[for] {
+  .form-row & {
+    position: absolute;
+    z-index: -1;
+    top: 5px;
+    left: 18.5px;
+    opacity: 0;
+    visibility: hidden;
+    font-size: em(12px, 14px);
+    color: lighten($checkout-font-passive, 10%);
+
+    transition: $g-transition;
+    @include transform(translateY(10px) );
+  }
+
+  .form-row.form-row--active &,
+  .woocommerce-form-login &,
+  .form-row.form-row--select & {
+    opacity: 1;
+    visibility: visible;
+    @include transform(none);
+  }
+
+  .form-row.woocommerce-invalid & {
+    color: $color-red;
+  }
+}
+
+// field
+
+.form-row {
+  position: relative;
+  padding: 0 0.5em;
+  margin-bottom: 1em;
 }
 
 [type="text"],
@@ -74,9 +109,39 @@ select,
 
   &:focus {
     border-color: $color-main;
-    box-shadow: inset 0 1px 2px rgba(black, .2);
+    box-shadow: 0 0 0 2px lighten( $color-main, 25% );
+  }
+
+
+  /////
+
+  .form-row & {
+    padding: 13px 11px;
+    -webkit-appearance: none;
+    appearance: none;
+    transition: $g-transition;
+  }
+
+  .form-row.form-row--active &,
+  .form-row.form-row--select &,
+  .woocommerce-form-login &, { // appear by default on login form
+    padding-top: 21px;
+    padding-bottom: 5px;
+  }
+
+  .form-row.woocommerce-invalid & {
+    border-color: $color-red;
+    box-shadow: 0 0 0 2px lighten( $color-red, 20% );
   }
 }
+
+.select2-container--default .select2-selection--single {
+  .form-row & {
+    padding-right: 32px;
+  }
+}
+
+// checkbox
 
 input[type="radio"],
 input[type="checkbox"] {
@@ -100,6 +165,7 @@ input[type="checkbox"] {
     border-color: $color-main;
     box-shadow: inset 0 0 0 4.5px $color-main;
   }
+
 }
 
 input[type="checkbox"] {
@@ -111,7 +177,21 @@ input[type="radio"] {
 }
 
 
+input[type="submit"] {
+  font-weight: $header-weight;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+
 ///// NOTICE BOX
+
+.woocommerce-NoticeGroup {
+
+  ul {
+    list-style-type: bullet;
+  }
+}
 
 .woocommerce-info,
 .woocommerce-message,
@@ -120,6 +200,7 @@ input[type="radio"] {
   list-style-type: none;
 
   box-shadow: $shadow-z0;
+  overflow: hidden;
 }
 
 .woocommerce-info {
