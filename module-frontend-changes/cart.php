@@ -2,7 +2,7 @@
 /*
   Configure Cart page
 */
-class Hoo_Cart {
+class H_Frontend_Cart {
 
   function __construct() {
     add_filter( 'woocommerce_cart_ready_to_calc_shipping', '__return_false', 99 );

@@ -1,3 +1,7 @@
+## 1.3.0
+
+- First foundation to Jetpack-like setting page. (Group up files into module to make it easier to enable or disable).
+
 ## 1.2.0
 
 - Rearrange the files and add conditional to only load when needed.

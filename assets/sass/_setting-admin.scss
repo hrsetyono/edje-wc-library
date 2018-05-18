@@ -3,6 +3,9 @@ $version: 0;
 $color-passive: #5c6c7a;
 $color-passive-light: #ebeef0;
 
+$body-bg: #f4f6f8;
+$panel-bg: #f9fafb;
+
 $color-red : #c05717;
 $color-yellow : #edc200;
 $color-green : #4caf50;
@@ -17,7 +20,7 @@ $color-green-light : #c8e6c9; // #b2d86a;
 $color-blue-light: #cae9f7;
 
 
-$g-radius: 3px;
+$g-radius: 4px;
 $g-transition: all .25s ease-in-out;
 
 @mixin variation-select($color) {

@@ -2,7 +2,7 @@
 /*
   Functions for Thank You page
 */
-class Hoo_Thankyou {
+class H_CheckoutUI_Thankyou {
 
   function __construct() {
     add_action('woocommerce_before_thankyou', array($this, 'before_thankyou'), 1);

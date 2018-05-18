@@ -1,9 +1,7 @@
 @import "setting-admin";
 @import "edje";
 
-// -----------
-// ATTRIBUTE
-// -----------
+///// PRODUCT ATTRIBUTE
 
 .wc-metaboxes-wrapper .wc-metabox {
   .woocommerce_attribute_data td label {
@@ -12,16 +10,13 @@
 }
 
 .woocommerce_attribute {
-
   &:nth-child(1) strong { color: $color-green; }
   &:nth-child(2) strong { color: $color-purple; }
   &:nth-child(3) strong { color: $color-orange; }
 }
 
 
-// -----------
-// VARIATION
-// -----------
+///// VARIATION
 
 .woocommerce_variation.wc-metabox {
   position: relative;
@@ -83,7 +78,6 @@
 }
 
 // Variation Header
-// need to be strong to override existing one
 .woocommerce_variations .woocommerce_variation.wc-metabox > h3 {
   cursor: default !important;
 
@@ -244,29 +238,4 @@
 
 .post-type-shop_order .wp-list-table .column-order_status {
   width: 10ch;
-}
-
-.widefat .column-order_status mark {
-  display: inline-block;
-  width: 100%;
-  height: auto;
-  text-indent: 0;
-  padding: 0.5em;
-  font-size: 1em;
-  line-height: 1;
-  border-radius: 2em;
-
-  &::after { display: none; }
-
-  &.completed { background-color: $color-green-light; }
-  &.processing { background-color: $color-yellow-light; }
-  &.on-hold,
-  &.pending { background-color: $color-passive-light; }
-  &.cancelled { background-color: $color-red-light; }
-}
-
-.widefat .column-order_actions {
-
-  .button.processing:hover { background-color: $color-yellow-light; }
-  .button.complete:hover { background-color: $color-green-light; }
 }

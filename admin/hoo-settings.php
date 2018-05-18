@@ -14,8 +14,8 @@ class Hoo_Settings {
     $terms_index = array_search( 'woocommerce_terms_page_id', array_column($settings, 'id') );
 
     $privacy_args = array(
-      'title'    => __( 'Privacy Policy', 'edje' ),
-      'desc'     => __( 'EDJE Settings. A page to let your visitor know what you will do with their data. Shown besides the Copyright info of Checkout page.', 'edje' ),
+      'title'    => __( 'Privacy Policy', 'h' ),
+      'desc'     => __( 'EDJE Settings. A page to let your visitor know what you will do with their data. Shown besides the Copyright info of Checkout page.', 'h' ),
       'id'       => 'woocommerce_privacy_page_id',
       'default'  => '',
       'class'    => 'wc-enhanced-select-nostd',

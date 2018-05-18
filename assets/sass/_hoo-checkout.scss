@@ -645,12 +645,13 @@ div.woocommerce .checkout-side-form + .woocommerce-message {
   }
 
   .product-quantity {
-    margin-right: 0.5em;
+    margin-left: 0.5em;
     border: $checkout-border;
     background-color: white;
     padding: 0.25em;
     letter-spacing: -1px;
     line-height: 1;
+    white-space: nowrap;
 
     border-radius: $g-radius;
   }

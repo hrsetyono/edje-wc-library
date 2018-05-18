@@ -1,9 +1,28 @@
 <?php
 /*
-  Functions for Checkout page
+  Replace Checkout interface with our UI
 */
 
-class Hoo_Checkout {
+// run
+add_action( 'template_redirect', 'run_h_checkout_ui' );
+function run_h_checkout_ui() {
+  if( is_checkout() && get_theme_support('h-wc-checkout') ) {
+    require_once 'form-fields.php';
+    require_once 'locate-template.php';
+    new H_CheckoutUI();
+    new H_CheckoutUI_Fields();
+  }
+
+  if( is_wc_endpoint_url( 'order-received' ) ) {
+    require_once 'thankyou-page.php';
+    new H_CheckoutUI_Thankyou();
+  }
+}
+
+/////
+
+
+class H_CheckoutUI {
 
   function __construct() {
     // Template

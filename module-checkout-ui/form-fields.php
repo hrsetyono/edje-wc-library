@@ -2,7 +2,7 @@
 /*
   Handle form fields for CHECKOUT and MY-ACCOUNT page
 */
-class Hoo_Form {
+class H_CheckoutUI_Fields {
   function __construct() {
     // Form Fields
     add_filter('woocommerce_billing_fields', array($this, 'reorder_billing_fields'), 10, 1 );

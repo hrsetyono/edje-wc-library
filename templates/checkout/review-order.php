@@ -4,7 +4,6 @@ WooCommerce Edje - Review order table
 
 Changes:
 1. Added wrapper in product name row so it can be vertically aligned with image
-2. Put quantity inside Name filter so it will appear after image.
 
 @from 3.3.0
  */
@@ -32,13 +31,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<tr class="<?php echo esc_attr( apply_filters( 'woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key ) ); ?>">
 						<td class="product-name">
 
-              <?php #2
-							$hoo_item_qty = apply_filters( 'woocommerce_checkout_cart_item_quantity', ' <strong class="product-quantity">' . sprintf( '&times; %s', $cart_item['quantity'] ) . '</strong>', $cart_item, $cart_item_key ); ?>
-
-              <?php #1 ?>
-							<?php echo apply_filters( 'woocommerce_cart_item_name', $hoo_item_qty . '<div>' . $_product->get_name(), $cart_item, $cart_item_key ); ?>
+              <?php #1 ///// ?>
+							<?php echo apply_filters( 'woocommerce_cart_item_name', '<div>' . $_product->get_name(), $cart_item, $cart_item_key ); ?>
 							<?php echo wc_get_formatted_cart_item_data( $cart_item ); ?>
 						  </div>
+
+							<?php echo apply_filters( 'woocommerce_checkout_cart_item_quantity', ' <strong class="product-quantity">' . sprintf( '&times; %s', $cart_item['quantity'] ) . '</strong>', $cart_item, $cart_item_key ); ?>
 
 						</td>
 						<td class="product-total">

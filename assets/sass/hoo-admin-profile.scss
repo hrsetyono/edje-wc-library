@@ -1,0 +1,193 @@
+@import "setting-admin";
+@import "edje";
+
+///// USER PROFILE
+
+#your-profile {
+
+  @include display-flex;
+  flex-wrap: wrap;
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  .form-table {
+    display: block;
+    width: 40%;
+    background-color: white;
+    padding: 1.25em;
+    margin-bottom: 1.5em;
+    border: 1px solid rgba(black, .15);
+    border-radius: $g-radius;
+
+    @include below( small ) {
+      width: 80%;
+    }
+
+    @include below( mini ) {
+      width: 100%;
+    }
+  }
+
+  h2 {
+    width: 10%;
+    padding: 0 0.5em;
+    margin-top: 0.5em;
+    line-height: 1.3;
+
+    @include below( small ) {
+      width: 20%;
+      margin-bottom: 0;
+    }
+
+    @include below( mini ) {
+      width: 100%;
+      padding-left: 0;
+      font-size: 22px;
+    }
+  }
+
+  tbody {
+    @include display-flex;
+    flex-wrap: wrap;
+    margin: 0 -0.5em;
+  }
+
+  tr {
+    width: 50%;
+    padding: 0 0.5em;
+
+    @include below( mini ) {
+      width: 100%;
+      margin-bottom: 0.5em;
+    }
+  }
+
+  th, td {
+    display: block;
+    padding: 0;
+  }
+
+  // field size
+
+  input[type="text"],
+  input[type="email"],
+  input[type="url"],
+  select,
+  .form-table textarea, {
+    width: 100%;
+    padding: 5px 10px;
+  }
+
+  .select2-container {
+    width: 100% !important;
+  }
+
+  .user-description-wrap,
+  .user-profile-picture {
+    width: 100%;
+
+    p { display: none; }
+    img { width: 75px; height: auto; }
+    td { margin-bottom: 0; }
+  }
+
+  .user-sessions-wrap {
+    width: 100%;
+  }
+}
+
+#your-profile {
+  ///// field order
+
+  // ADMIN COLOR
+  table:first-of-type,
+  h2:first-of-type {
+    display: none;
+  }
+
+  // NAME
+  h2:nth-of-type(2),
+  table:nth-of-type(2) {
+    order: 1;
+  }
+
+  // CONTACT INFO
+  h2:nth-of-type(3),
+  table:nth-of-type(3) {
+    order: 3;
+  }
+
+  // ABOUT THE USER
+  h2:nth-of-type(4),
+  table:nth-of-type(4) {
+    order: 2;
+  }
+
+  // ACCOUNT MANAGEMENT
+  h2:nth-of-type(5),
+  table:nth-of-type(5) {
+    order: 4;
+  }
+
+  // BILLING ADDRESS
+  h2:nth-of-type(6),
+  table:nth-of-type(6) {
+    order: 5;
+  }
+
+  // BILLING ADDRESS
+  h2:nth-of-type(7),
+  table:nth-of-type(7) {
+    order: 6;
+  }
+
+  .submit {
+    order: 7;
+  }
+
+
+  ///// field design
+
+  table:nth-of-type(4),
+  table:nth-of-type(5) {
+    background-color: $panel-bg;
+
+    @include above( small ) {
+      width: 31%;
+    }
+  }
+
+}
+
+// Shipping and Billing
+
+#your-profile {
+  #fieldset-billing,
+  #fieldset-shipping {
+    br { display: none; }
+  }
+
+  #fieldset-billing {
+    tr:nth-child(1),
+    tr:nth-child(2),
+    tr:nth-child(3) {
+      width: 33.333%;
+    }
+  }
+
+  #fieldset-shipping {
+    tr:nth-child(1) {
+      width: 100%;
+    }
+
+    tr:nth-child(2),
+    tr:nth-child(3),
+    tr:nth-child(4) {
+      width: 33.333%;
+    }
+  }
+}

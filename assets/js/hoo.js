@@ -14,7 +14,7 @@ function start() {
   }
 
   if( $body.hasClass('single-product') ) {
-    wooSingle.init();
+    // wooSingle.init();
   }
 }
 
@@ -28,8 +28,13 @@ function startOnLoad() {
 var wooSingle = {
   init: function() {
     var $form = $('form.variations_form');
+    $form.on( 'update_variation_values', this.onUpdateVariation );
     $form.on( 'found_variation', this.onFoundVariation );
     $form.on( 'reset_data', this.onClear );
+  },
+
+  onUpdateVariation: function() {
+
   },
 
   /*

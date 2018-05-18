@@ -1,11 +1,13 @@
 <?php
-
-class Hoo_Handlebars {
+/*
+  Output Handlebars JS template to footer
+*/
+class H_VariationsUI_Template {
   function __construct() {
-    add_filter('admin_footer', array($this, 'hoo_handlebars_template') );
+    add_filter( 'admin_footer', array($this, 'hoo_handlebars_template') );
   }
 
-  function hoo_handlebars_template($views) {
+  function hoo_handlebars_template( $views ) {
     ?>
 
     <!-- Global Form -->
