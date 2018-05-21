@@ -1,15 +1,4 @@
 <?php
-/*
-  Modify the WooCommerce metabox in Product edit page
-*/
-
-// run
-add_action( 'admin_init', 'run_h_profile_ui' );
-function run_h_profile_ui() {
-  new H_ProfileUI();
-}
-
-/////
 
 class H_ProfileUI {
   function __construct() {

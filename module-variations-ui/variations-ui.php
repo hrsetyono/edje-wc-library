@@ -1,19 +1,4 @@
 <?php
-/*
-  Modify the WooCommerce metabox in Product edit page
-*/
-
-// run
-add_action( 'admin_init', 'run_h_variations_ui' );
-function run_h_variations_ui() {
-  require_once 'template.php';
-
-  new H_VariationsUI();
-  new H_VariationsUI_Template();
-}
-
-/////
-
 class H_VariationsUI {
   function __construct() {
     add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ), 999 );

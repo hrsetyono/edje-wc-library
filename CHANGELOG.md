@@ -1,3 +1,7 @@
+## 1.3.1
+
+- Minor changes to file naming and organization.
+
 ## 1.3.0
 
 - First foundation to Jetpack-like setting page. (Group up files into module to make it easier to enable or disable).
