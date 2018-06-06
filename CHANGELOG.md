@@ -1,3 +1,7 @@
+## 1.3.2
+
+- [Single] Fixed price range not hiding when variation is selected
+
 ## 1.3.1
 
 - Minor changes to file naming and organization.

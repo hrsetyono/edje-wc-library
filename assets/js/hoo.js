@@ -14,7 +14,7 @@ function start() {
   }
 
   if( $body.hasClass('single-product') ) {
-    // wooSingle.init();
+    wooSingle.init();
   }
 }
 
@@ -41,7 +41,12 @@ var wooSingle = {
     After finished choosing all selection
   */
   onFoundVariation: function( e, variation ) {
-    $(this).siblings('.price').hide();
+    var $firstPrice = $(this).siblings( '.price' );
+
+    // if product has price range, hide it to show that variation's price
+    if( $firstPrice.find('.amount').length >= 2 ) {
+      $firstPrice.hide();
+    }
   },
 
   /*
