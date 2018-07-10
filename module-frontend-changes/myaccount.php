@@ -1,6 +1,6 @@
-<?php
+<?php namespace h;
 
-class H_Frontend_MyAccount {
+class Frontend_MyAccount {
 
   function __construct() {
     add_filter( 'woocommerce_account_menu_items', array($this, 'remove_account_menu_items') );

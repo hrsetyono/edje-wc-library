@@ -1,5 +1,6 @@
-<?php
-class H_CheckoutUI {
+<?php namespace h;
+
+class Checkout_UI {
 
   function __construct() {
     // Template

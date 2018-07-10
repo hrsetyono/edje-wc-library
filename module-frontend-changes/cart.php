@@ -1,8 +1,8 @@
-<?php
+<?php namespace h;
 /*
   Configure Cart page
 */
-class H_Frontend_Cart {
+class Frontend_Cart {
 
   function __construct() {
     add_filter( 'woocommerce_cart_ready_to_calc_shipping', '__return_false', 99 );

@@ -1,6 +1,8 @@
-<?php
-
-class H_ProfileUI {
+<?php namespace h;
+/*
+  Change the layout of User Profile edit page
+*/
+class Profile_UI {
   function __construct() {
     add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ), 999 );
   }

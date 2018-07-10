@@ -1,3 +1,8 @@
+## 1.3.3
+
+- [Wholesale] Added wholesale price field in Product edit page. (WIP)
+- Added "h" namespace to all modules
+
 ## 1.3.2
 
 - [Single] Fixed price range not hiding when variation is selected

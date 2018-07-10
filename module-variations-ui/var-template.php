@@ -1,8 +1,8 @@
-<?php
+<?php namespace h;
 /*
   Output Handlebars JS template to footer
 */
-class H_VariationsUI_Template {
+class Variations_Template {
   function __construct() {
     add_filter( 'admin_footer', array($this, 'hoo_handlebars_template') );
   }

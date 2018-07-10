@@ -11,12 +11,12 @@ function _run_h_frontend_changes() {
   if( is_account_page() ) {
     require_once HOO_PATH . '/module-frontend-changes/myaccount.php';
     require_once HOO_PATH . '/module-checkout-ui/form-fields.php';
-    new H_Frontend_MyAccount();
-    new H_CheckoutUI_Fields();
+    new \h\Frontend_MyAccount();
+    new \h\Checkout_Fields();
   }
 
   if( is_cart() ) {
     require_once HOO_PATH . '/module-frontend-changes/cart.php';
-    new H_Frontend_Cart();
+    new \h\Frontend_Cart();
   }
 }

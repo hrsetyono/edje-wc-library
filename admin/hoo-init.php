@@ -1,8 +1,8 @@
-<?php
+<?php namespace hoo;
 /*
   Generic function OR those that can't be run in template_redirect action.
 */
-class Hoo_Init {
+class Init {
 
   function __construct() {
     // Order Review

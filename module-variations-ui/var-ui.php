@@ -1,5 +1,6 @@
-<?php
-class H_VariationsUI {
+<?php namespace h;
+
+class Variations_UI {
   function __construct() {
     add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ), 999 );
 

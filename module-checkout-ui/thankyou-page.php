@@ -1,8 +1,8 @@
-<?php
+<?php namespace h;
 /*
   Functions for Thank You page
 */
-class H_CheckoutUI_Thankyou {
+class Checkout_Thankyou {
 
   function __construct() {
     add_action('woocommerce_before_thankyou', array($this, 'before_thankyou'), 1);
