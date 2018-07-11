@@ -18,6 +18,8 @@ Important information at a glance, editable without toggling each variation.
 
 Checkout page is very important to seal the deal. So we automatically transform yours into as seen below.
 
+Simply add this in your functions.php: `add_theme_support('h-checkout');`.
+
 [Read here](https://github.com/hrsetyono/woocommerce-edje/wiki/Checkout-Page) to see what customization you can do.
 
 ![Edje Woo - New Checkout Page](http://cdn.setyono.net/edjewoo/wch-checkout.jpg)

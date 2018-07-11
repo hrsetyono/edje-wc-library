@@ -1,5 +1,6 @@
 @import "setting";
-@import "edje-framework";
+$output-framework: true;
+@import "edje-v15";
 
 @mixin button(
   $color : $color-main,

@@ -1,3 +1,9 @@
+## 1.3.4
+
+- [Checkout] Require theme_support of `h-checkout`.
+- [Wholesale] Require theme_support of `h-wholesale`.
+- [Wholesale] (Still WIP) Added Wholesale price columns in Product list table.
+
 ## 1.3.3
 
 - [Wholesale] Added wholesale price field in Product edit page. (WIP)

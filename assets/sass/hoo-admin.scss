@@ -1,5 +1,5 @@
 @import "setting-admin";
-@import "edje";
+@import "edje-v15";
 
 ///// PRODUCT ATTRIBUTE
 
@@ -234,6 +234,12 @@
 .widefat .column-order_status {
   width: 80px;
   text-align: center;
+}
+
+table.wp-list-table {
+  .column-price {
+    width: 15ch;
+  }
 }
 
 .post-type-shop_order .wp-list-table .column-order_status {
