@@ -5,8 +5,6 @@ class Wholesale_Admin {
     add_action( 'woocommerce_product_options_general_product_data', array($this, 'add_wholesale_fields') );
     add_action( 'woocommerce_process_product_meta', array($this, 'save_wholesale_fields') );
 
-    // add_filter( 'woocommerce_product_visibility_options', array($this, 'add_wholesale_visibility') );
-
     // add new columns in WooCommerce > Products
     \H::add_column( 'product', array(
       'name' => 'Wholesale Price >price',
@@ -14,6 +12,10 @@ class Wholesale_Admin {
     ) );
   }
 
+  /*
+    Add wholesale fields in WC Product edit page
+    @action woocommerce_product_options_general_product_data
+  */
   function add_wholesale_fields() {
     global $woocommerce, $post;
     echo '<div class="options_group">';
@@ -41,6 +43,8 @@ class Wholesale_Admin {
   }
 
   /*
+    After saving WC Product, save the new field too
+    @action woocommerce_process_product_meta
   */
   function save_wholesale_fields( $post_id ) {
     $wholesale_price = $_POST['_wholesale_price'];
@@ -55,14 +59,14 @@ class Wholesale_Admin {
   }
 
   /*
-
+    Content of "Wholesale" column in WC Product table
   */
   function wholesale_price_column( $post, $fields ) {
-    $wholesale_price = get_post_meta( $post->ID, '_wholesale_price', true );
-    $wholesale_moq = get_post_meta( $post->ID, '_wholesale_moq', true );
+    $wholesale_price = isset( $fields['_wholesale_price'] ) ? $fields['_wholesale_price'][0] : null;
+    $wholesale_moq = isset( $fields['_wholesale_price'] ) ? $fields['_wholesale_moq'][0] : null;
 
     return $wholesale_price ?
-      wc_price( $wholesale_price ) . ' <br> Min: ' . $wholesale_moq
+      wc_price( $wholesale_price ) . ' <br> Moq: ' . $wholesale_moq
       :
       '-';
   }

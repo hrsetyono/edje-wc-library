@@ -1,3 +1,7 @@
+## 1.3.5
+
+- [MyAccount] Added extra fields in Registration form.
+
 ## 1.3.4
 
 - [Checkout] Require theme_support of `h-checkout`.

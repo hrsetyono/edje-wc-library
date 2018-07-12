@@ -5,7 +5,7 @@ Description: Library that helps customize WooCommerce. Designed to work with Tim
 Plugin URI: http://github.com/hrsetyono/woocommerce-edje
 Author: The Syne Studio
 Author URI: http://thesyne.com/
-Version: 1.3.4
+Version: 1.3.5
 */
 
 // exit if accessed directly
