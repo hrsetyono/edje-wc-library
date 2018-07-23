@@ -33,10 +33,13 @@
   }
 
   h2 {
-    width: 10%;
-    padding: 0 0.5em;
-    margin-top: 0.5em;
+    width: 100%;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
     line-height: 1.3;
+
+    font-size: 28px;
+    font-weight: 400;
 
     @include below( small ) {
       width: 20%;
@@ -69,6 +72,14 @@
   th, td {
     display: block;
     padding: 0;
+  }
+
+  th {
+    color: $color-passive;
+  }
+
+  td {
+    margin-bottom: 12px;
   }
 
   // field size
@@ -147,6 +158,7 @@
 
   .submit {
     order: 7;
+    width: 100%;
   }
 
 
@@ -155,10 +167,6 @@
   table:nth-of-type(4),
   table:nth-of-type(5) {
     background-color: $panel-bg;
-
-    @include above( small ) {
-      width: 31%;
-    }
   }
 
 }

@@ -67,7 +67,7 @@ class Checkout_UI {
   */
   function before_customer_details() {
     echo '<div class="column-main">';
-      jetpack_breadcrumbs();
+      if( class_exists('Jetpack') ) { jetpack_breadcrumbs(); }
   }
   function after_customer_details() {
       $this->output_legal_terms();
@@ -86,7 +86,7 @@ class Checkout_UI {
 
     @action wp_enqueue_scripts
   */
-  function enqueue_script_style($hook) {
+  function enqueue_script_style( $hook ) {
     // remove all previous CSS
     global $wp_styles;
   	foreach( $wp_styles->registered as $handle => $data ) {
@@ -104,9 +104,9 @@ class Checkout_UI {
 
     @param $order_id (int) - The new order that's just created
   */
-  function send_invoice_after_order($order_id) {
+  function send_invoice_after_order( $order_id ) {
     $email = new WC_Email_Customer_Invoice();
-    $email->trigger($order_id);
+    $email->trigger( $order_id );
   }
 
   /*
@@ -129,15 +129,15 @@ class Checkout_UI {
   private function output_legal_terms() {
     global $post;
     $tnc_url = get_permalink( wc_get_page_id( 'terms' ) );
-    $privacy_url = get_permalink( wc_get_page_id( 'privacy' ) );
+    $privacy_url = get_permalink( get_option( 'wp_page_for_privacy_policy', 0 ) );
 
     ?>
     <div class="checkout-legal">
       <span>All rights reserved <?php bloginfo('name'); ?></span>
-      <?php if($tnc_url) {
+      <?php if( $tnc_url ) {
         echo "<span><a href='$tnc_url' target='_blank'>" . __('Terms &amp; Conditions', 'hoo') . '</a></span>';
       } ?>
-      <?php if($privacy_url) {
+      <?php if( $privacy_url ) {
         echo "<span><a href='$privacy_url' target='_blank'>" .  __('Privacy Policy', 'hoo') . '</a></span>';
       } ?>
     </div>

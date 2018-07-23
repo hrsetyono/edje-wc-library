@@ -4,12 +4,12 @@
 */
 
 // run
-add_action( 'template_redirect', '_run_h_checkout_ui' );
+add_action( 'template_redirect', '_h_module_checkout_ui' );
 
 /////
 
-function _run_h_checkout_ui() {
-  if( !get_theme_support('h-checkout') || !get_theme_support('h-wc-checkout') ) { return false; }
+function _h_module_checkout_ui() {
+  if( !get_theme_support( 'h-checkout' ) ) { return false; }
 
   if( is_checkout() ) {
     require_once HOO_PATH . '/module-checkout-ui/checkout-ui.php';

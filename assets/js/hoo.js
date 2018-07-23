@@ -107,9 +107,9 @@ var wooCheckout = {
     var $row = $input.closest('.form-row');
 
     if($input.val() ) { // if not empty
-      $row.addClass('form-row--active');
+      $row.addClass( 'form-row--active' );
     } else {
-      $row.removeClass('form-row--active');
+      $row.removeClass( 'form-row--active' );
     }
   },
 
@@ -118,9 +118,9 @@ var wooCheckout = {
   */
   _moveErrorMessages: function(e) {
     console.log( 'on error' );
-    var $notice = $('.woocommerce-NoticeGroup');
+    var $notice = $( '.woocommerce-NoticeGroup' );
 
-    $notice.prependTo( $('.column-main') );
+    $notice.prependTo( $( '.column-main' ) );
   }
 };
 

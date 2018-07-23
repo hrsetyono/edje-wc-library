@@ -156,7 +156,7 @@ div.woocommerce {
   position: relative;
   width: 42%;
   clear: none;
-  padding: 3em 0 2em 40px;
+  padding: 1.5em 0 2em 40px;
   background-color: transparent;
 
   &::after {
@@ -210,11 +210,6 @@ div.woocommerce {
     font-size: em(13px, 14px);
   }
 
-  input[type="text"] {
-    padding-top: 8px;
-    padding-bottom: 8px;
-  }
-
   input[type="submit"] {
     padding: 8px 6px;
   }
@@ -226,6 +221,7 @@ div.woocommerce {
   .woocommerce-info,
   .woocommerce-message,
   .woocommerce-error {
+    display: block !important;
     margin: 10px 1em;
     border: none;
     background-color: transparent;
@@ -241,9 +237,8 @@ div.woocommerce {
 }
 
 form.woocommerce-form-login,
-form.checkout_coupon {
-  display: -webkit-flex;
-  display: flex;
+form.woocommerce-form-coupon {
+  @include display-flex;
 
   position: absolute;
   width: 100%;
@@ -253,14 +248,22 @@ form.checkout_coupon {
 
   border-radius: 0 0 $g-radius $g-radius;
   box-shadow: $shadow-z1;
+
+  // hide guide
+  > p:first-child {
+    display: none;
+  }
 }
 
+
+// login
 form.woocommerce-form-login {
   flex-direction: column;
   z-index: z(checkout_login);
 
-  > p:first-child { display: none; } // hide the how-to guide
-  .form-row label[for] { left: 11px; }
+  .form-row label[for] {
+    left: 11px;
+  }
 
   input[type="submit"] {
     width: 50%;
@@ -274,8 +277,11 @@ form.woocommerce-form-login {
   }
 }
 
-form.checkout_coupon {
-  .form-row { margin-bottom: 0; }
+// coupon
+form.woocommerce-form-coupon {
+  .form-row {
+    margin-bottom: 0;
+  }
 
   .form-row-first {
     flex: 1;
@@ -289,6 +295,12 @@ form.checkout_coupon {
   input {
     height: 100%;
   }
+
+  input[type="text"] {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
 }
 
 // error message from Coupon / Login
@@ -628,7 +640,7 @@ div.woocommerce .checkout-side-form + .woocommerce-message {
 .shop_table .order_item {
   img {
     margin-right: 0.5em;
-    width: 65px;
+    width: 55px;
     height: auto;
     border: $checkout-border;
     border-radius: $g-radius;
@@ -851,6 +863,11 @@ div.woocommerce .checkout-side-form + .woocommerce-message {
   label a {
     text-decoration: underline;
   }
+}
+
+.woocommerce-privacy-policy-text {
+  display: none;
+  margin-bottom: 1em;
 }
 
 .place-order {
@@ -1129,5 +1146,35 @@ div.woocommerce .checkout-side-form + .woocommerce-message {
   #pay-button {
     order: 3;
     align-self: center;
+  }
+}
+
+
+///// Store Wide Notice
+
+.woocommerce-store-notice {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  background-color: $color-main;
+  padding: 0.5em 1em;
+
+  text-align: center;
+  color: white;
+  box-shadow: $shadow-z2;
+
+  a {
+    display: inline-block;
+    float: right;
+    background-color: $color-main-dark;
+    padding: 0.5em 2em;
+    margin: -0.5em -1em;
+
+    color: white;
+    text-decoration: underline;
+
+    &:hover { opacity: .7; }
   }
 }

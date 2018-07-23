@@ -42,7 +42,7 @@ class Checkout_Fields {
     $fields['address_1']['priority'] = 22;
     $fields['address_1']['placeholder'] = $fields['address_1']['label'];
     $fields['address_2']['priority'] = 24;
-    $fields['address_2']['label'] = __('Apartment, suite, unit etc.', 'hoo');
+    $fields['address_2']['label'] = __('Unit No.', 'h');
 
     $fields['state']['priority'] = 42;
     $fields['state']['placeholder'] = $fields['state']['label'];

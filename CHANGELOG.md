@@ -1,3 +1,9 @@
+## 1.3.6
+
+- [Checkout] Compatibility with WooCommerce 3.4.x which addded Privacy page and changes on Coupon field.
+- [My Account] Fixed broken Login page when Register is disabled.
+- [Admin User Profile] Each section are in new line instead of 50:50 columns.
+
 ## 1.3.5
 
 - [MyAccount] Added extra fields in Registration form.

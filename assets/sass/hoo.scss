@@ -83,21 +83,13 @@ label[for] {
   margin-bottom: 1em;
 }
 
-[type="text"],
-[type="number"],
-[type="tel"],
-[type="password"],
-[type="email"],
-[type="search"],
-[type="url"],
-textarea,
-select,
-.select2-container--default .select2-selection--single {
+%field {
   display: block;
   width: 100%;
   height: auto;
   padding: 0.5em 0.75em;
   background-color: transparent;
+
   border: 1px solid $color-passive;
   border-top-color: darken($color-passive, 5%);
   border-radius: $g-radius;
@@ -112,7 +104,21 @@ select,
     border-color: $color-main;
     box-shadow: 0 0 0 2px lighten( $color-main, 25% );
   }
+}
 
+[type="text"],
+[type="number"],
+[type="tel"],
+[type="password"],
+[type="email"],
+[type="search"],
+[type="url"],
+[type="date"],
+[type="time"],
+textarea,
+select,
+.select2-container--default .select2-selection--single {
+  @extend %field;
 
   /////
 
@@ -123,9 +129,10 @@ select,
     transition: $g-transition;
   }
 
+  // super label
   .form-row.form-row--active &,
   .form-row.form-row--select &,
-  .woocommerce-form-login &, { // appear by default on login form
+  .woocommerce-form-login &, {
     padding-top: 21px;
     padding-bottom: 5px;
   }
@@ -164,7 +171,7 @@ input[type="checkbox"] {
 
   &:checked {
     border-color: $color-main;
-    box-shadow: inset 0 0 0 4.5px $color-main;
+    box-shadow: inset 0 0 0 .5em $color-main;
   }
 
 }
@@ -188,7 +195,6 @@ input[type="submit"] {
 ///// NOTICE BOX
 
 .woocommerce-NoticeGroup {
-
   ul {
     list-style-type: bullet;
   }
