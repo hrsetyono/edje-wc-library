@@ -1,3 +1,8 @@
+## 1.4.0
+
+- [Frontend] Moved over codes that rearrange elements from default theme to this plugin
+- [My Account] Override Login template
+
 ## 1.3.6
 
 - [Checkout] Compatibility with WooCommerce 3.4.x which addded Privacy page and changes on Coupon field.

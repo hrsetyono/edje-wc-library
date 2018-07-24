@@ -3,26 +3,44 @@
   Functions affecting public visitor
 */
 
-add_action( 'template_redirect', '_run_h_mfc_template_redirect' );
-add_action( 'init', '_run_h_mfc_init' );
+add_action( 'template_redirect', '_h_module_frontend' );
+add_action( 'init', '_h_module_frontend_init' );
 
 /////
 
-function _run_h_mfc_template_redirect() {
+function _h_module_frontend() {
+  if( is_admin() || !get_theme_support('h-woocommerce') ) { return false; }
+
+  // disable woocommerce CSS
+  add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
+
+  // my account page
   if( is_account_page() ) {
-    require_once HOO_PATH . '/module-frontend-changes/myaccount.php';
+    require_once 'myaccount.php';
     require_once HOO_PATH . '/module-checkout-ui/form-fields.php';
     new \h\Frontend_MyAccount();
     new \h\Checkout_Fields();
   }
-
-  if( is_cart() ) {
-    require_once HOO_PATH . '/module-frontend-changes/cart.php';
+  // cart page
+  elseif( is_cart() ) {
+    require_once 'cart.php';
     new \h\Frontend_Cart();
+  }
+  // single product page
+  elseif( is_product() || is_shop() ) {
+    require_once 'product.php';
+    new \h\Frontend_Product();
+  }
+  // shop page
+  elseif( is_shop() ) {
+    require_once 'shop.php';
+    new \h\Frontend_Shop();
   }
 }
 
-function _run_h_mfc_init() {
-  require_once HOO_PATH . '/module-frontend-changes/register.php';
+function _h_module_frontend_init() {
+  if( is_admin() || !get_theme_support('h-woocommerce') ) { return false; }
+
+  require_once 'register.php';
   new \h\Frontend_Register();
 }
