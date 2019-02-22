@@ -75,7 +75,7 @@ if ( $show_downloads ) {
 	</table>
 
   <?php if ( $order->get_customer_note() ) : #1 ?>
-    <div class="hoo-customer-note">
+    <div class="h-customer-note">
       <h3><?php _e( 'Note:', 'woocommerce' ); ?></h3>
       <?php echo wpautop( wptexturize( $order->get_customer_note() ) ); ?>
     </div>

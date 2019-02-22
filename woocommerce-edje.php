@@ -41,7 +41,7 @@ class Woocommerce_Edje {
 
     require_once 'module-checkout-ui/_run.php';
     require_once 'module-variations-ui/_run.php';
-    require_once 'module-profile-ui/_run.php';
+    // require_once 'module-profile-ui/_run.php';
     require_once 'module-frontend-changes/_run.php';
     require_once 'module-wholesale/_run.php';
 	}

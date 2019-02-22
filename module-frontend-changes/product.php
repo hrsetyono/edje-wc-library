@@ -5,9 +5,6 @@ class Frontend_Product {
     add_filter( 'woocommerce_get_breadcrumb', '__return_false' );
     add_filter( 'loop_shop_per_page', array($this, 'change_products_per_page') );
 
-    // remove default image in product thumb
-    remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail' );
-
     $this->_rearrange_single_product();
   }
 
