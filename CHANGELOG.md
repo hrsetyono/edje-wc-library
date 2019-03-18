@@ -1,3 +1,7 @@
+## 2.0.0
+
+- Renamed to "edje-wc-library".
+
 ## 1.4.0
 
 - [Frontend] Moved over codes that rearrange elements from default theme to this plugin

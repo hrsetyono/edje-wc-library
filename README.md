@@ -1,25 +1,32 @@
-# Edje WooCommerce
+# Edje WooCommerce Library
 
 ![Edje Wordpress](http://cdn.setyono.net/edge/wp-edge.jpg)
 
-WooCommerce is a fantastic shopping platform, but complicated to use and develop. This **plugin** brings order to that.
+WooCommerce is a fantastic shopping platform, but complicated to use and develop. This plugin helps simplifying many features.
 
-Visit our [WIKI](https://github.com/hrsetyono/edje-woo/wiki) for full documentation.
+**REQUIREMENT**
 
+- PHP 7.0+
+- WordPress 5.0+
+
+**TABLE OF CONTENTS**
+
+1. [Intuitive Variations UI](#intuitive-variations-ui)
+1. [Clean Checkout Page](#clean-checkout-page)
 
 ## 1. Intuitive Variations UI
 
-Important information at a glance, editable without toggling each variation.
+![Edje Woo - New Variation Interface](https://cdn.setyono.net/edjewoo/variation.jpg)
 
-![Edje Woo - New Variation Interface](http://cdn.setyono.net/edjewoo/variation.jpg)
+Important information at a glance, editable without toggling each variation.
 
 
 ## 2. Clean Checkout Page
 
-Checkout page is very important to seal the deal. So we automatically transform yours into as seen below.
+![Edje Woo - New Checkout Page](https://cdn.setyono.net/edjewoo/wch-checkout.jpg)
+
+Checkout page is very important to seal the deal. So we automatically transform yours into as seen above.
 
 Simply add this in your functions.php: `add_theme_support('h-checkout');`.
 
-[Read here](https://github.com/hrsetyono/woocommerce-edje/wiki/Checkout-Page) to see what customization you can do.
-
-![Edje Woo - New Checkout Page](http://cdn.setyono.net/edjewoo/wch-checkout.jpg)
+[Learn how to customize it »](https://github.com/hrsetyono/edje-wc-library/wiki/Checkout-Page)

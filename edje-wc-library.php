@@ -1,15 +1,14 @@
 <?php
 /*
-Plugin Name: WooCommerce Edje
-Description: Library that helps customize WooCommerce. Designed to work with Timber.
+Plugin Name: Edje WooCommerce Library
+Description: Simplify WooCommerce complicated features. Designed to work with Timber.
 Plugin URI: http://github.com/hrsetyono/woocommerce-edje
 Author: The Syne Studio
 Author URI: http://thesyne.com/
 Version: 1.4.0
 */
 
-// exit if accessed directly
-if( !defined('ABSPATH') ) { exit; }
+if( !defined( 'WPINC' ) ) { die; } // exit if accessed directly
 
 define( 'HOO_DIR', plugins_url( '', __FILE__ ) );
 define( 'HOO_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
