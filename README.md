@@ -8,11 +8,14 @@ WooCommerce is a fantastic shopping platform, but complicated to use and develop
 
 - PHP 7.0+
 - WordPress 5.0+
+- WooCommerce 3.5+
 
 **TABLE OF CONTENTS**
 
 1. [Intuitive Variations UI](#intuitive-variations-ui)
 1. [Clean Checkout Page](#clean-checkout-page)
+1. [Changelog](https://github.com/hrsetyono/edje-wc-library/wiki/Changelog)
+
 
 ## 1. Intuitive Variations UI
 

@@ -5,7 +5,7 @@ Description: Simplify WooCommerce complicated features. Designed to work with Ti
 Plugin URI: http://github.com/hrsetyono/woocommerce-edje
 Author: The Syne Studio
 Author URI: http://thesyne.com/
-Version: 1.4.0
+Version: 2.0.0
 */
 
 if( !defined( 'WPINC' ) ) { die; } // exit if accessed directly
