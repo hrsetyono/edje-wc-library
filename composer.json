@@ -1,0 +1,19 @@
+{
+  "name": "pixelstudio/edje-wc-library",
+  "description": "Plugin to simplify WooCommerce complicated features.",
+  "keywords": ["wordpress", "plugin", "library"],
+  "type": "wordpress-plugin",
+  "homepage": "https://github.com/hrsetyono/edje-wp-library/",
+  "authors": [
+    {
+      "name": "Pixel Studio",
+      "email": "info@pixelstudio.id",
+      "homepage": "https://pixelstudio.id"
+    }
+  ],
+  "license": "MIT",
+  "require": {
+    "php": ">=7.0.0",
+    "composer/installers": ">=1.6.0"
+  }
+}
