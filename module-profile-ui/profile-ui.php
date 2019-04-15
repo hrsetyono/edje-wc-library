@@ -13,7 +13,7 @@ class Profile_UI {
   */
   function admin_enqueue_scripts( $hook ) {
     if( in_array( $hook, array( 'user-edit.php', 'profile.php' ) ) ) {
-      wp_enqueue_style( 'hoo-admin-profile-css', HOO_DIR . '/assets/css/hoo-admin-profile.css' );
+      wp_enqueue_style( 'h-wc-admin-profile-css', HOO_DIR . '/assets/css/h-wc-admin-profile.css' );
     }
   }
 }

@@ -37,8 +37,8 @@ class Checkout_UI {
   */
   function replace_page_template( $template ) {
     $file = 'page-checkout.php';
-    if( file_exists(hoo_locate_template( $file ) ) ) {
-  		$template = hoo_locate_template( $file );
+    if( file_exists( \hoo_locate_template( $file ) ) ) {
+  		$template = \hoo_locate_template( $file );
   	}
 
     return $template;
