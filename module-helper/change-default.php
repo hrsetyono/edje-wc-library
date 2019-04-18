@@ -8,6 +8,9 @@ class Change_Default {
       // disable WooCommerce CSS
       add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
 
+      // disable breadcrumb
+      add_filter( 'woocommerce_get_breadcrumb', '__return_false' );
+
       add_filter('woocommerce_cart_item_name', array($this, 'add_thumbnail_to_order_table'), 10, 3);
       add_filter('woocommerce_order_item_name', array($this, 'add_thumbnail_to_order_table'), 10, 3);
     }
