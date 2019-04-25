@@ -5,7 +5,7 @@ Description: Simplify WooCommerce complicated features. Designed to work with Ti
 Plugin URI: http://github.com/hrsetyono/woocommerce-edje
 Author: The Syne Studio
 Author URI: http://thesyne.com/
-Version: 2.1.1
+Version: 2.1.2
 */
 
 if( !defined( 'WPINC' ) ) { die; } // exit if accessed directly
@@ -113,7 +113,7 @@ class Edje_WC_Library {
       // single product page
       elseif( is_product() ) {
         require_once 'module-frontend-changes/single.php';
-        new \h\Frontend_Product();
+        new \h\Frontend_Single();
       }
       
       // shop page OR single product page
