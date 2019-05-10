@@ -5,7 +5,7 @@ Description: Simplify WooCommerce complicated features. Designed to work with Ti
 Plugin URI: http://github.com/hrsetyono/edje-wc-library
 Author: Pixel Studio
 Author URI: https://pixelstudio.id/
-Version: 2.2.0
+Version: 2.2.1
 */
 
 if( !defined( 'WPINC' ) ) { die; } // exit if accessed directly
