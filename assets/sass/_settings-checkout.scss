@@ -1,0 +1,206 @@
+// EDJE Functional Sass
+// - Single-file version
+// - v3.0.0
+
+@charset "UTF-8";
+
+// ----------------
+// GLOBAL VARIABLE
+// ----------------
+
+// Color
+$main : #2196f3;
+$main-dark : darken($main, 20%);
+$main-light : lighten($main, 10%);
+
+$sub  : #607d8b;
+$sub-dark: darken($sub, 15%);
+$sub-light: lighten($sub, 10%);
+
+$gray : #b0bcc4;
+$gray-light: #f3f6f8;
+$gray-dark: #93a3ae;
+
+$color-link : #0366d6;
+$color-link-hover : lighten($color-link, 10%);
+
+$red : #f44336;
+$yellow : #ffeb3b;
+$green : #4caf50;
+$blue: #2196f3;
+$red-light : #fcf0ec;
+$yellow-light : #fcf5db;
+$green-light : #ebf5e8;
+$blue-light: #e9f7f7;
+
+$body-background: #fff;
+
+// Media Query
+$size-xs : 480px;
+$size-s  : 767px;
+$size-m  : 960px;
+$size-l  : 1120px;
+
+$below-xs: "max-width:#{ $size-xs }";
+$above-xs: "min-width:#{ $size-xs + 1px }";
+$below-s: "max-width:#{ $size-s }";
+$above-s: "min-width:#{ $size-s + 1px }";
+$below-m: "max-width:#{ $size-m }";
+$above-m: "min-width:#{ $size-m + 1px }";
+$below-l: "max-width:#{ $size-l }";
+$above-l: "min-width:#{ $size-l + 1px }";
+
+$below-nav: $below-s; // small navigation breakpoint
+$above-nav: $above-s;
+
+$portrait: "orientation: portrait";
+$landscape: "orientation: landscape";
+$retina: "min-resolution: 192dpi";
+
+// Typography
+$font-family : -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+$font-family-header : "Apple Garamond", "Baskerville", "Times New Roman", "Droid Serif", "Times","Source Serif Pro", serif;
+
+$font-family-monospace: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+
+
+// Put file in /assets/fonts directory
+$font-faces: (
+  // "Open Sans": (
+  //   ( "opensans.woff", 400 ),
+  //   ( "opensans-italic.woff", 400, italic ),
+  //   ( "opensans-bold.woff", 700 )
+  // )
+);
+
+$font-color  : #222;
+$font-passive : #888;
+$font-weight : 400;
+$font-line   : 1.65;
+$font-size : 16px;
+
+// Typography - Header
+$header-color   : $font-color;
+$header-weight  : 700;
+$header-line    : 1.25;
+$header-spacing : 0;
+$header-transform : none;
+
+$h1: (base: 42px, s: 30px);
+$h2: (base: 36px, s: 26px);
+$h3: (base: 30px, s: 22px);
+$h4: (base: 24px, s: 20px);
+$h5: (base: 20px, s: 18px);
+$h6: (base: $font-size, s: $font-size);
+
+// Typography List
+$ul-parent : disc;
+$ul-child  : circle;
+$ol-parent : decimal;
+$ol-child  : lower-alpha;
+
+// Grid
+$grid-columns : 12;
+$grid-gap     : 20px;
+$grid-rim     : 10px;
+$grid-max-width : $size-l;
+
+// Tile
+$tile-max : 8;
+$tile-gap : 20px;
+
+// Shadow
+$shadow-z0: 0 0.5px 2px rgba(black, .18), 0 1.5px 6px rgba(black, .08);
+$shadow-z1: 0 1.5px 4px rgba(black, .24), 0 1.5px 6px rgba(black, .12);
+$shadow-z2: 0 3px 12px rgba(black, .23), 0 3px 12px rgba(black, .16);
+$shadow-z3: 0 6px 12px rgba(black, .23), 0 10px 40px rgba(black, .19);
+
+// Other
+$g-radius : 4px;
+$g-transition : all .25s ease-out;
+
+$image-url: '../images/';
+$font-url: '../fonts/';
+
+// Blog
+$blog-width: 650px;
+$blog-font-size: 18px;
+
+
+///// CHECKOUT /////
+
+$checkout-bg: #fafafa;
+$checkout-font-size: $font-size;
+$checkout-font-passive: #717171;
+
+$checkout-border: 1px solid rgba(black, .1);
+$checkout-border-dark: 1px solid #d9d9d9;
+
+$checkout-radius: $g-radius;
+
+$banner-texts: (
+  banner_size: "Set 1600x200 featured image in Pages > Checkout",
+  banner_logo: "Set logo in \"Appearance > Customize\""
+);
+
+$checkout-password-meter: (
+  too_short: "Please use longer password.",
+  bad: "Good, but can be stronger.",
+  good: "Great, that will do!",
+  strong: "Now, that's a strong password!"
+);
+
+
+
+// ----------------
+// FUNCTIONAL SASS
+// ----------------
+
+// COLORS for FUNCTIONAL SASS
+// - Accessible by these shorthand styles: bg, bc, c
+// - You can add transparency by adding underscore and number between 1-99
+// - Example: bg-main, c-black_10
+$h-colors: (
+  'main': $main,
+  'main-dark': $main-dark,
+  'main-light': $main-light,
+
+  'sub': $sub,
+  'sub-dark': $sub-dark,
+  'sub-light': $sub-light,
+
+  'red': $red,
+  'red-light': $red-light,
+  'yellow': $yellow,
+  'yellow-light': $yellow-light,
+  'green': $green,
+  'green-light': $green-light,
+  'blue': $blue,
+  'blue-light': $blue-light,
+
+  'black': black,
+  'white': white,
+  'gray': $gray,
+  'gray-light': $gray-light,
+  'gray-dark': $gray-dark,
+
+  'text': $font-color,
+  'passive': $font-passive,
+  'header': $header-color,
+
+  'body-bg': $body-background
+);
+
+
+// If the CSS doesn't fit in any variable, put it here
+$h-custom: (
+  m0-auto: ( margin: 0 auto ),
+  content-empty: ( content: '' ), 
+);
+
+
+@import "edje/utility-h";
+@import "edje/utility";
+@import "edje/functional-vars";
+@import "edje/output";

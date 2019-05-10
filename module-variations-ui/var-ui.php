@@ -1,41 +1,44 @@
 <?php namespace h;
-
+/**
+ * Change the interface for WooCommerce's Variation metabox 
+ */
 class Variations_UI {
   function __construct() {
-    add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ), 999 );
+    add_action( 'admin_enqueue_scripts', [$this, 'admin_enqueue_scripts'], 999 );
 
-    add_action( 'woocommerce_product_after_variable_attributes', array( $this, 'add_variation_data' ), 10, 3 );
+    add_action( 'woocommerce_product_after_variable_attributes', [$this, 'add_variation_data'], 10, 3 );
 
     // save global price when saving via Submit or Ajax
-    add_action( 'woocommerce_process_product_meta', array($this, 'after_save_via_submit'), 100 );
-    add_action( 'wp_ajax_h_after_save_variations', array( $this, 'after_save_via_ajax' ) );
+    add_action( 'woocommerce_process_product_meta', [$this, 'after_save_via_submit'], 100 );
+    add_action( 'wp_ajax_h_after_save_variations', [$this, 'after_save_via_ajax'] );
   }
 
-  /*
-    Call the custom CSS and JS
-    @action admin_enqueue_scripts
-  */
+  /**
+   * Call the custom CSS and JS
+   * @action admin_enqueue_scripts
+   */
   function admin_enqueue_scripts( $hook ) {
-    if( in_array( $hook, array( 'post.php', 'post-new.php', 'edit.php' ) ) ) {
-      wp_enqueue_style( 'h-wc-admin', HOO_DIR . '/assets/css/h-wc-admin.css' );
-      wp_enqueue_script( 'h-wc-admin', HOO_DIR . '/assets/js/h-wc-admin.js', array('jquery') );
+    if( in_array( $hook, ['post.php', 'post-new.php', 'edit.php'] ) ) {
+      wp_enqueue_style( 'h-wc-admin', HOO_DIR . '/assets/css/hoo-admin.css' );
+      wp_enqueue_script( 'h-wc-admin', HOO_DIR . '/assets/js/h-wc-admin.js', ['jquery'] );
       wp_enqueue_script( 'handlebars', HOO_DIR . '/assets/js/handlebars.js' );
     }
   }
 
-  /*
-    Add Quick Form to each Variation
-    @action woocommerce_product_after_variable_attributes
-  */
+  /**
+   * Add Quick Form to each Variation
+   * @action woocommerce_product_after_variable_attributes
+   */
   function add_variation_data( $index, $variation_data, $variation ) {
     ?>
     <div class='h-variation-data' data-variation='<?php echo htmlspecialchars(json_encode($variation_data), ENT_QUOTES, 'UTF-8'); ?>'></div>
     <?php
   }
 
-  /*
-    Update the variation data to follow the Main field
-  */
+  /**
+   * Update the variation data to follow the Main field
+   * @action woocommerce_process_product_meta
+   */
   function after_save_via_submit( $post_id ) {
     // if variation product AND global price not empty
     if( !empty($_POST['global_price'] ) ) {
@@ -44,10 +47,10 @@ class Variations_UI {
     }
   }
 
-  /*
-    Save Main regular and sale price when AJAX-saving the variations
-    @action wp_ajax_h_after_save_variations
-  */
+  /**
+   * Save Main regular and sale price when AJAX-saving the variations
+   * @action wp_ajax_h_after_save_variations
+   */
   function after_save_via_ajax() {
     $data = $_POST['data'];
 

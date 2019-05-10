@@ -1,0 +1,553 @@
+$_h-all: (); // store all the Functional variables
+
+
+// Z-Index
+$h-z-index: (
+  names: ( z: z-index ),
+  values: (
+    '-1': -1,
+    0: 0,
+    1: 1,
+    2: 2,
+    5: 5,
+    10: 10,
+    50: 50,
+    100: 100,
+  )
+);
+
+
+// Border width
+$h-border: (
+  names: (
+    b: border,
+    bt: border-top,
+    bl: border-left,
+    br: border-right,
+    bb: border-bottom,
+  ),
+  values: (
+    '-none': none, // deprecated
+    '0': 0,
+    '1-solid': 1px solid,
+    '1-dashed': 1px dashed,
+    '2-solid': 2px solid,
+    '2-dashed': 2px dashed,
+  )
+);
+
+
+// Border Radius
+$h-border-radius: (
+  br: ( border-radius: $g-radius ), // deprecated
+  br-circle: ( border-radius: 50% ), // deprecated
+  br-pill: ( border-radius: 999px ), // deprecated
+  
+  brad0: ( border-radius: 0 ),
+  brad: ( border-radius: $g-radius ),
+  brad-circle: ( border-radius: 50% ),
+  brad-pill: ( border-radius: 999px ),
+);
+
+
+
+// Background Image - name can't be duplicate with BG Color
+$h-background-image: (
+  names: ( bg-: background-image ),
+  values: ()
+);
+
+
+// Opacity
+$h-opacity: (
+  names: ( o: opacity ),
+  values: (
+    100: 1,
+    90: .9,
+    80: .8,
+    70: .7,
+    60: .6,
+    50: .5,
+    40: .4,
+    30: .3,
+    20: .2,
+    10: .1,
+    0: 0,
+  )
+);
+
+
+// Box Shadow
+$h-shadow: (
+  names: ( shadow: box-shadow ),
+  values: (
+    0: $shadow-z0,
+    1: $shadow-z1,
+    2: $shadow-z2,
+    3: $shadow-z3,
+    '-none': none,
+  )
+);
+
+
+// Hover Effect
+$h-hover: (
+  hover-dim: (
+    ':hover': ( opacity: .6 ),
+    ':active': ( opacity: .8 ),
+  ),
+  hover-grow: (
+    ':hover': ( '-webkit-transform': scale(1.05), transform: scale(1.05) ),
+    ':active': ( '-webkit-transform': scale(1), transform: scale(1) ),
+  ),
+  hover-u: ( ':hover': ( text-decoration: underline ) ),
+);
+
+
+// Transition
+$h-transition: (
+  transition: ( transition: $g-transition ),
+  transition-none: ( transition: none ),
+);
+
+
+// Font Size
+$h-font-size: (
+  names: ( fs-: font-size ),
+  values: (
+    h1: '%h1',
+    h2: '%h2',
+    h3: '%h3',
+    h4: '%h4',
+    h5: '%h5',
+    h6: '%h6',
+    body: 1rem,
+    m: 1.125em,
+    s: 0.875em,
+    xs: 0.75em,
+  ),
+);
+
+
+// Letter Spacing
+$h-letter-spacing: (
+  names: ( ls: letter-spacing ),
+  values: (
+    '-100': -0.1em,
+    '-50': -0.05em,
+    '-25': -0.025em,
+    0: 0,
+    25: 0.025em,
+    50: 0.05em,
+    75: 0.075em,
+    100: 0.1em,
+    150: 0.15em
+  )
+);
+
+
+// Font Family
+$h-font-family: (
+  names: ( ff-: font-family ),
+  values: (
+    body: $font-family,
+    header: $font-family-header,
+    monospace: $font-family-monospace,
+  )
+);
+
+
+// Line Height
+$h-line-height: (
+  names: ( lh: line-height ),
+  values: (
+    0: 0,
+    1: 1,
+    '-normal': normal,
+    '-body': $font-line,
+    '-header': $header-line,
+  )
+);
+
+
+
+///// PRIVATE VARS //////
+// Don't change anything below here
+
+
+// --------
+// DISPLAY
+// --------
+
+$_h-display: (
+  d-inline-block: ( display: inline-block ),
+  d-iblock: ( display: inline-block ),
+  d-block: ( display: block ),
+  d-none: ( display: none ),
+  d-flex: ( '_display': '-webkit-flex', display: flex ),
+  d-grid: ( '_display': '-ms-grid', display: grid ),
+);
+
+// Flexbox
+$_h-flex: (
+  fd-row: ( flex-direction: row ),
+  fd-column: ( flex-direction: column ),
+  fd-column-reverse: ( flex-direction: column-reverse ),
+  fd-row-reverse: ( flex-direction: row-reverse ),
+  fw-wrap: ( flex-wrap: wrap ),
+);
+
+
+// Flex Wrapper - Align Items
+$_h-align-items: (
+  names: (
+    ai-: align-items,
+  ),
+  values: (
+    start: flex-start,
+    end: flex-end,
+    center: center,
+    baseline: baseline,
+    stretch: stretch,
+  )
+);
+
+
+// Flex wrapper - Justify content
+$_h-justify-content: (
+  names: (
+    jc-: justify-content,
+  ),
+  values: (
+    start: flex-start,
+    end: flex-end,
+    center: center,
+    around: space-around,
+    between: space-between
+  )  
+);
+
+
+// Flex portion
+$_h-flex-portion: (
+  names: (
+    flex: flex,
+  ),
+  values: (
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3,
+    4: 4,
+    5: 5
+  )
+);
+
+
+// Flex order
+$_h-flex-order: (
+  names: (
+    order: order,
+  ),
+  values: (
+    1: 1,
+    2: 2,
+    3: 3,
+    4: 4,
+    5: 5,
+    '-last': 999
+  ),
+);
+
+
+// Flex Align Self
+$_h-align-self: (
+  names: (
+    as-: align-self,
+  ),
+  values: (
+    start: flex-start,
+    end: flex-end,
+    center: center,
+    baseline: baseline,
+    stretch: stretch,
+  )
+);
+
+
+// Overflow
+$_h-overflow: (
+  names: (
+    ov-: overflow,
+    ovx-: overflow-x,
+    ovy-: overflow-y,
+  ),
+  values: (
+    auto: auto,
+    hidden: hidden,
+    scroll: scroll,
+    visible: visible,
+  )
+);
+
+
+// Cursor
+$_h-cursor: (
+  names: (
+    cursor-: cursor,
+  ),
+  values: (
+    default: default,
+    pointer: pointer,
+    text: text,
+    move: move,
+    grab: grab,
+    progress: progress,
+    not-allowed: not-allowed,
+    zoom-in: zoom-in,
+    zoom-out: zoom-out,
+  )
+);
+
+// Other Display
+$_h-display-misc: (
+  v-visible: ( visibility: visible ),
+  v-hidden: ( visibility: hidden ),
+
+  select-none: (
+    '-webkit-touch-callout': none,
+    '-webkit-user-select': none,
+    '-moz-user-select': none,
+    'user-select': none
+  ),
+  
+  events-none: (
+    pointer-events: none,
+  ),
+  events-all: (
+    pointer-events: all,
+  ),
+
+  appearance-none: (
+    '-moz-appearance': none,
+    '-webkit-appearance': none,
+    'appearance': none
+  ),
+  backface-hidden: (
+    '-webkit-backface-visibility': hidden,
+    'backface-visibility': hidden
+  ),
+
+  no-select: ( // deprecated
+    '-webkit-touch-callout': none,
+    '-webkit-user-select': none,
+    '-moz-user-select': none,
+    'user-select': none
+  ),
+  no-appearance: ( // deprecated
+    '-moz-appearance': none,
+    '-webkit-appearance': none,
+    'appearance': none
+  ),
+  no-events: ( // deprecated
+    pointer-events: none,
+  ),
+);
+
+
+// -------
+// LAYOUT
+// -------
+
+
+// Position
+$_h-position: (
+  static: ( position: static ),
+  relative: ( position: relative ),
+  absolute: ( position: absolute ),
+  fixed: ( position: fixed ),
+  sticky: ( '_position': '-webkit-sticky', position: sticky ),
+
+  absolute-fill: ( position: absolute, top: 0, right: 0, left: 0, bottom: 0 ),
+);
+
+
+// Float
+$_h-float: (
+  float-left: ( float: left ),
+  float-right: ( float: right ),
+  float-none: ( float: none ),
+  clear-both: ( clear: both ),
+  clear-none: ( clear: none ),
+  // clearfix: (
+  //   '::before': ( content: " ", display: table ),
+  //   '::after': ( content: " ", display: table, clear: both )
+  // )
+);
+
+
+// ------
+// THEME
+// ------
+
+$_h-background-position: (
+  names: ( bgp-: background-position ),
+  values: (
+    cc: center center,
+    cr: center right,
+    cl: center left,
+    tc: top center,
+    tr: top right,
+    tl: top left,
+    bc: bottom center,
+    br: bottom right,
+    bl: bottom left,
+  )
+);
+
+
+// Background Misc
+$_h-background-misc: (
+  bgs-cover: ( background-size: cover ),
+  bgs-contain: ( background-size: contain ),
+  
+  bgr: ( background-repeat: repeat ),
+  bgr-no: ( background-repeat: no-repeat ),
+  bgr-x: ( background-repeat: repeat-x ),
+  bgr-y: ( background-repeat: repeat-y ),
+
+  // alias
+  bgr-repeat: ( background-repeat: repeat ),
+  bgr-no-repeat: ( background-repeat: no-repeat ),
+  bgr-repeat-x: ( background-repeat: repeat-x ),
+  bgr-repeat-y: ( background-repeat: repeat-y ),
+);
+
+
+// Theme Misc
+$_h-theme-misc: (
+);
+
+
+// -----------
+// TYPOGRAPHY
+// -----------
+
+// List style
+$_h-list-style: (
+  names: ( list-: list-style-type ),
+  values: (
+    none: none,
+    disc: disc,
+    circle: circle,
+    square: square,
+  
+    decimal: decimal,
+    decimal0: decimal-leading-zero,
+    alpha: lower-alpha,
+    roman: lower-roman,
+    upper-alpha: upper-alpha,
+    upper-roman: upper-roman,
+  )
+);
+
+
+// Font Misc
+$_h-font-misc: (
+  nowrap: ( white-space: nowrap ),
+  
+  tt-uppercase: ( text-transform: uppercase ),
+  tt-lowercase: ( text-transform: lowercase ),
+  tt-capitalize: ( text-transform: capitalize ),
+  tt-none: ( text-transform: none ),
+
+  ta-center: ( text-align: center ),
+  ta-right: ( text-align: right ),
+  ta-left: ( text-align: left ),
+  ta-justify: ( text-align: justify ),
+);
+
+
+// Font Weight
+$_h-font-weight: (
+  names: ( fw: font-weight ),
+  values: (
+    300: 300,
+    400: 400,
+    600: 600,
+    700: 700,
+    900: 900,
+    '-body': $font-weight,
+    '-header': $header-weight,
+  )
+);
+
+
+// Font Styles
+$_h-font-style: (
+  b: ( font-weight: 700 ),
+  i: ( font-style: italic ),
+  u: ( text-decoration: underline ),
+  td-u: ( text-decoration: underline ),
+  strike: ( text-decoration: line-through ),
+  td-strike: ( text-decoration: line-through ),
+  td-none: ( text-decoration: none ),
+);
+
+
+// Vertical Align
+$_h-vertical-align: (
+  names: ( va-: vertical-align ),
+  values: (    
+    baseline: baseline,
+    top: top,
+    middle: middle,
+    bottom: bottom,
+    sub: sub,
+    super: super,
+    text-top: text-top
+  )
+);
+
+
+/////
+
+$_h-all: map-merge( $_h-all, _merge(
+  $_h-display,
+  $_h-flex,
+  $_h-align-items,
+  $_h-justify-content,
+  $_h-flex-order,
+  $_h-flex-portion,
+  $_h-align-self,
+  $_h-overflow,
+  $_h-cursor,
+  $_h-display-misc,
+
+  $_h-position,
+  $h-z-index,
+  $_h-float,
+
+  $h-border,
+  $h-border-radius,
+
+  $h-background-image,
+  $_h-background-position,
+  $_h-background-misc,
+  $h-shadow,
+  $h-opacity,
+  $_h-theme-misc,
+  $h-transition,
+
+  $h-font-size,
+  $h-letter-spacing,
+  $h-font-family,
+  $h-line-height,
+  $_h-list-style,
+  $_h-font-misc,
+  $_h-font-weight,
+  $_h-font-style,
+  $_h-vertical-align,
+
+  $h-custom,
+) );

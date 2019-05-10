@@ -1,0 +1,529 @@
+@import "settings"
+
+$wc-panel: $gray-light
+$wc-panel-dark: darken($wc-panel, 5%)
+$wc-panel-border: 1px solid darken($wc-panel, 10%)
+
+///// LAYOUT
+
+.woocommerce-account
+  main .woocommerce
+    +h( d-grid relative )
+    grid-column-gap: 2.5rem
+    grid-row-gap: 1.5rem
+    grid-template-columns: 2fr 8fr
+
+    > *
+      grid-column: span 1
+
+    @media ($below-s)
+      grid-template-columns: 1fr
+      
+
+// MyAccount Sidebar
+.woocommerce-MyAccount-navigation
+  background-color: $wc-panel
+  
+  ul
+    +h( d-flex fd-row fw-wrap h100p list-none p0 m0 )
+    
+  @media ($below-s)
+    +h( w100p ov-hidden brad )
+    border: $wc-panel-border
+
+    li
+      width: 33.3333%
+
+  @media ($below-xs)
+    li
+      +h( w50p )
+
+
+.woocommerce-MyAccount-navigation-link
+  +h( w100p mb0 )
+
+  + .woocommerce-MyAccount-navigation-link
+    border-top: $wc-panel-border
+
+    @media ($below-s)
+      +h( b0 )
+
+  &.is-active
+    a
+      +h( bc-main c-main )
+      background-color: $wc-panel-dark
+    a::after
+      +h( c-main )
+  
+  a
+    +h( d-flex ai-center pv0_75 ph1 w100p c-body transition  )
+    border-left: 4px solid transparent
+    border-bottom: none
+
+    &:hover
+      background-color: $wc-panel-dark
+    &::after
+      +h( ml-auto o70 fs-m )
+      font-family: "dashicons"
+    //
+    @media ($below-s)
+      +h( ph0_5 )
+      border-left: none
+      border-bottom: 4px solid transparent
+
+
+.woocommerce-MyAccount-navigation-link--orders
+  a::after
+    content: "\f174"
+
+.woocommerce-MyAccount-navigation-link--edit-address
+  a::after
+    content: "\f102"
+
+.woocommerce-MyAccount-navigation-link--edit-account
+  +h( mb3 )
+
+  a::after
+    content: "\f110"
+
+  @media ($below-s)
+    +h( mb0 )
+
+.woocommerce-MyAccount-navigation-link--customer-logout
+  +h( mt-auto )
+
+  a::after
+    content: "\f153"
+
+
+// MyAccount Content
+.woocommerce-MyAccount-content
+  +h( flex1 )
+
+  body.woocommerce-orders &
+    +h( maxw100p ovx-auto )
+
+.woocommerce-pagination
+  +h( d-flex mt2 ta-center )
+
+  a
+    +h( bg-inherit c-main )
+
+  a:hover
+    +h( c-main )
+
+  .woocommerce-button--previous::before
+    content: "\00AB"
+    +h( d-inline-block mr0_25 )
+  
+  .woocommerce-button--next
+    +h( ml-auto )
+
+    &::after
+      content: "\00BB"
+      +h( d-inline-block ml0_25 )
+
+
+
+///// FORM General
+
+%form
+  +h( d-grid )
+  grid-column-gap: 1rem
+  grid-row-gap: 1rem
+  grid-template-columns: repeat(12, 1fr)
+  
+  > *
+    grid-column: span 4
+
+  .clear
+    +h( d-none )
+
+
+.form-row
+  +h( d-flex fd-column mb0 w100p )
+
+  label
+    +h( cursor-pointer mb2px c-passive fs-s )
+
+  // hide the label of Address 2
+  &[id*="_address_2_field"]
+    label
+      +h( v-hidden )
+      letter-spacing: -1em
+
+  &[id*="separator_field"]
+    +h( w100p mv1_5 bt1-solid bc-gray )
+
+    input
+      +h( d-none )
+
+
+.woocommerce-input-wrapper
+  +h( d-flex flex1 )
+
+.select2-container
+  +h( d-flex fd-column relative )
+
+
+  .select2-container
+    +h( w100p h100p )
+
+  .selection
+    +h( d-block h100p )
+
+  .select2-selection
+    +h( d-flex ai-center h100p )
+
+  // selected
+  .select2-selection--single
+    +h( pv0_5 bg-black_05 )
+    border-bottom-width: 2px
+
+  .select2-selection--single .select2-selection__arrow
+    +h( top50p right10px w20px )
+    transform: translateY(-50%)
+   
+    b
+      +h( m0 )
+
+
+///// LOGIN WRAPPER
+
+.h-login-wrapper
+  +clearfix
+  +h( w100p pt1 pb2 ph2 mt2 mb3 bg-gray-light )
+  +h( b1-solid bc-black_10 brad )
+
+  h2
+    +h( fs-h3 mb1 ta-center )
+
+  .u-column1,
+  .u-column2
+    +h( d-flex fd-column ai-center w50p mh-auto )
+
+  // Login column
+  .u-column1
+    @media ($below-s)
+      +h( w100p )
+
+  // Register column
+  .u-column2
+    +h( d-none )
+
+    // show register if URL has #register
+    &:target
+      +h( d-flex )
+    &:target ~ .u-column1
+      +h( d-none )
+
+    // show login if URL has no #register
+    &:not(:target) ~ .u-column1
+      +h( d-flex )
+
+  .button.--passive
+    +h( mt1 )
+
+
+////// User Account Form
+
+.woocommerce-form-login,
+.woocommerce-form-register,
+.woocommerce-ResetPassword
+  @extend %form
+  +h( m0 mt1 p1_25 bg-white  shadow0 brad )
+
+  em
+    +h( d-iblock fs-s )
+
+  //
+  @media ($below-m)
+    +h( p1 )
+
+ 
+.woocommerce-form-login,
+.woocommerce-ResetPassword
+  > *
+    grid-column: span 12
+
+  +h( mh-auto w320px )
+
+  .form-row
+    +h( d-flex fw-wrap p0 w100p )
+
+  p:last-of-type
+    +h( mb0 )
+
+
+// LOGIN
+.woocommerce-form-login
+  .woocommerce-LostPassword
+    +h( fs-s )
+
+  [name="login"] + label // Remember me
+    +h( ml-auto )
+
+// RESET
+.woocommerce-ResetPassword
+  p:first-of-type
+    +h( fs-s )
+
+
+// REGISTER
+.woocommerce-form-register
+  p:last-child
+    +h( mb0 )
+
+  [id*="_phone_field"]
+    +h( d-none )
+
+  [id*="separator"]
+    grid-column: span 12
+
+  @media ($above-s)
+    [id*="_address_1_field"]
+      grid-column: span 7
+
+    [id*="_address_2_field"]
+      grid-column: span 5
+
+    [id*="_country_field"],
+    [id*="_city_field"],
+    [id*="_postcode_field"],
+    [id*="_state_field"]
+      grid-column: span 4
+
+  .woocommerce-privacy-policy-text
+    +h( fs-s )
+    grid-column: span 112
+
+  .button
+    +h( w100p )
+
+
+.woocommerce-password-strength
+  +h( mt0_5 mb1 fs-s )
+
+  &.short,
+  &.bad
+    +h( c-red )
+
+  &.good,
+  &.strong
+    +h( fw-header tt-uppercase )
+
+  &.good
+    +h( c-yellow )
+
+  &.strong
+    +h( c-green )
+
+
+
+
+
+  
+///// ADDRESS FORM and CUSTOMER DETAIL
+
+// wrapper
+.woocommerce-Addresses,
+.woocommerce-customer-details
+  +h( mt1 )
+
+.woocommerce-Addresses,
+.woocommerce-columns--addresses
+  +h( d-flex )
+
+  @media ($below-s)
+    +h( fd-column )
+
+// form
+.woocommerce-address-fields__field-wrapper
+  @extend %form
+  +h( mb1 )
+  
+  > *
+    grid-column: span 4
+
+    @media ($below-s)
+      grid-column: span 6
+
+  [id*="_address_1_field"]
+    grid-column: span 8
+
+  //
+  @media ($below-s)
+    > *
+      grid-column: span 6
+
+    [id*="_email_field"]
+      grid-column: span 12
+
+    [id*="_address_1_field"]
+      grid-column: span 7
+
+    [id*="_address_2_field"]
+      grid-column: span 5
+
+
+// column
+.woocommerce-Address,
+.woocommerce-column--billing-address,
+.woocommerce-column--shipping-address
+  +h( flex1 )
+
+  .title
+    +h( d-flex ai-center )
+
+  @media ($below-s)
+    +h( mb1 )
+
+
+// title
+.woocommerce-Address h3,
+.woocommerce-column__title
+  +h( fs-h3 fw-body mb0_5 )
+
+
+// edit button
+.woocommerce-Address
+  .edit
+    +h( d-inline-block ml1 b1-solid bc-main pv0_25 ph0_5 )
+    +h( fs-s tt-uppercase lh1 brad )
+
+  .edit:hover
+    +h( bg-main c-white )
+
+
+///// MY ACCOUNT - ORDER
+.account-orders-table
+  +h( fs-s )
+
+.woocommerce-order-details
+  +h( mv2 )
+
+  h2
+    +h( mb1 fw-body )
+
+  table, thead, tbody, tfoot, tr, td, th
+    +h( d-block p0 bg-inherit b0 )
+
+  thead
+    +h( d-none )
+
+.order-again
+  +h( mt2 )
+
+.woocommerce-order-details table
+  +h( ov-hidden brad shadow0 )
+  max-width: 600px
+  border: 1px solid $wc-panel-dark
+
+.woocommerce-order-details tbody
+  +h( d-flex fw-wrap p1 )
+
+  tr
+    +h( d-flex ai-center w100p p0_5 )
+    border: 1px solid $wc-panel-dark
+
+  tr + tr
+    +h( mt0_5 )
+  
+  img
+    +h( mr1 )
+
+  td:first-child
+    +h( flex1 )
+
+  .product-quantity
+    +h( d-inline-block ph0_25 ml0_5 b1-solid bc-main )
+    +h( c-main lh1 fw-body brad )
+    padding-top: 2px
+    padding-bottom: 2px
+
+
+.woocommerce-order-details tfoot
+  +h( d-flex fw-wrap w100p p1 )
+  background-color: $wc-panel
+
+  th
+    +h( tt-uppercase ls25 fs-s )
+
+  td
+  tr
+    +h( w25p )
+
+  // total
+  tr:last-child
+    +h( w100p mt1 )
+
+    th
+      +h( lh1 )
+
+    th, td
+      +h( ta-center )
+
+    td
+      +h( fs-h3 fw-header )
+
+  .shipped_via
+    +h( d-block )
+
+
+.h-customer-note
+  +h( mt2 )
+  
+  h3
+    +h( mb1 fw-body )
+
+///// MY ACCOUNT - EDIT ACCOUNT
+
+.woocommerce-EditAccountForm
+  @extend %form
+
+  > *
+    grid-column: span 4
+    
+    @media ($below-s)
+      grid-column: span 6
+
+    @media ($below-xs)
+      grid-column: span 12
+
+  em
+    +h( d-block fs-xs c-passive )
+    line-height: 1.5
+
+  legend
+    +h( fs-h5 fw-header pl0_5 )
+
+
+.woocommerce-EditAccountForm fieldset
+  +clearfix
+  grid-column: span 12
+
+  legend
+    +h( d-block pl0 )
+
+  p
+    +h( d-iblock )
+    width: calc(33.333% - 5px)
+
+  p + p
+    +h( pl1 )
+
+  //
+  @media ($below-s)
+    p
+      +h( mb1 )
+      width: calc(50% - 5px)
+
+    p:nth-child(4)
+      +h( pl0 )
+
+  @media ($below-xs)
+    p
+      width: 100%
+
+    p + p
+      +h( mt1 pl0 )
