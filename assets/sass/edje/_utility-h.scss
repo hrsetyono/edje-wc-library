@@ -1,0 +1,275 @@
+@mixin h( $bits ) {
+  @each $b in $bits {
+    $prop-key: getPropKey( $b );
+    $value-raw: str-slice( $b, str-length( $prop-key ) + 1 );
+
+    $prop: false;
+    $value: false;
+
+    // If color
+    @if map-has-key( $h-props-color, $prop-key ) {
+      $prop: map-get( $h-props-color, $prop-key );
+      $value: getColorValue( $value-raw );
+    }
+    // If measurement
+    @else if map-has-key( $h-props-measurement, $prop-key ) {
+      $prop: map-get( $h-props-measurement, $prop-key );
+      $value: getMeasurementValue( $value-raw );
+    }
+    // Else, it's static prop
+    @else {
+      $prop: map-get( $_h-all, $b );
+
+      @if $prop == null {
+        @warn "The bit '#{ $b }' doesn't exist";
+      }
+    }
+
+    // If static prop
+    @if type-of( $prop ) == map {
+      @each $p, $v in $prop {
+        // if first char is %, extend it
+        @if type-of( $v ) == string and str-index( $v, '%') == 1 {
+          @extend #{ $v };
+        }
+        @else {
+          #{ $p } : $v;
+        }
+      }
+    }
+    // if dynamic multiple prop
+    @else if type-of( $prop ) == list {
+      @each $p in $prop {
+        #{ $p } : $value;
+      }
+    }
+    // if dynamic single prop
+    @else {
+      #{ $prop } : $value;
+    }
+  }
+}
+
+
+
+// ---------------
+// DYNAMIC STYLE
+// ---------------
+
+// Property that can use color from $h-palette and allow opacity prefix
+// Example: c-red >>> color: $red
+//          bg-main_10 >>> background-color: rgba($main, .10)
+$h-props-color: (
+  bg: background-color,
+  bc: border-color,
+  c: color
+);
+
+// Property that can accept any number and allow unit prefix
+// Example: p1_5 >>> padding: 1.5rem
+//          h50p >>> height: 50%
+//          top70px >>> top: 70px
+$h-props-measurement: (
+  top: top,
+  right: right,
+  bottom: bottom,
+  left: left,
+
+  p: padding,
+  pt: padding-top,
+  pr: padding-right,
+  pb: padding-bottom,
+  pl: padding-left,
+  pv: ( padding-top, padding-bottom ),
+  ph: ( padding-right, padding-left ),
+
+  m: margin,
+  mt: margin-top,
+  mr: margin-right,
+  mb: margin-bottom,
+  ml: margin-left,
+  mv: ( margin-top, margin-bottom ),
+  mh: ( margin-right, margin-left ),
+
+  h: height,
+  minh: min-height,
+  maxh: max-height,
+  w: width,
+  minw: min-width,
+  maxw: max-width,
+
+  bw: border-width,
+  btw: border-top-width,
+  brw: border-right-width,
+  bbw: border-bottom-width,
+  blw: border-left-width,
+);
+
+
+// Get property name, indicated by the letters before number or dash
+//
+@function getPropKey( $bit ) {
+  $separator: ( '-': '-', '0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9);
+  $prop-key: '';
+
+  @for $i from 1 through str-length( $bit ) {
+    $char: str-slice( $bit, $i, $i );
+
+    @if map-has-key( $separator, $char ) {
+      @return $prop-key;
+    } @else {
+      $prop-key: $prop-key + $char;
+    }
+  }
+
+  @return $prop-key;
+}
+
+
+// Get color value and its transparency (if any)
+//
+@function getColorValue( $raw ) {
+  $raw: str-slice( $raw, 2 ); // remove the initial dash
+
+  $alpha-index: str-index( $raw, '_' );
+
+  // if has transparency
+  @if $alpha-index {
+    $alpha: '0.' + str-slice( $raw, $alpha-index + 1 );
+    $color-key: str-slice( $raw, 1, $alpha-index - 1 );
+    @return rgba( var(--#{ $color-key }RGB), unquote($alpha) );
+  }
+
+  // if not in map, return as is
+  @if not map-has-key( $h-colors, $raw ) {
+    @return $raw;
+  }
+
+  // default
+  @return var(--#{ $raw });
+}
+
+
+
+// Get measurement value with its unit (use 'rem' by default)
+//
+@function getMeasurementValue( $raw ) {
+  $numbers: ('0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9 );
+
+  // if already number
+  @if type-of( $raw ) == 'number' { @return $raw; }
+
+  $len: str-length( $raw );
+  $first-char: str-slice( $raw, 1, 1 );
+  $second-char: str-slice( $raw, 2, 2 );
+  $last-char: str-slice( $raw, $len, $len );
+
+  // If found underscore, replace it with dot.
+  $number: str-replace( $raw, '_' , '.' );
+
+  // If last char is "p", change to %
+  @if $last-char == 'p' {
+    @return str-replace( $number, 'p', '%');
+  }
+  // If first char is '-' but second is not number, it's a string value
+  @else if $first-char == '-' AND not map-has-key( $numbers, $second-char) {
+    @return str-slice( $raw, 2 );
+  }
+  // If last char is not number, return as is
+  @else if not map-has-key( $numbers, $last-char ) {
+    @return $number;
+  }
+
+  // if zero or $add-rem is false, no need to add unit
+  @if ($len == 1 AND $first-char == '0') {
+    @return $number;
+  }
+
+  @return $number + rem;
+}
+
+
+// --------------
+// STATIC STYLE 
+//---------------
+
+// Merge multiple Functional maps into one
+@function _merge( $maps... ) {
+  $collection: ();
+
+  @each $map in $maps {
+    @if map-get( $map, names ) {
+      $collection: map-merge( $collection, _format-classes( $map ) );
+    } @else {
+      $collection: map-merge( $collection, $map );
+    }
+  }
+
+  @return $collection;
+}
+
+
+// Format classes mapping by pairing each name to the values
+//
+// @param $raw (map) - Containing two items: names and values. Each will be paired against each other to create classes
+@function _format-classes( $raw ) {
+  $classes: ();
+
+  // loop the name
+  @each $name, $props in map-get( $raw, 'names' ) {
+    @each $postfix, $value in map-get( $raw, 'values' ) {
+
+      $_name: #{ $name }#{ $postfix }; // format the name like "pt05"
+      $new-item: ( $_name: _format-values( $props, $value ) );
+
+      // add the new item
+      $classes: map-merge( $classes, $new-item );
+    }
+  }
+
+  @return $classes;
+}
+
+
+// Format the values of an Item
+//   Expected format: ( padding-top: 0.5em )
+// 
+// If $styles is a list, pair each with the value
+//   Example: ( padding-top: 0.5em, padding-bottom: 0.5em )
+@function _format-values( $props, $value ) {
+  $values: ();
+
+  // If has multiple styles, combine them
+  @if type-of( $props ) == 'list' {
+
+    // combine the multiple styles
+    @each $p in $props {
+      $values: map-merge( $values, ( #{ $p }: #{ $value } ) );
+    }
+  }
+  // If single style, just format it normally
+  @else {
+    $values: ( #{ $props }: #{ $value } );
+  }
+
+  @return $values;
+}
+
+
+
+
+// --------
+// SASS HELPER
+// --------
+
+// Replace part of string
+//
+@function str-replace( $string, $search, $replace: '' ) {
+  $index: str-index( $string, $search );
+  
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+  
+  @return $string;
+}

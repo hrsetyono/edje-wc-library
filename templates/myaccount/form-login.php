@@ -23,7 +23,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="u-columns col2-set" id="customer_login">
 
 	<div class="u-column2 col-2" id="register"> <?php #3 #4 ?>
-    <?php do_action( 'h_before_register_form' ); #2 ?>
 		<h2><?php esc_html_e( 'Register', 'woocommerce' ); ?></h2>
 
 		<form method="post" class="woocommerce-form woocommerce-form-register register">
@@ -62,6 +61,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php do_action( 'woocommerce_register_form_end' ); ?>
 
 		</form>
+
+		<?php do_action( 'h_after_register_form' ); #2 ?>
 	</div>
 
 	<div class="u-column1 col-1">

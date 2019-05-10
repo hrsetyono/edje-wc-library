@@ -1,12 +1,15 @@
 <?php namespace h;
 
+/**
+ * Change Register form
+ */
 class Frontend_Register {
   private $fields;
 
   function __construct() {
-    add_action( 'woocommerce_register_form_start', array($this, 'add_extra_register_fields') );
-    add_action( 'woocommerce_register_post', array($this, 'validate_extra_register_fields'), 10, 3 );
-    add_action( 'woocommerce_created_customer', array($this, 'save_extra_register_fields' ) );
+    add_action( 'woocommerce_register_form_start', [$this, 'add_extra_register_fields'] );
+    add_action( 'woocommerce_register_post', [$this, 'validate_extra_register_fields'], 10, 3 );
+    add_action( 'woocommerce_created_customer', [$this, 'save_extra_register_fields'] );
 
     $this->fields = $this->_set_fields();
   }
@@ -79,61 +82,61 @@ class Frontend_Register {
     $states = $wc_countries->get_states( key( $countries ) );
 
     $fields = array(
-      'billing_first_name' => array(
+      'billing_first_name' => [
         'type' => 'text',
-        'label' => __('First name', 'h'),
+        'label' => __('First name'),
         'required' => true,
-        'placeholder' => __('First name', 'h'),
-      ),
-      'billing_last_name' => array(
+        'placeholder' => __('First name'),
+      ],
+      'billing_last_name' => [
         'type' => 'text',
-        'label' => __('Last name', 'h'),
+        'label' => __('Last name'),
         'required' => true,
-        'placeholder' => __('Last name', 'h'),
-      ),
+        'placeholder' => __('Last name'),
+      ],
       //
-      'billing_address_1' => array(
+      'billing_address_1' => [
         'type' => 'text',
-        'label' => __('Address', 'h'),
+        'label' => __('Address'),
         'required' => true,
-        'placeholder' => __('Street Address', 'h'),
-      ),
-      'billing_address_2' => array(
+        'placeholder' => __('Street Address'),
+      ],
+      'billing_address_2' => [
         'type' => 'text',
-        'label' => __('Address 2', 'h'),
-        'placeholder' => __('Apartment, Suite (optional)', 'h'),
-      ),
+        'label' => __('Address 2'),
+        'placeholder' => __('Apartment, Suite (optional)'),
+      ],
       //
-      'billing_country' => array(
+      'billing_country' => [
         'type' => 'select',
-        'label' => __('Country', 'h'),
+        'label' => __('Country'),
         'required' => true,
         'options' => $countries,
-      ),
-      'billing_state' => array(
+      ],
+      'billing_state' => [
         'type' => 'select',
-        'label' => __('Province / State', 'h'),
+        'label' => __('Province / State'),
         'required' => true,
         'options' => $states
-      ),
-      'billing_postcode' => array(
+      ],
+      'billing_postcode' => [
         'type' => 'text',
-        'label' => __('Postcode', 'h'),
+        'label' => __('Postcode'),
         'required' => true,
-        'placeholder' => __('Postcode', 'h'),
-      ),
+        'placeholder' => __('Postcode'),
+      ],
       //
-      'billing_city' => array(
+      'billing_city' => [
         'type' => 'text',
-        'label' => __('Town / City', 'h'),
+        'label' => __('Town / City'),
         'required' => true,
-        'placeholder' => __('Town / City', 'h'),
-      ),
-      'billing_phone' => array(
+        'placeholder' => __('Town / City'),
+      ],
+      'billing_phone' => [
         'type' => 'text',
-        'label' => __('Phone', 'h'),
-      ),
-      'separator' => array(),
+        'label' => __('Phone'),
+      ],
+      'separator' => [],
     );
 
     // prepopulate fields

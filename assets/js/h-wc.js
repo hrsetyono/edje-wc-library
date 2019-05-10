@@ -1,20 +1,26 @@
 (function() { 'use strict';
-// NOTE: This JS requires jQuery for the event listener. The rest of the code are pure JS
-
 if( window.jQuery ) { $ = jQuery; }
 
 document.addEventListener( 'DOMContentLoaded', onReady );
 document.addEventListener( 'load', onLoad )
 
 function onReady() {
-  var $body = document.querySelector( 'body' );
+  var bodyClassList = document.querySelector( 'body' ).classList;
 
-  if( $body.classList.contains('woocommerce-checkout') ) {
+  // on any woocommerce page
+  wooGeneral.init();
+
+  // If account page
+  if( bodyClassList.contains('woocommerce-account') ) {
+    wooAccount.init();
+  }
+  // If checkout page
+  else if( bodyClassList.contains('woocommerce-checkout') ) {
     wooCheckout.init();
     wooThankyou.init();
   }
-
-  if( $body.classList.contains('single-product') ) {
+  // If Single product
+  else if( bodyClassList.contains('single-product') ) {
     wooSingle.init();
   }
 }
@@ -23,6 +29,24 @@ function onReady() {
 function onLoad() {
   wooCheckout.moveEmailField();
 }
+
+
+///// GENERAL FUNCTIONS
+
+var wooGeneral = {
+  init() {
+    let $toasts = document.querySelectorAll( '.h-close-toast' );
+    for( let $t of $toasts ) {
+      $t.addEventListener( 'click', this.closeToast );
+    }
+  },
+
+  closeToast( e ) {
+    let $toast = e.currentTarget.closest( '.woocommerce-info, .woocommerce-message, .woocommerce-error' );
+    $toast.style.display = 'none';
+  }
+}
+
 
 ///// SINGLE PRODUCT page
 
@@ -39,8 +63,8 @@ var wooSingle = {
 
   },
 
-  /*
-    After finished choosing all selection
+ /**
+  * After finished choosing all selection
   */
   onFoundVariation( e, variation ) {
     var $firstPrice = e.currentTarget.parentNode.querySelector( '.price' );
@@ -51,14 +75,15 @@ var wooSingle = {
     }
   },
 
-  /*
-    After pressing "Clear" to remove all variant selection
+ /**
+  * After pressing "Clear" to remove all variant selection 
   */
   onClear( e ) {
     e.currentTarget.parentNode.querySelector( '.price' ).style.display = '';
   },
 
 };
+
 
 ///// CHECKOUT Page /////
 
@@ -80,7 +105,20 @@ var wooCheckout = {
    */
   moveEmailField() {
     var $field = $('.woocommerce-account-fields');
-    $('#billing_email_field').prependTo($field);
+    $('#billing_email_field').prependTo( $field );
+  },
+
+  /**
+   * Add active state to field with value
+   */
+  addActiveState( $input ) {
+    let $row = $input.closest( '.form-row' );
+    
+    if( $input.value ) {
+      $row.classList.add( 'form-row--active' );
+    } else {
+      $row.classList.remove( 'form-row--active' );
+    }
   },
 
 
@@ -118,9 +156,7 @@ var wooCheckout = {
    * Move the error message inside the wrapper to maintain Flex layout
    */
   _moveErrorMessages( e ) {
-    console.log( 'on error' );
     var $notice = $( '.woocommerce-NoticeGroup' );
-
     $notice.prependTo( $( '.column-main' ) );
   }
 };
@@ -164,7 +200,15 @@ var wooThankyou = {
       $(this).text(name.replace(':', '') );
     });
   },
+};
 
-}
+
+///// WOO ACCOUNT /////
+
+var wooAccount = {
+  init() {
+
+  },
+};
 
 })();

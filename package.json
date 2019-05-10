@@ -7,7 +7,7 @@
   },
   "dependencies": {},
   "scripts": {
-    "sass": "node-sass -w assets/css -o assets/css --output-style compressed"
+    "sass": "node-sass -w assets/sass -o assets/css --output-style compressed"
   },
   "devDependencies": {}
 }

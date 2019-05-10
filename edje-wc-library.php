@@ -5,7 +5,7 @@ Description: Simplify WooCommerce complicated features. Designed to work with Ti
 Plugin URI: http://github.com/hrsetyono/woocommerce-edje
 Author: The Syne Studio
 Author URI: http://thesyne.com/
-Version: 2.1.2
+Version: 2.2.0
 */
 
 if( !defined( 'WPINC' ) ) { die; } // exit if accessed directly
@@ -37,7 +37,7 @@ class Edje_WC_Library {
     $this->module_helper();
     $this->module_checkout_ui();
     $this->module_frontend_changes();
-    $this->module_profile_ui();
+    // $this->module_profile_ui();
     $this->module_variations_ui();
     // $this->module_wholesale();
   }
@@ -97,6 +97,11 @@ class Edje_WC_Library {
     require_once 'module-frontend-changes/register.php';
     new \h\Frontend_Register();
 
+    // toast alert box
+    require_once 'module-frontend-changes/toast.php';
+    new \h\Frontend_Toast();
+
+    
     add_action( 'template_redirect', function() {
       // my account page
       if( is_account_page() ) {

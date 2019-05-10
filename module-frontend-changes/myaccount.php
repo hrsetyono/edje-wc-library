@@ -1,15 +1,34 @@
 <?php namespace h;
-
+/**
+ * Change interface for My Account page (frontend)
+ */
 class Frontend_MyAccount {
 
   function __construct() {
-    add_filter( 'woocommerce_account_menu_items', array($this, 'remove_account_menu_items') );
+    add_action( 'wp_enqueue_scripts', [$this, 'enqueue_assets'], 99 );
 
-    add_action( 'woocommerce_before_customer_login_form', array($this, 'add_form_wrapper') );
-    add_action( 'woocommerce_after_customer_login_form', array($this, 'close_form_wrapper') );
+    add_filter( 'woocommerce_account_menu_items', [$this, 'remove_account_menu_items'] );
 
-    add_action( 'h_after_login_form', array($this, 'add_toggle_register') );
-    add_action( 'h_before_register_form', array($this, 'add_toggle_login') );
+    add_action( 'woocommerce_before_customer_login_form', [$this, 'add_form_wrapper'] );
+    add_action( 'woocommerce_after_customer_login_form', [$this, 'close_form_wrapper'] );
+
+    add_action( 'woocommerce_before_lost_password_form', [$this, 'add_form_wrapper'] );
+    add_action( 'woocommerce_after_lost_password_form', [$this, 'close_form_wrapper'] );
+
+    add_action( 'woocommerce_before_reset_password_form', [$this, 'add_form_wrapper'] );
+    add_action( 'woocommerce_after_reset_password_form', [$this, 'close_form_wrapper'] );
+
+    add_action( 'h_after_login_form', [$this, 'add_toggle_register'] );
+    add_action( 'h_after_register_form', [$this, 'add_toggle_login'] );
+  }
+
+
+  /**
+   * Customize JS and CSS in My Account page
+   * @action wp_enqueue_scripts
+   */
+  function enqueue_assets( $hook ) {
+    wp_enqueue_style( 'h-myaccount', HOO_DIR . '/assets/css/h-myaccount.css' );
   }
 
   /*
@@ -28,31 +47,34 @@ class Frontend_MyAccount {
     return $items;
   }
 
-  /*
-    @action woocommerce_before_customer_login_form
-  */
+  /**
+   * Add wrapper to Login and Register form
+   * @action woocommerce_before_customer_login_form
+   */
   function add_form_wrapper() {
-    echo '<div class="h-myaccount-wrapper">';
+    echo '<div class="h-login-wrapper">';
   }
 
-  /*
-    @action woocommerce_after_customer_login_form
-  */
+  /**
+   * Close the Login and Register form wrapper
+   * @action woocommerce_after_customer_login_form
+   */
   function close_form_wrapper() {
     echo '</div>';
   }
 
-  /*
-    @action h_after_login_form
-  */
+
+  /**
+   * @action h_after_login_form
+   */
   function add_toggle_register() {
-    echo '<p class="text-center"><a class="button-passive h-toggle-form">Register »</a></p>';
+    echo '<a class="button --passive" href="#register">Register »</a>';
   }
 
-  /*
-    @action h_before_register_form
-  */
+  /**
+   * @action h_after_register_form
+   */
   function add_toggle_login() {
-    echo '<a class="button-passive h-toggle-form">« Login</a>';
+    echo '<a class="button --passive" href="#login">« Login</a>';
   }
 }
