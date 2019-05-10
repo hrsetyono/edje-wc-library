@@ -2,9 +2,9 @@
 /*
 Plugin Name: Edje WooCommerce Library
 Description: Simplify WooCommerce complicated features. Designed to work with Timber.
-Plugin URI: http://github.com/hrsetyono/woocommerce-edje
-Author: The Syne Studio
-Author URI: http://thesyne.com/
+Plugin URI: http://github.com/hrsetyono/edje-wc-library
+Author: Pixel Studio
+Author URI: https://pixelstudio.id/
 Version: 2.2.0
 */
 
