@@ -23,6 +23,13 @@ WooCommerce is a fantastic shopping platform, but complicated to use and develop
 
 Important information at a glance, editable without toggling each variation.
 
+**HOW TO USE**:
+
+This feature is automatically activated.
+
+Also we don't add any new metadata. So even if you disable this plugin, your variation price is still there.
+
+-----
 
 ## 2. Clean Checkout Page
 
@@ -32,4 +39,17 @@ Checkout page is very important to seal the deal. So we automatically transform 
 
 Simply add this in your functions.php: `add_theme_support('h-checkout');`.
 
-[Learn how to customize it »](https://github.com/hrsetyono/edje-wc-library/wiki/Checkout-Page)
+**HOW TO USE**:
+
+Add this in your functions.php:
+
+```
+add_theme_support('h-checkout');
+add_theme_support('custom-logo');
+```
+
+**CUSTOMIZATION**:
+
+- **Logo** - Add it in Appearance > Customize > Site Identity.
+
+- **Banner Image** - Add featured image in Checkout page.
