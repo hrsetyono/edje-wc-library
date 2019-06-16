@@ -1,6 +1,6 @@
 # Edje WooCommerce Library
 
-![Edje Wordpress](http://cdn.setyono.net/edge/wp-edge.jpg)
+![Edje Wordpress](https://raw.github.com/hrsetyono/cdn/master/edje-wp-library/logo.jpg)
 
 WooCommerce is a fantastic shopping platform, but complicated to use and develop. This plugin helps simplifying many features.
 
@@ -19,14 +19,14 @@ WooCommerce is a fantastic shopping platform, but complicated to use and develop
 
 ## 1. Intuitive Variations UI
 
-![Edje Woo - New Variation Interface](https://cdn.setyono.net/edjewoo/variation.jpg)
+![Edje Woo - New Variation Interface](https://raw.github.com/hrsetyono/cdn/master/edje-wc-library/variation.jpg)
 
 Important information at a glance, editable without toggling each variation.
 
 
 ## 2. Clean Checkout Page
 
-![Edje Woo - New Checkout Page](https://cdn.setyono.net/edjewoo/wch-checkout.jpg)
+![Edje Woo - New Checkout Page](https://raw.github.com/hrsetyono/cdn/master/edje-wc-library/checkout-design.jpg)
 
 Checkout page is very important to seal the deal. So we automatically transform yours into as seen above.
 
