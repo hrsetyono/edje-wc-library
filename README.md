@@ -37,8 +37,6 @@ Also we don't add any new metadata. So even if you disable this plugin, your var
 
 Checkout page is very important to seal the deal. So we automatically transform yours into as seen above.
 
-Simply add this in your functions.php: `add_theme_support('h-checkout');`.
-
 **HOW TO USE**:
 
 Add this in your functions.php:
