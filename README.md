@@ -14,7 +14,7 @@ WooCommerce is a fantastic shopping platform, but complicated to use and develop
 
 1. [Intuitive Variations UI](#1-intuitive-variations-ui)
 1. [Clean Checkout Page](#2-clean-checkout-page)
-1. [Changelog](https://github.com/hrsetyono/edje-wc-library/wiki/Changelog)
+1. [Changelog](https://github.com/hrsetyono/edje-wc-library/wiki/)
 
 
 ## 1. Intuitive Variations UI
