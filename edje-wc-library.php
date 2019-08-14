@@ -5,7 +5,7 @@ Description: Simplify WooCommerce complicated features. Designed to work with Ti
 Plugin URI: http://github.com/hrsetyono/edje-wc-library
 Author: Pixel Studio
 Author URI: https://pixelstudio.id/
-Version: 2.2.1
+Version: 2.3.0
 */
 
 if( !defined( 'WPINC' ) ) { die; } // exit if accessed directly
@@ -17,6 +17,18 @@ define( 'HOO_BASE', basename(dirname(__FILE__) ).'/'.basename(__FILE__) );
 /////
 
 if( !class_exists('Edje_WC_Library') ):
+
+// Modules list
+$hwc_modules = [
+  'frontend-changes',
+  'checkout-ui',
+];
+
+// require all module loaders
+foreach( $hwc_modules as $m ) {
+  require_once "module-$m/_load.php";
+}
+
 
 class Edje_WC_Library {
   function __construct() {
@@ -32,15 +44,24 @@ class Edje_WC_Library {
    * Load all modules
    */
   function load_modules() {
-    if( !class_exists('woocommerce') ) { return; }
+    if( !class_exists('WooCommerce') ) { return; }
+
+    global $hwc_modules;
+    foreach( $hwc_modules as $m ) {
+      $m = str_replace( '-', '_', $m );
+      $func_name = "load_hmodule_$m";
+
+      if( function_exists( $func_name ) ) {
+        call_user_func( $func_name );
+      }
+    }
 
     $this->module_helper();
-    $this->module_checkout_ui();
-    $this->module_frontend_changes();
     // $this->module_profile_ui();
     $this->module_variations_ui();
     // $this->module_wholesale();
   }
+
 
   /**
    * Enqueue custom assets
@@ -53,7 +74,7 @@ class Edje_WC_Library {
    * Codes to run when the plugin is activated
    */
   function register_activation_hook() {
-
+    
   }
 
   //
@@ -68,66 +89,6 @@ class Edje_WC_Library {
     new \hoo\Change_Default();
   }
 
-  /**
-   * Module to replace Checkout page interface with our custom one
-   */
-  private function module_checkout_ui() {
-    add_action( 'template_redirect', function() {
-      if( is_checkout() ) {
-        require_once 'module-checkout-ui/checkout-ui.php';
-        require_once 'module-checkout-ui/form-fields.php';
-        new \h\Checkout_UI();
-        new \h\Checkout_Fields();
-      }
-      
-      if( is_wc_endpoint_url( 'order-received' ) ) {
-        require_once 'module-checkout-ui/thankyou-page.php';
-        new \h\Checkout_Thankyou();
-      }
-    } );
-  }
-
-  /**
-   * Module to change Frontend template. Need to add `define('EDJE', true)` in wp-config
-   */
-  private function module_frontend_changes() {
-    if( is_admin() || !defined('EDJE') ) { return; }
-
-    // register page
-    require_once 'module-frontend-changes/register.php';
-    new \h\Frontend_Register();
-
-    // toast alert box
-    require_once 'module-frontend-changes/toast.php';
-    new \h\Frontend_Toast();
-
-    
-    add_action( 'template_redirect', function() {
-      // my account page
-      if( is_account_page() ) {
-        require_once 'module-frontend-changes/myaccount.php';
-        require_once 'module-checkout-ui/form-fields.php';
-        new \h\Frontend_MyAccount();
-        new \h\Checkout_Fields();
-      }
-      // cart page
-      elseif( is_cart() ) {
-        require_once 'module-frontend-changes/cart.php';
-        new \h\Frontend_Cart();
-      }
-      // single product page
-      elseif( is_product() ) {
-        require_once 'module-frontend-changes/single.php';
-        new \h\Frontend_Single();
-      }
-      
-      // shop page OR single product page
-      if( is_shop() || is_product() ) {
-        require_once 'module-frontend-changes/shop.php';
-        new \h\Frontend_Shop();
-      }
-    } );
-  }
 
   /**
    * Module to modify the WooCommerce fields in User Profile page

@@ -571,7 +571,10 @@ ol {
   :root {
     @each $name, $value in $h-colors {
       --#{ $name }: #{ $value };
-      --#{ $name }RGB: #{ round(red($value)) }, #{ round(green($value)) }, #{ round(blue($value)) };
+
+      @if type_of( $value ) == 'color' {  
+        --#{ $name }RGB: #{ round(red($value)) }, #{ round(green($value)) }, #{ round(blue($value)) }
+      }
     }
   }
 }
