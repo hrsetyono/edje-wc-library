@@ -7,25 +7,25 @@ $wc-panel-border: 1px solid darken($wc-panel, 10%)
 ///// LAYOUT
 
 .woocommerce-account
-  main .woocommerce
-    +h( d-grid relative )
-    grid-column-gap: 2.5rem
-    grid-row-gap: 1.5rem
-    grid-template-columns: 2fr 8fr
 
-    > *
-      grid-column: span 1
+.woocommerce
+  +h( d-grid relative )
+  grid-column-gap: 2.5rem
+  grid-row-gap: 1.5rem
+  grid-template-columns: 2fr 8fr
 
-    @media ($below-s)
-      grid-template-columns: 1fr
-      
+  > *
+    grid-column: span 1
+
+  @media ($below-s)
+    grid-template-columns: 1fr
 
 // MyAccount Sidebar
 .woocommerce-MyAccount-navigation
   background-color: $wc-panel
   
   ul
-    +h( d-flex fd-row fw-wrap h100p list-none p0 m0 )
+    +h( d-flex fd-column fw-wrap h100p list-none p0 m0 )
     
   @media ($below-s)
     +h( w100p ov-hidden brad )
@@ -194,6 +194,7 @@ $wc-panel-border: 1px solid darken($wc-panel, 10%)
   +clearfix
   +h( w100p pt1 pb2 ph2 mt2 mb3 bg-gray-light )
   +h( b1-solid bc-black_10 brad )
+  grid-column: span 2
 
   h2
     +h( fs-h3 mb1 ta-center )
@@ -443,19 +444,26 @@ $wc-panel-border: 1px solid darken($wc-panel, 10%)
 
 
 .woocommerce-order-details tfoot
-  +h( d-flex fw-wrap w100p p1 )
+  +h( d-flex fw-wrap w100p )
   background-color: $wc-panel
+
+  td, tr, th
+    +h( d-block )
 
   th
     +h( tt-uppercase ls25 fs-s )
 
-  td
+  th, td
+    +h( p0 bg-transparent b0 )
+
   tr
-    +h( w25p )
+    +h( w50p b0 ph1 pv0_5 )
+  tr:nth-child(even)
+    +h( bg-transparent )
 
   // total
   tr:last-child
-    +h( w100p mt1 )
+    +h( w100p mt1 p0_5 bg-black_05 )
 
     th
       +h( lh1 )
