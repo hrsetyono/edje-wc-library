@@ -1,0 +1,16 @@
+.wc-block-featured-category .wc-block-featured-category__description,
+.wc-block-featured-product .wc-block-featured-product__description {
+  margin-top: 1rem;
+}
+
+.wc-block-featured-category .wc-block-featured-category__wrapper:hover,
+.wc-block-featured-product .wc-block-featured-product__wrapper:hover {
+  opacity: 1;
+  transform: none;
+  box-shadow: none;
+}
+
+.wc-block-featured-category .wc-block-featured-category__link,
+.wc-block-featured-product .wc-block-featured-product__link {
+  display: none;
+}

@@ -1,0 +1,46 @@
+{
+  "name": "edje-wc-library--gutenberg",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hrsetyono/edje-wc-library.git"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.11.5"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.14.5",
+    "@babel/core": "^7.14.6",
+    "@babel/plugin-transform-runtime": "^7.14.5",
+    "@babel/preset-env": "^7.14.5",
+    "@wordpress/components": "^11.1.5",
+    "@wordpress/scripts": "^12.6.1",
+    "autoprefixer": "^10.2.6",
+    "babel-core": "^7.0.0-bridge.0",
+    "css-loader": "^4.3.0",
+    "file-loader": "^6.1.0",
+    "litepicker": "^1.5.7",
+    "lodash": "^4.17.21",
+    "mini-css-extract-plugin": "^0.11.2",
+    "node-sass": "^4.14.1",
+    "postcss": "^8.3.5",
+    "postcss-loader": "^4.3.0",
+    "sass-loader": "^10.2.0",
+    "url-loader": "^4.1.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  },
+  "scripts": {
+    "prod": "webpack --mode production",
+    "dev": "webpack --mode development --watch"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ],
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@wordpress/babel-preset-default"
+    ]
+  }
+}
