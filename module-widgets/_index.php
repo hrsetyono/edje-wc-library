@@ -1,6 +1,6 @@
 <?php
 
-add_action( 'widgets_init', '_hwc_unregister_widgets' );
+add_action( 'widgets_init', '_hwc_unregister_widgets', 100 );
 
 
 function _hwc_unregister_widgets() {
