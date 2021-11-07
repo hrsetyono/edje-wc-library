@@ -10,7 +10,7 @@ Version: 3.0.2
 
 if( !defined( 'WPINC' ) ) { die; } // exit if accessed directly
 
-define( 'H_WC_VERSION', '3.0.2' );
+define( 'H_WC_VERSION', '3.0.3' );
 define( 'HOO_DIR', plugins_url( '', __FILE__ ) );
 define( 'HOO_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'HOO_BASE', basename(dirname(__FILE__) ).'/'.basename(__FILE__) );

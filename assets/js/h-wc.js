@@ -42,7 +42,7 @@ var wooGeneral = {
   },
 
   closeToast( e ) {
-    let $toast = e.currentTarget.closest( '.woocommerce-info, .woocommerce-message, .woocommerce-error' );
+    let $toast = e.currentTarget.closest( '.woocommerce-notices-wrapper' );
     $toast.style.display = 'none';
   }
 }

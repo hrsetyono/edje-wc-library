@@ -6,8 +6,10 @@
     "url": "git+https://github.com/hrsetyono/edje-wc-library.git"
   },
   "dependencies": {},
+  "devDependencies": {
+    "node-sass": "^4.14.1"
+  },
   "scripts": {
     "sass": "node-sass -w assets/sass -o assets/css --output-style compressed"
-  },
-  "devDependencies": {}
+  }
 }

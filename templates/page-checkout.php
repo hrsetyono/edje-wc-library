@@ -21,11 +21,11 @@
       <section class="checkout-banner checkout-empty-banner">
     <?php } ?>
 
-        <h-row><h-column class="large-12">
+        <div class="checkout-banner__inner-container">
           <?php if( function_exists('the_custom_logo') ) {
             the_custom_logo();
           } ?>
-        </h-column></h-row>
+        </div>
       </section>
 
 		<?php the_content(); ?>
