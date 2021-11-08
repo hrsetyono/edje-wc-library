@@ -14,6 +14,9 @@ class Change_Default {
       add_filter('woocommerce_cart_item_name', array($this, 'add_thumbnail_to_order_table'), 10, 3);
       add_filter('woocommerce_order_item_name', array($this, 'add_thumbnail_to_order_table'), 10, 3);
     }
+
+    // Disable auto regenerate thumbnail
+    add_filter( 'woocommerce_background_image_regeneration', '__return_false' );
   }
 
   /**
