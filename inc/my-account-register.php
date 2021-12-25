@@ -1,15 +1,15 @@
-<?php namespace h;
+<?php
 
 /**
  * Change Register form
  */
-class Frontend_Register {
+class H_WooCommerce_Register {
   private $fields;
 
   function __construct() {
-    add_action( 'woocommerce_register_form_start', [$this, 'add_extra_register_fields'] );
-    add_action( 'woocommerce_register_post', [$this, 'validate_extra_register_fields'], 10, 3 );
-    add_action( 'woocommerce_created_customer', [$this, 'save_extra_register_fields'] );
+    add_action('woocommerce_register_form_start', [$this, 'add_extra_register_fields']);
+    add_action('woocommerce_register_post', [$this, 'validate_extra_register_fields'], 10, 3);
+    add_action('woocommerce_created_customer', [$this, 'save_extra_register_fields']);
 
     $this->fields = $this->_set_fields();
   }
@@ -18,8 +18,8 @@ class Frontend_Register {
     @action woocommerce_register_form_start
   */
   function add_extra_register_fields() {
-    foreach( $this->fields as $name => $field ) {
-      woocommerce_form_field( $name, $field );
+    foreach ($this->fields as $name => $field) {
+      woocommerce_form_field($name, $field);
     }
   }
 
@@ -27,7 +27,7 @@ class Frontend_Register {
     @action woocommerce_register_post
   */
   function validate_extra_register_fields( $username, $email, $validation_errors ) {
-    foreach( $this->fields as $name => $field ) {
+    foreach($this->fields as $name => $field) {
 
       $required_isset = isset( $field['required'] );
       // if required arg doesn't exist OR exist but false
@@ -136,7 +136,6 @@ class Frontend_Register {
         'type' => 'text',
         'label' => __('Phone'),
       ],
-      'separator' => [],
     );
 
     // prepopulate fields
@@ -150,3 +149,6 @@ class Frontend_Register {
   }
 
 }
+
+
+new H_WooCommerce_Register();

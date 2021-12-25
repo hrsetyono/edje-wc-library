@@ -1,0 +1,96 @@
+{
+  "key": "group_61c67d8a280df",
+  "title": "Edje Widget - Cart",
+  "fields": [
+      {
+          "key": "field_61c67e72cb76f",
+          "label": "Style",
+          "name": "style",
+          "type": "radio",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "choices": {
+              "default": "Default",
+              "icon-only": "Icon Only",
+              "inline": "Inline (no Popup)"
+          },
+          "allow_null": 0,
+          "other_choice": 0,
+          "default_value": "",
+          "layout": "horizontal",
+          "return_format": "value",
+          "save_other_choice": 0
+      },
+      {
+          "key": "field_61c67ee4cb771",
+          "label": "Label",
+          "name": "label",
+          "type": "text",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": [
+              [
+                  {
+                      "field": "field_61c67e72cb76f",
+                      "operator": "!=",
+                      "value": "icon-only"
+                  }
+              ]
+          ],
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "default_value": "Cart",
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "maxlength": ""
+      },
+      {
+          "key": "field_61c67e98cb770",
+          "label": "Icon",
+          "name": "icon",
+          "type": "textarea",
+          "instructions": "Paste in the SVG code here",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "default_value": "<svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewBox=\"0 0 576 512\" width=\"50\" height=\"50\"><path d=\"M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z\"\/><\/svg>",
+          "placeholder": "",
+          "maxlength": "",
+          "rows": 4,
+          "new_lines": ""
+      }
+  ],
+  "location": [
+      [
+          {
+              "param": "widget",
+              "operator": "==",
+              "value": "h_cart"
+          }
+      ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 0,
+  "modified": 1640399465
+}
