@@ -44,7 +44,7 @@ function _h_after_woocommerce_template_loaded() {
   require_once __DIR__ . '/inc/cart.php';
   require_once __DIR__ . '/inc/my-account.php';
   require_once __DIR__ . '/inc/my-account-register.php';
-  require_once __DIR__ . '/inc/shop.php';
+  require_once __DIR__ . '/inc/products.php';
   require_once __DIR__ . '/inc/order-table.php';
 }
 
@@ -52,5 +52,6 @@ function _h_after_woocommerce_template_loaded() {
  * Enqueue custom WooCommerce assets
  */
 function _h_enqueue_woocommerce_scripts() {
-  wp_enqueue_script('h-wc', HOO_DIR . '/assets/js/h-wc.js');
+  $dist = HOO_DIR . '/assets/dist';
+  wp_enqueue_script('edje-wc', $dist . '/edje-wc.js', [], H_WC_VERSION, true);
 }

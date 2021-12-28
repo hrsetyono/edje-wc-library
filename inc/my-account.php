@@ -25,8 +25,8 @@ if (is_account_page()) {
  * Customize JS and CSS in My Account page
  * @action wp_enqueue_scripts
  */
-function h_myaccount_enqueue_assets($hook) {
-  wp_enqueue_style('h-myaccount', HOO_DIR . '/assets/css/h-myaccount.css');
+function h_myaccount_enqueue_assets() {
+  // wp_enqueue_style('h-myaccount', HOO_DIR . '/assets/css/h-myaccount.css');
 }
 
 /*

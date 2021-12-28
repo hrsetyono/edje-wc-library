@@ -96,7 +96,8 @@ class Checkout_UI {
   		wp_dequeue_style( $handle );
   	}
 
-    wp_enqueue_style( 'h-checkout', HOO_DIR . '/assets/css/h-checkout.css' );
+    $dist = HOO_DIR . '/assets/dist';
+    wp_enqueue_style('edje-checkout', $dist . '/edje-checkout.css');
   }
 
   /**

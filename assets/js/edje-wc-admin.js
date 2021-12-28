@@ -1,3 +1,5 @@
+import '../sass/edje-wc-admin.scss';
+
 (function($) {
 'use strict';
 

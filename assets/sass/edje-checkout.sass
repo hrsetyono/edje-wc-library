@@ -1,10 +1,12 @@
+@use "sass:math"
+  
 // Framework output settings
-$include-normalize: true;
-$include-grid: true;
-$include-tile: true;
-$include-typography: true;
-$include-visibility: true;
-$include-colors: true;
+$include-normalize: true
+$include-grid: true
+$include-tile: true
+$include-typography: true
+$include-visibility: true
+$include-colors: true
 
 $output-framework: true // this will output the Normalizer, Grid, etc
 @import "settings-checkout"
@@ -261,7 +263,7 @@ div.woocommerce-order
   left: 50%
   height: 1.5em
   width: 1.5em
-  background-image: url("../../../../../wp-includes/images/spinner.gif")
+  background-image: url("../images/spinner.gif")
   background-position: center center
   background-size: cover
   transform: translateX(-50%) translateY(-50%)
@@ -343,7 +345,7 @@ div.woocommerce
 
   @media ($below-s)
     top: -1em
-    right: $grid-gap / 2
+    right: math.div($grid-gap, 2)
     font-size: em(13px, 14px)
 
   input[type="submit"]

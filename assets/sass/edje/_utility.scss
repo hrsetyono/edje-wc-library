@@ -1,3 +1,5 @@
+@use "sass:math";
+
 // -------------
 // Media Query
 // -------------
@@ -68,7 +70,7 @@ $_media-sizes: (
 
 // Strips unit and return plain number
 @function _stripUnit($num) {
-  @return $num / ($num * 0 + 1);
+  @return math.div($num, ($num * 0 + 1));
 }
 
 // Convert the number to EM
@@ -76,7 +78,7 @@ $_media-sizes: (
   // if not number, return it as is
   @if type-of($value) != number { @return $value; }
 
-  $value: _stripUnit($value) / _stripUnit($base) * 1em;
+  $value: math.div(_stripUnit($value), _stripUnit($base)) * 1em;
   // turn 0em into 0
   @if ($value == 0em) {
     $value: 0;
