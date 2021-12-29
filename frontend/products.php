@@ -16,10 +16,6 @@ if (is_product()) {
   add_action('woocommerce_before_single_product_summary', 'h_show_product_outfstock_flash', 15);
 }
 
-if (is_product() || is_cart()) {
-  add_action('woocommerce_before_quantity_input_field', 'h_add_order_quantity_control');
-}
-
 add_filter('woocommerce_sale_flash', 'h_shop_change_badge', 10, 3);
 add_filter('woocommerce_blocks_product_grid_item_html', 'h_show_product_badge_in_block', 10, 3);
 
@@ -85,16 +81,6 @@ function h_show_product_badge_in_block($html, $data, $product) {
   </li>";
 }
 
-/**
- * Add button to increment and decrement the Order Form
- * 
- * @action woocommerce_before_quantity_input_field
- */
-function h_add_order_quantity_control() {
-  echo '<button class="quantity__spin is-minus">–</button>';
-  echo '<button class="quantity__spin is-plus">+</button>';
-}
-
 
 /**
  * Get a Sale badge saying "% Off"
@@ -120,7 +106,9 @@ function _h_get_sale_badge($product) : string {
       }
     }
 
-    $percentage = max($percentages);
+    if (count($percentages) >= 1) {
+      $percentage = max($percentages);
+    }
   } else {
     $regular_price = (float) $product->get_regular_price();
     $sale_price = (float) $product->get_sale_price();

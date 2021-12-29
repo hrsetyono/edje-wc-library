@@ -20,9 +20,10 @@ class Variations_UI {
   function admin_enqueue_scripts( $hook ) {
     if( in_array( $hook, ['post.php', 'post-new.php', 'edit.php'] ) ) {
       $dist = HOO_DIR . '/assets/dist';
+
       wp_enqueue_style( 'edje-wc-admin', $dist . '/edje-wc-admin.css' );
       wp_enqueue_script( 'edje-wc-admin', $dist . '/edje-wc-admin.js', ['jquery'] );
-      wp_enqueue_script( 'handlebars', $dist . '/handlebars.js' );
+      wp_enqueue_script( 'handlebars', HOO_DIR . '/assets/js/handlebars.js' );
     }
   }
 

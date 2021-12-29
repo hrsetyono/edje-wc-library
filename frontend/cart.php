@@ -2,9 +2,13 @@
 
 if (is_cart()) {
   add_filter('woocommerce_cart_item_thumbnail', 'h_cart_change_thumbnail_size', 111, 2);
-
   add_action('woocommerce_cart_collaterals', 'h_cart_add_total_footnote', 20);
 }
+
+if (is_product() || is_cart()) {
+  add_action('woocommerce_before_quantity_input_field', 'h_add_order_quantity_control');
+}
+
 
 /**
  * @action woocommerce_cart_collaterals - 20
@@ -20,6 +24,7 @@ function h_cart_add_total_footnote() {
 
 /**
  * Change the thumbnail size of product image in cart
+ * 
  * @filter woocommerce_cart_item_thumbnail
  */
 function h_cart_change_thumbnail_size($img, $cart_item) {
@@ -28,4 +33,14 @@ function h_cart_change_thumbnail_size($img, $cart_item) {
   }
 
   return $img;
+}
+
+/**
+ * Add button to increment and decrement the Order Form
+ * 
+ * @action woocommerce_before_quantity_input_field
+ */
+function h_add_order_quantity_control() {
+  echo '<button class="quantity__h-spin is-minus">–</button>';
+  echo '<button class="quantity__h-spin is-plus">+</button>';
 }

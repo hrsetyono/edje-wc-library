@@ -1,49 +1,3 @@
-// const $ = jQuery;
-
-// function onReady() {
-//   var bodyClassList = document.querySelector( 'body' ).classList;
-
-//   // on any woocommerce page
-//   wooGeneral.init();
-
-//   // If account page
-//   if( bodyClassList.contains('woocommerce-account') ) {
-//     wooAccount.init();
-//   }
-//   // If checkout page
-//   else if( bodyClassList.contains('woocommerce-checkout') ) {
-//     wooCheckout.init();
-//     wooThankyou.init();
-//   }
-//   // If Single product
-//   else if( bodyClassList.contains('single-product') ) {
-//     wooSingle.init();
-//   }
-// }
-
-// // functions that needs to run only after everything loads
-// function onLoad() {
-//   wooCheckout.moveEmailField();
-// }
-
-/**
- * Added close button to Alert box. This is the listener for it.
- */
- const hAlert = {
-  init() {
-    const $toasts = document.querySelectorAll('.h-close-toast');
-
-    [...$toasts].forEach(($t) => {
-      $t.addEventListener('click', this.closeToast);
-    });
-  },
-
-  closeToast(e) {
-    const $toast = e.currentTarget.closest('.woocommerce-notices-wrapper');
-    $toast.style.display = 'none';
-  },
-};
-
 /**
  * Added (+) and (-) button to Quantity box. This is the listener for it.
  */
@@ -56,7 +10,7 @@ const hQuantity = {
   },
 
   changeQuantity(e) {
-    if (!e.target.classList.contains('quantity__spin')) { return; }
+    if (!e.target.classList.contains('quantity__h-spin')) { return; }
 
     e.preventDefault();
     const $field = e.target.closest('.quantity').querySelector('input[type="number"]');
@@ -110,7 +64,6 @@ const hMiniCart = {
 };
 
 function onReady() {
-  hAlert.init();
   hQuantity.init();
   hMiniCart.init();
 }
@@ -121,44 +74,6 @@ function onLoad() {
 
 document.addEventListener('DOMContentLoaded', onReady);
 document.addEventListener('load', onLoad);
-
-/**
- * SINGLE PRODUCT page
- * /
-
-// var wooSingle = {
-//   init() {
-//     var $form = $( 'form.variations_form' );
-
-//     $form.on( 'update_variation_values', this.onUpdateVariation );
-//     $form.on( 'found_variation', this.onFoundVariation );
-//     $form.on( 'reset_data', this.onClear );
-//   },
-
-//   onUpdateVariation() {
-
-//   },
-
-//  /**
-//   * After finished choosing all selection
-//   */
-//   onFoundVariation( e, variation ) {
-//     var $firstPrice = e.currentTarget.parentNode.querySelector( '.price' );
-
-//     // if product has price range, hide it to show that variation's price
-//     if( $firstPrice.querySelectorAll( '.amount' ).length >= 2 ) {
-//       $firstPrice.style.display = 'none';
-//     }
-//   },
-
-//  /**
-//   * After pressing "Clear" to remove all variant selection 
-//   */
-//   onClear( e ) {
-//     e.currentTarget.parentNode.querySelector( '.price' ).style.display = '';
-//   },
-
-// };
 
 /**
  * CHECKOUT Page
