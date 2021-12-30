@@ -63,9 +63,69 @@ const hMiniCart = {
   },
 };
 
+/**
+ * Changed the coupon and login form in Checkout into Popup
+ */
+const hCheckoutForm = {
+  init() {
+    if (!document.querySelector('body').classList.contains('woocommerce-checkout')) { return; }
+
+    const $formLinks = document.querySelectorAll('.showcoupon, .showlogin');
+    const $forms = document.querySelectorAll('.woocommerce-form-coupon, .woocommerce-form-login');
+    const $couponForm = document.querySelector('.woocommerce-form-coupon');
+
+    [...$formLinks].forEach(($link) => {
+      $link.addEventListener('click', this.openForm);
+    });
+
+    // prevent closing when clicking inside the form
+    [...$forms].forEach(($form) => {
+      $form.addEventListener('click', (e) => e.stopPropagation());
+    });
+
+    // close the form when clicking outside
+    document.addEventListener('click', this.closeForm);
+
+    if ($couponForm) {
+      $couponForm.addEventListener('submit', this.closeForm);
+    }
+  },
+
+  /**
+   *
+   */
+  openForm(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const formTarget = e.target.classList.contains('showcoupon')
+      ? '.woocommerce-form-coupon'
+      : '.woocommerce-form-login';
+
+    const $form = document.querySelector(formTarget);
+
+    if ($form) {
+      $form.classList.toggle('is-open');
+      document.querySelector('body').classList.toggle('has-checkout-form-open');
+    }
+  },
+
+  /**
+   *
+   */
+  closeForm() {
+    const $openedForm = document.querySelector('.woocommerce-form-coupon.is-open, .woocommerce-form-login.is-open');
+
+    if ($openedForm) {
+      document.querySelector('body').classList.remove('has-checkout-form-open');
+      $openedForm.classList.remove('is-open');
+    }
+  },
+};
+
 function onReady() {
   hQuantity.init();
   hMiniCart.init();
+  hCheckoutForm.init();
 }
 
 function onLoad() {
