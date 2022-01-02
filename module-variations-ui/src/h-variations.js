@@ -1,4 +1,4 @@
-import '../sass/edje-wc-admin.scss';
+import './h-variations.sass';
 
 (function($) {
 'use strict';

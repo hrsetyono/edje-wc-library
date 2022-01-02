@@ -32,8 +32,10 @@ function _h_unregister_woocommerce_widgets() {
  */
 function _h_register_woocommerce_widgets() {
   require_once __DIR__ . '/widget-cart.php';
+  require_once __DIR__ . '/widget-myaccount.php';
 
   register_widget('H_Widget_Cart');
+  register_widget('H_Widget_MyAccount');
 }
 
 /**

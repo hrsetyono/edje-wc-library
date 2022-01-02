@@ -1,0 +1,220 @@
+@import "settings"
+
+///// PRODUCT ATTRIBUTE
+
+.wc-metaboxes-wrapper .wc-metabox
+  .woocommerce_attribute_data td label
+    display: none
+
+.woocommerce_attribute
+  &:nth-child(1) strong
+    color: $color-green
+
+  &:nth-child(2) strong
+    color: $color-purple
+
+  &:nth-child(3) strong
+    color: $color-orange
+
+///// VARIATION
+
+.woocommerce_variation.wc-metabox
+  position: relative
+
+.toolbar-variations-defaults
+  display: none !important
+
+.wc-metaboxes-wrapper .wc-metaboxes .wc-metabox > h3
+  a.delete,
+  .handlediv
+    position: relative
+    width: 27px
+    height: 27px
+    margin-top: 0 !important
+
+    +wp-button
+
+    &::before
+      position: absolute
+      top: 0
+      right: 0
+      width: 100%
+      height: 100%
+      text-align: center
+
+  .handlediv
+    width: auto
+    padding-right: 18px
+    background-color: #f7f7f7 !important
+    border-radius: 3px 0 0 3px
+
+    &::before
+      line-height: 27px !important
+      padding: 0
+      text-align: right
+
+    &::after
+      content: "Edit"
+
+  a.delete
+    font-size: 0
+    border-radius: 0 3px 3px 0
+
+    +wp-button-error-on-hover
+
+    &::before
+      content: "\f182"
+      font-family: dashicons
+      font-size: initial
+      vertical-align: top
+      -webkit-font-smoothing: antialiased
+
+// Variation Header
+.woocommerce_variations .woocommerce_variation.wc-metabox > h3
+  cursor: default !important
+
+  .sort
+    margin-top: 1px
+
+  strong
+    display: none
+
+  select
+    cursor: pointer
+    margin: 0
+    padding: 0 5px
+    border: none
+    background-color: transparent
+    border-radius: $g-radius
+    box-shadow: none
+    transition: $g-transition
+    -moz-appearance: none
+    -webkit-appearance: none
+
+  select:nth-of-type(1)
+    +variation-select($color-green)
+
+  select:nth-of-type(2)
+    +variation-select($color-purple)
+
+  select:nth-of-type(3)
+    +variation-select($color-orange)
+
+.wc-metabox.open h3,
+.wc-metabox h3:hover,
+.wc-metabox.active
+  background-color: #eff9fd
+
+// custom form at variation header
+.hoo-form
+  input
+    position: relative
+    z-index: 2
+    width: 80px
+    vertical-align: middle
+    line-height: normal
+    font-weight: normal
+    border-radius: $g-radius
+
+  input[type="number"]
+    width: 60px
+
+  label
+    display: inline-block
+    background: #f4f4f4
+    padding: 3.5px 7px
+    border: #dfdfdf solid 1px
+    height: 27px
+    font-size: 13px
+    font-weight: normal
+    line-height: normal
+    border-radius: 3px 0 0 3px
+    box-sizing: border-box
+
+  label + input
+    margin: 0 5px 0 -1px
+    border-radius: 0 3px 3px 0
+
+  .dashicons
+    width: auto
+    vertical-align: sub
+    font-size: 14px
+
+// Form at the header of each variation
+.quick-form
+  display: inline-block
+
+  // hover / opened state, shows the fields border
+  .woocommerce_variation h3:hover &,
+  .woocommerce_variation.open &,
+  .woocommerce_variation.active &
+    input
+      border: 1px solid #ddd
+      box-shadow: inset 0 1px 2px rgba(black, 0.07)
+
+      &:focus
+        border-color: #5b9dd9
+        box-shadow: 0 0 2px rgba(30, 140, 190, 0.8)
+
+    label
+      background: #f4f4f4
+      border: #dfdfdf solid 1px
+
+  input
+    border-color: transparent
+    box-shadow: none
+
+  label
+    border-color: transparent
+    background-color: transparent
+
+  // ---------
+  // SALE
+  // ---------
+
+  &.has-sale
+    [name*="quick_price"]
+      margin-right: -4px
+      border-radius: 0
+
+    [name*="quick_price"] + label,
+    [name*="quick_sale"]
+      display: inline-block
+
+  [name*="quick_price"] + label,
+  [name*="quick_sale"]
+    display: none
+
+  [name*="quick_price"] + label
+    border-radius: 0
+    margin-left: -1px
+
+  [name*="quick_sale"]
+    border-radius: 0 $g-radius $g-radius 0
+
+// Global Form at the top of all variations
+.global-form
+  span
+    margin-right: 5px
+
+  input
+    margin-right: 15px
+
+///// ORDER LISTING
+
+.widefat .column-order_status
+  width: 80px
+  text-align: center
+
+table.wp-list-table
+  .column-price
+    width: 15ch
+
+.post-type-shop_order .wp-list-table .column-order_status
+  width: 10ch
+
+///// WIDGET Selection
+
+#widget-list
+  [id*="woocommerce_widget_cart"]
+    display: none

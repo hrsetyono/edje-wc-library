@@ -1,4 +1,22 @@
-<?php namespace h;
+<?php
+
+add_action('woocommerce_before_thankyou', 'h_thankyou_add_wrapper');
+add_action('woocommerce_thankyou', 'h_thankyou_add_closing_wrapper', 5);
+
+/**
+ * @action woocommerce_before_thankyou
+ */
+function h_thankyou_add_wrapper() {
+  echo "<aside class='h-order-overview'>";
+}
+
+/**
+ * 
+ */
+function h_thankyou_add_closing_wrapper() {
+  echo "</aside>";
+}
+
 /*
   Functions for Thank You page
 */

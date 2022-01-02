@@ -46,14 +46,14 @@ const hMiniCart = {
   },
 
   openPopup(e) {
-    if (!e.target.classList.contains('h-cart__button') && !e.target.closest('.h-cart__button')) { return; }
+    if (!e.target.classList.contains('is-cart-button') && !e.target.closest('.is-cart-button')) { return; }
 
     e.preventDefault();
     e.target.closest('.h-cart').classList.toggle('is-active');
   },
 
   closePopup(e) {
-    if (e.target.closest('.widget_shopping_cart') || e.target.closest('.h-cart__button')) { return; }
+    if (e.target.closest('.widget_shopping_cart') || e.target.closest('.is-cart-button')) { return; }
 
     const $openMinicart = document.querySelector('.h-cart.is-active');
 

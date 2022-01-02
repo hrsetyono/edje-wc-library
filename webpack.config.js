@@ -4,14 +4,13 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const path = require('path');
 
-const cssPath = './assets/sass';
-const jsPath = './assets/js';
-const outputPath = 'assets/dist';
+const jsPath = './src/js';
+const outputPath = 'dist';
 
 const entryPoints = {
   'edje-wc': `${jsPath}/edje-wc.js`,
   'edje-wc-admin': `${jsPath}/edje-wc-admin.js`,
-  'edje-checkout': `${cssPath}/edje-checkout.sass`,
+  'h-variations': './module-variations-ui/src/h-variations.js',
 };
 
 module.exports = {
