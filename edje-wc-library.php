@@ -5,12 +5,12 @@ Description: WooCommerce library plugins to be used with Edje Theme.
 Plugin URI: http://github.com/hrsetyono/edje-wc-library
 Author: Pixel Studio
 Author URI: https://pixelstudio.id/
-Version: 4.0.3
+Version: 4.0.4
 */
 
 if (!defined('WPINC')) { die; } // exit if accessed directly
 
-define('H_WC_VERSION', '4.0.3');
+define('H_WC_VERSION', '4.0.4');
 define('HOO_DIR', plugins_url('', __FILE__ ));
 define('HOO_PATH', untrailingslashit(plugin_dir_path( __FILE__ )));
 define('HOO_BASE', basename(dirname(__FILE__) ).'/'.basename(__FILE__));

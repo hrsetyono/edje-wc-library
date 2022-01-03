@@ -86,13 +86,11 @@ class H_WooCommerce_Register {
         'type' => 'text',
         'label' => __('First name'),
         'required' => true,
-        'placeholder' => __('First name'),
       ],
       'billing_last_name' => [
         'type' => 'text',
         'label' => __('Last name'),
         'required' => true,
-        'placeholder' => __('Last name'),
       ],
       //
       'billing_address_1' => [
@@ -104,7 +102,7 @@ class H_WooCommerce_Register {
       'billing_address_2' => [
         'type' => 'text',
         'label' => __('Address 2'),
-        'placeholder' => __('Apartment, Suite (optional)'),
+        'placeholder' => __('Apartment, Suite, Unit No.'),
       ],
       //
       'billing_country' => [
@@ -123,14 +121,12 @@ class H_WooCommerce_Register {
         'type' => 'text',
         'label' => __('Postcode'),
         'required' => true,
-        'placeholder' => __('Postcode'),
       ],
       //
       'billing_city' => [
         'type' => 'text',
         'label' => __('Town / City'),
         'required' => true,
-        'placeholder' => __('Town / City'),
       ],
       'billing_phone' => [
         'type' => 'text',
