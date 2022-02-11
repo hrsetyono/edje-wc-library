@@ -22,7 +22,7 @@
     "litepicker": "^1.5.7",
     "lodash": "^4.17.21",
     "mini-css-extract-plugin": "^0.11.2",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "postcss": "^8.3.5",
     "postcss-loader": "^4.3.0",
     "sass-loader": "^10.2.0",
