@@ -121,6 +121,7 @@ function _h_get_sale_badge($product) : string {
   // if has discount
   if ($percentage < 100) {
     $label = sprintf(__('%s%% Off'), $percentage);
+    $label = apply_filters('h_product_onsale_label', $label, $percentage);
     return "<span class='wc-block-grid__product-badge onsale'>{$label}</span>";
   }
 

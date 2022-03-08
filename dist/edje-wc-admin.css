@@ -1,1 +1,4 @@
-#widget-list [id*=woocommerce_widget_cart],#widget-list [id*=_block-]{display:none}
+#widget-list [id*=woocommerce_widget_cart],
+#widget-list [id*=_block-] {
+  display: none;
+}

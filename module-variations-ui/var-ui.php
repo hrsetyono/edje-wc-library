@@ -23,7 +23,7 @@ class Variations_UI {
 
       wp_enqueue_style('h-variations', $dist . '/h-variations.css');
       wp_enqueue_script('h-variations', $dist . '/h-variations.js', ['jquery']);
-      wp_enqueue_script('handlebars', HOO_DIR . '/assets/js/handlebars.js');
+      wp_enqueue_script('handlebars', HOO_DIR . '/src/js/handlebars.js');
     }
   }
 

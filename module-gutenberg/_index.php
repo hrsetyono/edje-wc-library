@@ -13,7 +13,6 @@ function h_shop_editor_assets() {
   $dir = plugin_dir_url(__FILE__) . 'dist';
   $assets = [
     'h-shop-editor',
-    'h-featured-category',
     // 'h-products' // error because it's a dynamic block
   ];
 
