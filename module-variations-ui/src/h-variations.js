@@ -1,473 +1,350 @@
 import './h-variations.sass';
 
-(function($) {
-'use strict';
+const $ = jQuery;
 
-/* --------------
-  GLOBAL FORM
--------------- */
+/**
+ * PRODUCT TYPE SELECTION
+ */
+const hProductType = {
+  init() {
+    // on change product type
+    const $select = document.querySelector('#product-type');
+    if (!$select) { return; }
 
-function GlobalForm(args) {
-  this.field = args.field;
-  this.defaultPlaceholder = args.defaultPlaceholder;
-}
+    this.addTypeClass($select);
 
-GlobalForm.prototype = {
-  addListener: function() {
-    var that = this;
-    var globalVal = 0;
-    $('#variable_product_options').on('change', GLOBAL[that.field], _onChange);
+    $select.addEventListener('change', (e) => {
+      this.addTypeClass(e.currentTarget);
+    });
+  },
 
-    /*
-      Listener
-    */
-    function _onChange(e) {
-      globalVal = $(this).val();
+  /**
+   * Add extra class to <body> so it's easier to target and style
+   */
+  addTypeClass($select) {
+    const typeName = $select.value;
+    const $wrapper = document.querySelector('body');
 
-      // change placeholder on quick field
-      var placeholder = (globalVal) ? globalVal : that.defaultPlaceholder;
-      $(QUICK[that.field]).attr('placeholder', placeholder);
+    if (!$wrapper) { return; }
 
-      $(MAIN[that.field] ).val(globalVal); // change main field
-      $(TARGET[that.field] ).each(_applyToVariation); // change all variations field
-    }
+    const re = new RegExp(/is-product-type-\w+/, 'g');
 
-    function _applyToVariation() {
-      var $target = $(this);
-      var $quick = $(this).closest('.woocommerce_variation').find(QUICK[that.field] );
-
-      var isEmpty = !$quick.val();
-      var isEqualGlobal = $quick.val() === globalVal;
-
-      // if quick field is empty, it follows the global price
-      if(isEmpty) { $target.val(globalVal).change(); }
-
-      // if equal global, remove the content so it shows only the placeholder
-      if(isEqualGlobal) { $quick.val(''); }
+    if ($wrapper.className.match(re)) {
+      $wrapper.className = $wrapper.className.replace(re, `is-product-type-${typeName}`);
+    } else {
+      $wrapper.classList.add(`is-product-type-${typeName}`);
     }
   },
 };
 
-GlobalForm.create = function() {
-  // remove existing global form
-  $(GLOBAL.form).remove();
+/**
+ * ATTRIBUTE Tab
+ */
+const hAttributes = {
+  init() {
+    this.onAdded();
+    this.onSaved();
+    this.moveFields();
+  },
 
-  var data = { currency: woocommerce_admin_meta_boxes.currency_format_symbol };
+  /**
+   * Tick the "Use as Variations" checkbox whenever new attribute is added
+   */
+  onAdded() {
+    $('body').on('woocommerce_added_attribute', () => {
+      // @note - currently no need for check because we hide the Attribute tab when it's not variable
+      // if (!document.body.classList.contains('is-product-type-variable')) {
+      //   return;
+      // }
 
-  var template = Handlebars.compile($('#hoo-global-form').html() );
-  var html = template(data);
-  $('#variable_product_options .toolbar-top').after(html);
+      const $variationToggles = document.querySelectorAll('#product_attributes [name*="attribute_variation["]');
 
-  // copy the number from main form to global form
-  $(GLOBAL.price).val( $(MAIN.price).val() );
-  $(GLOBAL.sale).val( $(MAIN.sale).val() );
-};
+      [...$variationToggles].forEach(($t) => {
+        $t.checked = true;
+        $t.dispatchEvent(new Event('change'));
 
-/* -------------
-  QUICK FORM
-------------- */
+        this.moveField($t.closest('.wc-metabox'));
+      });
+    });
+  },
 
-function QuickForm(args) {
-  this.field = args.field;
-}
+  /**
+   * Move all fields after saving
+   */
+  onSaved() {
+    $('#variable_product_options').on('reload', () => {
+      this.moveFields();
+    });
+  },
 
-QuickForm.prototype = {
-  addListener: function() {
-    var that = this;
-    $('#variable_product_options').on('change', QUICK[that.field], _onChange);
+  /**
+   * Move all input field to Heading
+   */
+  moveFields() {
+    const $atts = document.querySelectorAll('#product_attributes .wc-metabox');
 
-    /*
-      Listener
-    */
-    function _onChange(e) {
-      var newVal = $(this).val();
-      var $target = $(this).closest('.woocommerce_variation').find(TARGET[that.field]);
+    [...$atts].forEach(($a) => {
+      this.moveField($a);
+    });
+  },
 
-      switch(that.field) {
-        case 'price':
-        case 'sale':
-          // if same as globalVal, empty out the quick field so it shows the placeholder
-          var globalVal = $(GLOBAL[that.field] ).val();
-          if(newVal === globalVal) {
-            $(this).val('');
-          }
-          // if empty but global val not empty, assign the globalVal to target
-          else if(!newVal && globalVal) {
-            newVal = globalVal;
-          }
-          break;
+  /**
+   * Move an input field to Heading
+   */
+  moveField($att) {
+    const $heading = $att.querySelector('h3');
 
-        // TODO: after entering 0 and delete it, the status is Out of Stock
-        case 'stock':
-          newVal = parseInt(newVal);
-          var $manage = $(this).closest('.woocommerce_variation').find(TARGET.manageStock);
-          var $status = $(this).closest('.woocommerce_variation').find(TARGET.stockStatus);
-
-          if(newVal > 0 || newVal < 0) {
-            $manage.prop('checked', true).change();
-          }
-          else if(newVal === 0) {
-            $manage.prop('checked', false).change();
-            $status.find('option:nth-child(2)').attr('selected', 'selected');
-          }
-          else {
-            $manage.prop('checked', false).change();
-            $status.find('option:nth-child(1)').attr('selected', 'selected');
-          }
+    // if doesn't contain "taxonomy", move the attribute name field too
+    if (!$att.classList.contains('taxonomy')) {
+      const $nameWrapper = $att.querySelector('td.attribute_name');
+      if ($nameWrapper) {
+        $heading.append(...$nameWrapper.childNodes);
       }
+    }
 
-      // change the target field to be the same
-      $target.val(newVal);
-    } // _onChange
-
+    const $termsWrapper = $att.querySelector('td[rowspan="3"]');
+    if ($termsWrapper) {
+      $heading.append(...$termsWrapper.childNodes);
+    }
   },
 };
 
-/*
-  Add a Quick form on top of current variation
+/**
+ * VARIATIONS
+ */
+const hVariationButtons = {
+  init() {
+    this.moveActionSelect();
+    this.renderToolbarButtons();
 
-  @param int $variation - The outer container of the variation
-*/
-QuickForm.create = function($variation) {
-  var $header = $variation.closest('.woocommerce_variation').find('h3');
+    this.initSetPrice();
+    this.initSetSalePrice();
+    this.initSetStock();
+  },
 
-  var data = _parseData($variation);
+  /**
+   * Move the Action Dropdown to the Default Toolbar
+   */
+  moveActionSelect() {
+    const $select = document.querySelector('.variation_actions');
+    const $selectButton = document.querySelector('.do_variation_action');
+    const $wrapper = document.querySelector('.toolbar-variations-defaults');
 
-  // manage stock always on
-  // $variation.find(TARGET.manageStock).prop('checked', true);
+    if (!$select || !$wrapper) { return; }
 
-  // append template
-  var template = Handlebars.compile($('#hoo-quick-form').html() );
-  var html = template(data);
-  $header.append(html);
+    $wrapper.appendChild($select);
+    $wrapper.appendChild($selectButton);
+  },
 
-  // trigger change in target field
-  $header.find(QUICK.price).change();
-  $header.find(QUICK.sale).change();
+  /**
+   * Create buttons in toolbar that mimic the action from the dropdown
+   */
+  renderToolbarButtons() {
+    const $wrapper = document.querySelector('#variable_product_options .toolbar-top');
 
-  // $variation.find(TARGET.price).val(data._regular_price);
-  // $variation.find(TARGET.sale).val(data._sale_price);
+    if (!$wrapper) { return; }
 
-  /*
-    Get the raw data and process it
+    const template = document.querySelector('#h-variation-buttons').innerHTML;
+    $wrapper.innerHTML += template;
+  },
 
-    @return array - Parsed data ready to be used
-  */
-  function _parseData() {
-    // parse data
-    var data = $variation.find('.h-variation-data').data('variation');
+  /**
+   * Prompt user for global price
+   */
+  initSetPrice() {
+    $('#variable_product_options').on('click', '.button[data-action="set-price"]', _setPrice.bind(this));
 
-    data.currency = woocommerce_admin_meta_boxes.currency_format_symbol;
-    data.globalPrice = $(GLOBAL.price).val();
-    data.globalSale = $(GLOBAL.sale).val();
+    function _setPrice() {
+      const price = prompt('Enter the price');
 
-    data._regular_price = parseInt(data._regular_price);
-    data._sale_price = parseInt(data._sale_price);
+      // Abort if cancelled
+      if (price === null) { return; }
 
-    data.isEqualGlobalPrice = data.globalPrice == data._regular_price;
-    data.isEqualGlobalSale = data.globalSale == data._sale_price;
-
-    // if price empty
-    if(!data._regular_price) {
-      data._regular_price = parseInt(data.globalPrice);
+      this.fillAllFields('input[name*="variable_regular_price"]', price);
     }
+  },
 
-    // if sale empty
-    if(!data._sale_price) {
-      data._sale_price = parseInt(data.globalSale);
-    }
+  /**
+   * Prompt user for global sale price
+   */
+  initSetSalePrice() {
+    $('#variable_product_options').on('click', '.button[data-action="set-sale-price"]', _setSalePrice.bind(this));
 
-    // if stock is 0 AND stock status is empty
-    if(data._stock === 0 && data._stock_status === '') {
-      data._stock = null;
-    }
-    // if stock is false AND out of stock
-    else if(!data._stock && data._stock_status === 'outofstock') {
-      data._stock = 0;
-    }
+    function _setSalePrice() {
+      const price = prompt('Enter the discounted price (leave empty to remove sale)');
 
-    return data;
-  }
-}
+      // Abort if cancelled
+      if (price === null) { return; }
 
+      this.fillAllFields('input[name*="variable_sale_price"]', price);
 
-/* --------------
-  TARGET FORM
--------------- */
+      // Sale schedule
+      let startDate = '';
+      let endDate = '';
 
-function TargetForm(args) {
-  this.field = args.field;
-}
+      // Ask whether to set schedule or not (only when sale is not empty)
+      if (price !== '' && window.confirm('Set Sale Schedule?')) {
+        startDate = prompt('Enter start date (YYYY-MM-DD or leave blank)');
+        endDate = prompt('Enter end date (YYYY-MM-DD or leave blank)');
 
-TargetForm.prototype = {
-  addListener: function() {
-    var that = this;
-    $('#variable_product_options').on('change', TARGET[that.field], _onChange);
+        // if format is wrong, empty it
+        if (!startDate.match(/\d{4}-\d{2}-\d{2}$/)) {
+          startDate = '';
+        }
 
-    /*
-      Listener
-    */
-    function _onChange(e) {
-      var targetVal = $(this).val();
+        if (!endDate.match(/\d{4}-\d{2}-\d{2}$/)) {
+          endDate = '';
+        }
 
-      // change the quick field to be the same
-      var $quick = $(this).closest('.woocommerce_variation').find(QUICK[that.field] );
-      $quick.val(targetVal);
-
-      switch(that.field) {
-        case 'price':
-          // if empty, set it to 0
-          if(!targetVal) {
-            targetVal = 0;
-            $(this).val(targetVal);
-          }
-          break;
-
-        case 'sale':
-          var $form = $quick.closest('.quick-form');
-
-          // if empty, remove the has-sale class
-          if(!targetVal) {
-            $form.removeClass('has-sale');
-          } else {
-            $form.addClass('has-sale');
-          }
-          break;
-      }
-
-      if(that.field === 'price' || that.field === 'sale') {
-        // if same as global value, empty out the quick field so it shows the placeholder
-        var globalVal = $(GLOBAL[that.field]).val();
-        if(targetVal === globalVal) {
-          $quick.val('');
+        // show the hidden schedule fields
+        if (startDate) {
+          const $hiddenFields = document.querySelectorAll('.form-field.sale_price_dates_fields');
+          [...$hiddenFields].forEach(($f) => {
+            $f.classList.remove('hidden');
+            $f.style.display = 'block';
+          });
         }
       }
-    }  // _onChange
 
+      this.fillAllFields('input[name*="variable_sale_price_dates_from"]', startDate);
+      this.fillAllFields('input[name*="variable_sale_price_dates_to"]', endDate);
+    }
+  },
+
+  /**
+   * Prompt user for stock number
+   */
+  initSetStock() {
+    $('#variable_product_options').on('click', '.button[data-action="set-stock"]', _setStock.bind(this));
+
+    function _setStock() {
+      const amount = prompt('Enter stock amount (leave empty if not managing stock)');
+
+      const isManagingStock = amount !== '';
+      this.tickAllCheckboxes('[name*="variable_manage_stock"]', isManagingStock);
+
+      if (amount === '') { return; }
+
+      this.fillAllFields('[name*="variable_stock"]', amount);
+    }
+  },
+
+  /**
+   * Fill all variation fields
+   */
+  fillAllFields(query, value) {
+    const $fields = document.querySelectorAll(query);
+
+    [...$fields].forEach(($f) => {
+      $f.value = value;
+      $($f).trigger('change'); // has to be jQuery trigger to activate other behavior
+    });
+  },
+
+  /**
+   * Tick or Untick all checkboxes
+   */
+  tickAllCheckboxes(query, value) {
+    const $checkboxes = document.querySelectorAll(query);
+    [...$checkboxes].forEach(($cb) => {
+      $cb.checked = value;
+      $($cb).trigger('change'); // has to be jQuery trigger to toggle the hidden fields
+    });
   },
 };
 
+/**
+ * Add a quick info for Price, Sale Price, and Stock
+ */
+const hVariationOverview = {
+  init() {
+    $('#woocommerce-product-data').on('woocommerce_variations_loaded', this.render);
+    $('#woocommerce-product-data').on('woocommerce_variations_added', this.render);
 
-/*
-  Replacing Default WooCommerce behavior
-*/
-var changeDefault = {
-  init: function() {
-    this.variation();
+    const $fieldTargets = [
+      {
+        field: '[name*="regular_price["]',
+        overview: '[data-info="price"]',
+      },
+      {
+        field: '[name*="sale_price["]',
+        overview: '[data-info="sale-price"]',
+      },
+      {
+        field: '[name*="variable_stock["]',
+        overview: '[data-info="stock"]',
+      },
+    ];
+
+    $fieldTargets.forEach((target) => {
+      // add listener to change the overview
+      $('#variable_product_options').on('change', target.field, (e) => {
+        this._updateOverview(e.currentTarget, target.overview);
+      });
+
+      // initially populate the overiew
+      $('#woocommerce-product-data').on('woocommerce_variations_loaded', () => {
+        const $fields = document.querySelectorAll(target.field);
+        [...$fields].forEach(($f) => {
+          this._updateOverview($f, target.overview);
+        });
+      });
+    });
+
+    // If untick "Manage Stock"
+    $('#variable_product_options').on('change', '[name*="variable_manage_stock["]', (e) => {
+      // abort if checked
+      if (e.currentTarget.checked) { return; }
+
+      this._updateOverview(e.currentTarget, '[data-info="stock"]');
+    });
   },
 
-  variation: function() {
-    var that = this;
+  /**
+   * Render the overview into each variation heading
+   */
+  render() {
+    const $headings = document.querySelectorAll('#variable_product_options .wc-metabox h3');
+    const template = document.querySelector('#h-variation-overview').innerHTML;
 
-    // remove default toggle
-    $('#variable_product_options').off('click', '.wc-metabox h3');
-    $('#variable_product_options').off('click', '.wc-metabox > h3');
+    [...$headings].forEach(($h) => {
+      // Abort if already have overview
+      if ($h.innerHTML.match(/h-variation-overview/)) { return; }
 
-    // toggle only if clicking the Edit button
-    $('#variable_product_options').on('click', 'h3 .handlediv', that.toggleVariation);
+      $h.innerHTML += template;
+    });
   },
 
-  toggleVariation: function() {
-    var $container = $(this).closest('.woocommerce_variation');
-    $container.toggleClass('open closed');
-    $container.find('.wc-metabox-content').slideToggle();
-  }
+  /**
+   * Update the overview label
+   */
+  _updateOverview(target, query) {
+    const $wrapper = target.closest('.wc-metabox').querySelector('.h-variation-overview');
+
+    if (!$wrapper) { return; }
+
+    const $label = $wrapper.querySelector(query);
+
+    if (target.value > 0) {
+      $label.classList.remove('hidden');
+    } else {
+      $label.classList.add('hidden');
+    }
+
+    $label.querySelector('span').textContent = target.value;
+  },
 };
 
-/* ----------
-  CONSTANT
------------ */
-
-var TARGET = {
-  form: '.woocommerce_variation',
-  price: '[name*="variable_regular_price"]',
-  stock: '[name*="variable_stock["]',
-  stockStatus: '[name*="variable_stock_status"]',
-  manageStock: '[name*="variable_manage_stock"]',
-  sale: '[name*="variable_sale_price["]',
-};
-
-var GLOBAL = {
-  form: '.global-form',
-  price: '#global-price',
-  sale: '#global-sale',
-};
-
-var QUICK = {
-  form: '.quick-form',
-  price: '[name*="quick_price"]',
-  sale: '[name*="quick_sale"]',
-  stock: '[name*="quick_stock"]',
-};
-
-var MAIN = {
-  price: '#_regular_price',
-  sale: '#_sale_price',
-};
-
-var BACKORDER = {
-  main: '#_backorders',
-  target: '[name*="variable_backorders["]'
+function onReady() {
+  hProductType.init();
+  hAttributes.init();
+  hVariationButtons.init();
+  hVariationOverview.init();
 }
 
-/* -----------------
-  VARIATION Handler
------------------ */
-var variation = {
-  init: function() {
-    var $variationTab = $('#variable_product_options');
+function onLoad() {
+  // script that runs when everything is loaded
+}
 
-    GlobalForm.create();
-
-    // $variation.on('DOMNodeInserted', this.onAdded);
-    $('#woocommerce-product-data').on('woocommerce_variations_loaded', this.onLoaded);
-    $('#woocommerce-product-data').on('woocommerce_variations_added', this.onAdded);
-    $('#woocommerce-product-data').on('woocommerce_variations_saved', this.onSaved);
-
-    $variationTab.on('focus', 'h3 input', this.highlightHeader);
-    $variationTab.on('blur', 'h3 input', this.removeHighlightHeader);
-
-    this.addListener();
-  },
-
-  highlightHeader: function(e) {
-    $(this).closest('.woocommerce_variation').addClass('active');
-  },
-
-  removeHighlightHeader: function(e) {
-    $(this).closest('.woocommerce_variation').removeClass('active');
-  },
-
-  /*
-    After finished loading the Variations tab
-  */
-  onLoaded: function(e) {
-    var that = variation;
-
-    // if no global form yet
-    if($(GLOBAL.form).length === 0) {
-      GlobalForm.create();
-    }
-
-    $('.woocommerce_variation').each(function() {
-      QuickForm.create($(this) );
-    });
-  },
-
-  /*
-    After adding a new variation using the toolbar
-  */
-  onAdded: function(e) {
-    var that = variation;
-    var $newVar = $(this).find('.woocommerce_variation:not(:has(.quick-form))');
-
-    // if adding one variation (if multiple, it won't have the class below)
-    if($newVar.is('.variation-needs-update') ) {
-      QuickForm.create($newVar);
-    }
-  },
-
-  /*
-    After AJAX Save the variatios
-  */
-  onSaved: function(e) {
-
-    var post = {
-      action: 'h_after_save_variations',
-      data: {
-        post_id: woocommerce_admin_meta_boxes.post_id,
-        global_price: $(GLOBAL.price).val(),
-        global_sale: $(GLOBAL.sale).val()
-      }
-    };
-
-    $.post(ajaxurl, post, function(response) {
-      // success
-    });
-  },
-
-  addListener: function() {
-    // initiate global price field listener
-    this.globalListener();
-    this.quickListener();
-    this.targetListener();
-  },
-
-  globalListener: function() {
-    var priceField = new GlobalForm({ field: 'price', defaultPlaceholder: 'Price' });
-    var saleField = new GlobalForm({ field: 'sale', defaultPlaceholder: 'Sale' });
-
-    priceField.addListener();
-    saleField.addListener();
-  },
-
-  targetListener: function() {
-    var priceField = new TargetForm({ field: 'price' });
-    var saleField = new TargetForm({ field: 'sale' });
-    var stockField = new TargetForm({ field: 'stock' });
-
-    priceField.addListener();
-    saleField.addListener();
-    stockField.addListener();
-  },
-
-  quickListener: function() {
-    var priceField = new QuickForm({ field: 'price' });
-    var saleField = new QuickForm({ field: 'sale' });
-    var stockField = new QuickForm({ field: 'stock' });
-
-    priceField.addListener();
-    saleField.addListener();
-    stockField.addListener();
-  }
-};
-
-
-/* -------------------
-  ATTRIBUTE Handler
------------------- */
-var attribute = {
-  init: function() {
-    $(document.body).on('woocommerce_added_attribute', this.onAdded);
-  },
-
-  /*
-    After adding new attribute, auto check the 'Used for variations'
-  */
-  onAdded: function(e) {
-    $('#product_attributes').find('[name*="attribute_variation["]').prop('checked', true).change();
-  }
-};
-
-/* ----------------
-  BACKORDER Handler
----------------- */
-
-var backorder = {
-  init: function() {
-    $(BACKORDER.main).on('change', this.onChange);
-  },
-
-  onChange: function(e) {
-    var newVal = $(this).val();
-    $(BACKORDER.target).val(newVal);
-  }
-};
-
-
-///// RUNNER
-
-var start = function() {
-  // if in product edit page
-  if($('#woocommerce-product-data').length ) {
-    changeDefault.init();
-    variation.init();
-    attribute.init();
-    // backorder.init();
-  }
-};
-
-$(document).ready(start);
-$(document).on('page:load', start);
-
-})(jQuery);
+document.addEventListener('DOMContentLoaded', onReady);
+window.addEventListener('load', onLoad);

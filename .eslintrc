@@ -17,6 +17,8 @@
     "linebreak-style": 0,
     "no-alert": "off",
     "no-param-reassign": [2, { "props": false }],
+    "no-use-before-define": "off",
+    "no-underscore-dangle": "off",
     "prefer-destructuring": [
       "error",
       {

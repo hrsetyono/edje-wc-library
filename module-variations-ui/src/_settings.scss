@@ -1,24 +1,26 @@
 $version: 0;
 
-$color-passive: #5c6c7a;
-$color-passive-light: #ebeef0;
+$text: #333;
+$text-dim: #5c6c7a;
+$text-invert: #ebeef0;
+
+$border: #eee;
 
 $body-bg: #f4f6f8;
-$panel-bg: #f9fafb;
+$panel: #fafafa;
 
-$color-red : #c05717;
-$color-yellow : #edc200;
-$color-green : #4caf50;
-$color-blue: #47c1bf;
+$red : #e35950;
+$yellow : #edc200;
+$green : #4caf50;
+$blue: #47c1bf;
 
-$color-purple: #763eaf;
-$color-orange: #ff9517;
+$purple: #763eaf;
+$orange: #ff9517;
 
-$color-red-light : #ffc58b;
-$color-yellow-light : #ffea8a;
-$color-green-light : #c8e6c9; // #b2d86a;
-$color-blue-light: #cae9f7;
-
+$red-light : #ffc58b;
+$yellow-light : #ffea8a;
+$green-light : #c8e6c9;
+$blue-light: #cae9f7;
 
 $g-radius: 4px;
 $g-transition: all .25s ease-in-out;
@@ -34,8 +36,9 @@ $g-transition: all .25s ease-in-out;
   display: inline-block;
   background: #f7f7f7;
   height: 28px;
+  width: 28px;
   margin: 0;
-  padding: 0 10px 1px;
+  padding: 0;
   border: 1px solid #ccc;
 
   white-space: nowrap;
