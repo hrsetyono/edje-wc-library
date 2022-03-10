@@ -6,12 +6,25 @@ This is a library plugin for our starter theme: [Edje](https://github.com/hrsety
 
 [DEMO](https://test.pixelstudio.id/shop)
 
-## 1. Changes
+## Main Features
+
+### 1. Variation UI
+
+The original variation interface is really lacking. We did a slight rearrangement and styling changes to make it much easier to use.
+
+![](https://raw.github.com/hrsetyono/cdn/master/edje-wc-library/variation-ui.jpg)
+
+### 2. Widgets
+
+Our Edje Theme uses widget for Header and Footer (we like it the old way), so this plugin adds two widgets:
+
+- **Cart** - The revamped Cart widget with better markup for styling.
+- **MyAccount** - Button to login when signed-out and to MyAccount when signed-in.
+
+## Other Changes
 
 These are the list of modifications by this plugin:
 
-- [Widget] Added custom Cart widget for easier styling than the original Cart widget.
-- [Widget] Added custom MyAccount widget. This button will toggle between "Sign In" and "My Account" depending on logged-in state.
 - [Alert] Changed the button in alert box when adding new item from "View Cart" to "Go to Checkout".
 - [Shop] Changed the "On Sale" label into "X% Off".
 - [Shop] Added "Out of Stock" label when the product is out of stock.
@@ -26,16 +39,3 @@ These are the list of modifications by this plugin:
 - [Thank You] Added multiple wrapper to make styling easier.
 - [Register] Added most of the billing fields like Address, Country, Postcode, and more to Register form.
 - [Register] Added a toggle button to switch between Login and Register form.
-
-## 2. Intuitive Variations UI
-
-![Edje Woo - New Variation Interface](https://raw.github.com/hrsetyono/cdn/master/edje-wc-library/variation.jpg)
-
-Important information at a glance, editable without toggling each variation.
-
-**HOW TO USE**:
-
-This feature is automatically activated.
-
-Also we don't add any new metadata. So even if you disable this plugin, your variation price is still there.
-
