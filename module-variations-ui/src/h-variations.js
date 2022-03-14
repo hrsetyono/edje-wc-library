@@ -114,18 +114,33 @@ const hAttributes = {
  */
 const hVariationButtons = {
   init() {
-    this.moveActionSelect();
-    this.renderToolbarButtons();
+    // this.moveActionSelect();
+    // this.renderToolbarButtons();
+
+    this.changeNoticeButton();
 
     this.initSetPrice();
     this.initSetSalePrice();
     this.initSetStock();
+
+    this.initCreateVariations();
+
+    $('#woocommerce-product-data').on('woocommerce_variations_loaded', () => {
+      console.log('loaded');
+      this.moveActionSelect();
+      this.renderToolbarButtons();
+    });
   },
 
   /**
    * Move the Action Dropdown to the Default Toolbar
    */
   moveActionSelect() {
+    const $movedSelect = document.querySelector('.toolbar-variations-defaults .variation_actions');
+
+    // abort if already moved
+    if ($movedSelect) { return; }
+
     const $select = document.querySelector('.variation_actions');
     const $selectButton = document.querySelector('.do_variation_action');
     const $wrapper = document.querySelector('.toolbar-variations-defaults');
@@ -142,25 +157,47 @@ const hVariationButtons = {
   renderToolbarButtons() {
     const $wrapper = document.querySelector('#variable_product_options .toolbar-top');
 
+    // Abort if no toolbar
     if (!$wrapper) { return; }
 
-    const template = document.querySelector('#h-variation-buttons').innerHTML;
-    $wrapper.innerHTML += template;
+    const $buttons = $wrapper.querySelector('.h-variation-buttons');
+
+    // abort if already has buttons
+    if ($buttons) { return; }
+
+    const $template = document.querySelector('#h-variation-buttons');
+
+    if ($template) {
+      $wrapper.innerHTML += $template.innerHTML;
+    }
+  },
+
+  /**
+   * Change the "Learn More" button when variation is empty to open Attributes tab instead of opening documentation.
+   */
+  changeNoticeButton() {
+    $('#variable_product_options').on('click', '#variable_product_options_inner > .woocommerce-message a', _onClick);
+
+    function _onClick(e) {
+      e.preventDefault();
+
+      const $targetTab = document.querySelector('.wc-tabs .attribute_tab a');
+      $targetTab.dispatchEvent(new MouseEvent('click', {
+        view: window,
+        bubbles: true,
+        cancelable: true,
+      }));
+    }
   },
 
   /**
    * Prompt user for global price
    */
   initSetPrice() {
-    $('#variable_product_options').on('click', '.button[data-action="set-price"]', _setPrice.bind(this));
+    $('#variable_product_options').on('click', '.button[data-action="set-price"]', _onClick.bind(this));
 
-    function _setPrice() {
-      const price = prompt('Enter the price');
-
-      // Abort if cancelled
-      if (price === null) { return; }
-
-      this.fillAllFields('input[name*="variable_regular_price"]', price);
+    function _onClick() {
+      this.doAction('variable_regular_price');
     }
   },
 
@@ -168,16 +205,20 @@ const hVariationButtons = {
    * Prompt user for global sale price
    */
   initSetSalePrice() {
-    $('#variable_product_options').on('click', '.button[data-action="set-sale-price"]', _setSalePrice.bind(this));
+    $('#variable_product_options').on('click', '.button[data-action="set-sale-price"]', _onClick.bind(this));
 
-    function _setSalePrice() {
+    function _onClick() {
       const price = prompt('Enter the discounted price (leave empty to remove sale)');
 
       // Abort if cancelled
       if (price === null) { return; }
 
-      this.fillAllFields('input[name*="variable_sale_price"]', price);
+      this.fillFields('input[name*="variable_sale_price"]', price);
 
+      // _setSchedule(price);
+    }
+
+    function _setSchedule(price) {
       // Sale schedule
       let startDate = '';
       let endDate = '';
@@ -206,8 +247,8 @@ const hVariationButtons = {
         }
       }
 
-      this.fillAllFields('input[name*="variable_sale_price_dates_from"]', startDate);
-      this.fillAllFields('input[name*="variable_sale_price_dates_to"]', endDate);
+      this.fillFields('input[name*="variable_sale_price_dates_from"]', startDate);
+      this.fillFields('input[name*="variable_sale_price_dates_to"]', endDate);
     }
   },
 
@@ -215,24 +256,54 @@ const hVariationButtons = {
    * Prompt user for stock number
    */
   initSetStock() {
-    $('#variable_product_options').on('click', '.button[data-action="set-stock"]', _setStock.bind(this));
+    $('#variable_product_options').on('click', '.button[data-action="set-stock"]', _onClick.bind(this));
 
-    function _setStock() {
+    function _onClick() {
       const amount = prompt('Enter stock amount (leave empty if not managing stock)');
 
+      // Abort if cancelled
+      if (amount === null) { return; }
+
       const isManagingStock = amount !== '';
-      this.tickAllCheckboxes('[name*="variable_manage_stock"]', isManagingStock);
+      this.tickCheckboxes('[name*="variable_manage_stock"]', isManagingStock);
 
       if (amount === '') { return; }
 
-      this.fillAllFields('[name*="variable_stock"]', amount);
+      this.fillFields('[name*="variable_stock"]', amount);
     }
+  },
+
+  /**
+   * Init create variations button (only appear when there's no variation)
+   */
+  initCreateVariations() {
+    $('#variable_product_options').on('click', '.button[data-action="create-variations"]', _onClick.bind(this));
+
+    function _onClick() {
+      this.doAction('link_all_variations');
+    }
+  },
+
+  /**
+   * Change the Action Select value and trigger it
+   */
+  doAction(value) {
+    const $select = document.querySelector('#variable_product_options #field_to_edit');
+    const $button = document.querySelector('#variable_product_options .do_variation_action');
+
+    // @todo - add a check whether value exist or not
+    $select.value = value;
+    $button.dispatchEvent(new MouseEvent('click', {
+      view: window,
+      bubbles: true,
+      cancelable: true,
+    }));
   },
 
   /**
    * Fill all variation fields
    */
-  fillAllFields(query, value) {
+  fillFields(query, value) {
     const $fields = document.querySelectorAll(query);
 
     [...$fields].forEach(($f) => {
@@ -244,7 +315,7 @@ const hVariationButtons = {
   /**
    * Tick or Untick all checkboxes
    */
-  tickAllCheckboxes(query, value) {
+  tickCheckboxes(query, value) {
     const $checkboxes = document.querySelectorAll(query);
     [...$checkboxes].forEach(($cb) => {
       $cb.checked = value;

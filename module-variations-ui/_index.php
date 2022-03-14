@@ -53,6 +53,11 @@ function h_variations_js_template($views) {
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20"><path d="M509.5 184.6L458.9 32.8C452.4 13.2 434.1 0 413.4 0H98.6c-20.7 0-39 13.2-45.5 32.8L2.5 184.6c-1.6 4.9-2.5 10-2.5 15.2V464c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V199.8c0-5.2-.8-10.3-2.5-15.2zm-48.1 7.4H280V48h133.4l48 144zM98.6 48H232v144H50.6l48-144zM48 464V240h416v224H48z"/></svg>
         <?php _e('Set Stock'); ?>
       </a>
+
+      <a class="button" data-action="create-variations">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20"><path d="M480 288H320c-17.67 0-32 14.33-32 32v160c0 17.67 14.33 32 32 32h160c17.67 0 32-14.33 32-32V320c0-17.67-14.33-32-32-32zm-16 176H336V336h128v128zM128 256C57.31 256 0 313.31 0 384s57.31 128 128 128 128-57.31 128-128-57.31-128-128-128zm0 208c-44.11 0-80-35.89-80-80s35.89-80 80-80 80 35.89 80 80-35.89 80-80 80zm378.98-262.86L400.07 18.29C392.95 6.1 380.47 0 368 0s-24.95 6.1-32.07 18.29L229.02 201.14c-14.26 24.38 3.56 54.86 32.07 54.86h213.82c28.51 0 46.33-30.48 32.07-54.86zM280.61 208L368 58.53 455.39 208H280.61z"/></svg>
+        <?php _e('Create All Variations'); ?>
+      </a>
     </div>
   </template>
 
@@ -80,19 +85,4 @@ function h_variations_js_template($views) {
   </template>
 
   <?php return $views;
-}
-
-
-
-
-
-/**
- * Add Quick Form to each Variation
- * 
- * @action woocommerce_product_after_variable_attributes
- */
-function h_variations_js_hidden_data($index, $variation_data, $variation) {
-  ?>
-  <div class='h-variation-data' data-variation='<?php echo htmlspecialchars(json_encode($variation_data), ENT_QUOTES, 'UTF-8'); ?>'></div>
-  <?php
 }

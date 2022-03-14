@@ -1,6 +1,6 @@
 @import "settings"
 
-.wc-metaboxes .wc-metabox
+.metaboxes .wc-metabox
   border: none
   border-bottom: 1px solid $border
 
@@ -58,10 +58,26 @@ body:not(.is-product-type-variable) .attribute_tab
   &:nth-child(3)
     --color: #{$orange}
 
+#product_attributes
+  .wc-metaboxes
+    border-bottom: none
+
+  .wc-metabox
+    border: none
+    border-bottom: 1px solid $border
+
+// Toolbar
+#product_attributes .toolbar
+  &.toolbar-top
+    background-color: $panel
+
+  .expand-close
+    display: none
+
 // Heading
 #product_attributes
   h3
-    padding: 0.25rem 1rem !important
+    padding: 0.75rem 1rem !important
     cursor: default
 
   h3 > label
@@ -91,6 +107,12 @@ body:not(.is-product-type-variable) .attribute_tab
   button.select_all_attributes,
   button.select_no_attributes
     display: none
+
+  button.add_new_attribute
+    padding: 0 0.5rem
+    border: 1px solid rgba(black, .1)
+    font-size: 12px
+    line-height: 1
 
   div.handlediv
     display: none
@@ -147,14 +169,16 @@ body:not(.is-product-type-variable) .attribute_tab
   .variations-pagenav
     display: none !important
 
-.h-variation-buttons
+#variable_product_options .h-variation-buttons
   display: flex
   column-gap: 0.5rem
+  width: 100%
 
   .button
     display: flex
     align-items: center
     column-gap: 0.5rem
+    margin: 0
 
   svg
     height: 1rem
@@ -163,14 +187,27 @@ body:not(.is-product-type-variable) .attribute_tab
   path
     fill: currentColor
 
+  [data-action="set-stock"]
+    margin-right: auto
+
+// Hide the Set price button when there is no variations
+#variable_product_options .toolbar-variations-defaults[style*="none"]
+  ~ .toolbar-top .h-variation-buttons
+    [data-action="set-price"],
+    [data-action="set-sale-price"],
+    [data-action="set-stock"]
+      display: none
+
 // Heading
-#variable_product_options
-  h3 > strong
+#variable_product_options h3
+  > strong
     display: none
 
-  h3 select
+  select
     color: var(--color)
     border: none
+    padding: 0 0.5rem
+    background: none
 
   div.handlediv
     display: flex
