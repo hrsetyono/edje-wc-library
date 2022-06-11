@@ -94,7 +94,12 @@ function h_checkout_reorder_fields($fields) {
   $fields['billing']['billing_email']['priority'] = 4;
 
   $fields['billing']['billing_phone']['required'] = false;
-  $fields['shipping']['shipping_phone']['required'] = false;
+  $fields['shipping']['shipping_phone'] = [
+    'type' => 'text',
+    'label' => __('Phone'),
+    'required' => false,
+    'priority' => 100,
+  ];
   return $fields;
 }
 
