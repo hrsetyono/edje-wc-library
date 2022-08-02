@@ -1,16 +1,12 @@
-// const { VueLoaderPlugin } = require('vue-loader');
 const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extraction-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const path = require('path');
 
 const jsPath = './src/js';
 const outputPath = 'dist';
-const localDomain = 'lab.test';
-
 const entryPoints = {
-  'edje-wc': `${jsPath}/edje-wc.js`,
-  'edje-wc-admin': `${jsPath}/edje-wc-admin.js`,
+  'hwc-public': `${jsPath}/hwc-public.js`,
+  'hwc-admin': `${jsPath}/hwc-admin.js`,
   'h-variations': './module-variations-ui/src/h-variations.js',
 };
 
@@ -21,12 +17,6 @@ module.exports = {
     filename: '[name].js',
   },
   plugins: [
-    new BrowserSyncPlugin({
-      proxy: localDomain,
-      files: [`${outputPath}/*.css`],
-      injectCss: true,
-    }, { reload: false }),
-
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
@@ -37,10 +27,6 @@ module.exports = {
   ],
   module: {
     rules: [
-      // {
-      //   test: /\.vue$/,
-      //   use: 'vue-loader',
-      // },
       {
         test: /\.s?[ac]ss$/i,
         use: [

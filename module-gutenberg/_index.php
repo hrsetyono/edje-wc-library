@@ -17,7 +17,7 @@ function h_shop_editor_assets() {
   ];
 
   foreach( $assets as $a ) {
-    wp_enqueue_script( $a, $dir . "/$a.js", [ 'wp-blocks', 'wp-dom' ] , H_WC_VERSION, true );
-    wp_enqueue_style( $a, $dir . "/$a.css", [ 'wp-edit-blocks' ], H_WC_VERSION );
+    wp_enqueue_script( $a, $dir . "/$a.js", [ 'wp-blocks', 'wp-dom' ] , HWC_VERSION, true );
+    wp_enqueue_style( $a, $dir . "/$a.css", [ 'wp-edit-blocks' ], HWC_VERSION );
   }
 }

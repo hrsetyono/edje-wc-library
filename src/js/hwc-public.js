@@ -149,30 +149,6 @@ const hMobileTabs = {
     }
 
     $button.classList.toggle('active');
-
-    // if ($tab) {
-    //   $tab.style.display = '';
-    // }
-
-    // // deactivate other tab buttons
-    // const $activeButton = document.querySelector('.h-tab-mobile.active');
-    // if ($activeButton) {
-    //   $activeButton.classList.remove('active');
-    // }
-
-    // // hide other tabs
-    // const $tabs = document.querySelectorAll('.wc-tab');
-    // [...$tabs].forEach(($t) => {
-    //   $t.style.display = 'none';
-    // });
-
-    // // highlight button
-    // $button.classList.add('active');
-
-    // // show selected tab
-    // if ($tab) {
-    //   $tab.style.display = '';
-    // }
   },
 };
 

@@ -1,4 +1,4 @@
-import './h-variations.sass';
+import './hwc-variations.sass';
 
 const $ = jQuery;
 
@@ -126,7 +126,6 @@ const hVariationButtons = {
     this.initCreateVariations();
 
     $('#woocommerce-product-data').on('woocommerce_variations_loaded', () => {
-      console.log('loaded');
       this.moveActionSelect();
       this.renderToolbarButtons();
     });
