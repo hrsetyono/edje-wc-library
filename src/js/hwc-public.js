@@ -3,10 +3,10 @@
  */
 const hQuantity = {
   init() {
-    const $cartForm = document.querySelector('.woocommerce-cart .woocommerce, form.cart');
-    if ($cartForm) {
-      $cartForm.addEventListener('click', this.changeQuantity);
-    }
+    const $cartForms = document.querySelectorAll('.woocommerce-cart .woocommerce, form.cart');
+    $cartForms.forEach(($f) => {
+      $f.addEventListener('click', this.changeQuantity);
+    });
   },
 
   changeQuantity(e) {
@@ -21,9 +21,9 @@ const hQuantity = {
 
     $field.value = result;
 
-    // trigger change event to check whether to hide (-) button or not
-    const changeEvent = new Event('change');
-    $field.dispatchEvent(changeEvent);
+    // trigger change event for future use
+    // const changeEvent = new Event('change');
+    // $field.dispatchEvent(changeEvent);
 
     // trigger input event to enable "Update Cart" button in Cart page
     const event = new Event('input', { bubbles: true });
@@ -149,30 +149,6 @@ const hMobileTabs = {
     }
 
     $button.classList.toggle('active');
-
-    // if ($tab) {
-    //   $tab.style.display = '';
-    // }
-
-    // // deactivate other tab buttons
-    // const $activeButton = document.querySelector('.h-tab-mobile.active');
-    // if ($activeButton) {
-    //   $activeButton.classList.remove('active');
-    // }
-
-    // // hide other tabs
-    // const $tabs = document.querySelectorAll('.wc-tab');
-    // [...$tabs].forEach(($t) => {
-    //   $t.style.display = 'none';
-    // });
-
-    // // highlight button
-    // $button.classList.add('active');
-
-    // // show selected tab
-    // if ($tab) {
-    //   $tab.style.display = '';
-    // }
   },
 };
 

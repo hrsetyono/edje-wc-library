@@ -25,10 +25,8 @@ function h_variations_enqueue($hook) {
   $screen = get_current_screen();
   if ($screen->base !== 'post' || $screen->post_type !== 'product') { return; }
 
-  $dist = HOO_DIR . '/dist';
-
-  wp_enqueue_style('h-variations', $dist . '/h-variations.css', [], H_WC_VERSION);
-  wp_enqueue_script('h-variations', $dist . '/h-variations.js', ['jquery'], H_WC_VERSION);
+  wp_enqueue_style('hwc-variations', HWC_DIST . '/hwc-variations.css', [], HWC_VERSION);
+  wp_enqueue_script('hwc-variations', HWC_DIST . '/hwc-variations.js', ['jquery'], HWC_VERSION);
 }
 
 /**

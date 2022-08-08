@@ -13,7 +13,7 @@ function hoo_allow_template_in_plugin( $template, $template_name, $template_path
     $template_path = $woocommerce->template_url;
   }
 
-  $plugin_path  = HOO_PATH . '/templates/';
+  $plugin_path  = HWC_PATH . '/templates/';
 
   // Look within passed path within the theme - this is priority
   $template = locate_template(

@@ -11,20 +11,20 @@
 </head>
 
 <body <?php body_class(); ?>>
-  <?php if( have_posts() ): while(have_posts() ): the_post();
+  <?php if (have_posts()): while(have_posts()): the_post();
 
     // Banner
-    $thumbnail_url = get_the_post_thumbnail_url( $post->ID );
-    if( $thumbnail_url ) { ?>
-      <section class="checkout-banner" style="background: url('<?php echo $thumbnail_url ?>') center center;">
-    <?php } else { ?>
+    $thumbnail_url = get_the_post_thumbnail_url($post->ID);
+    if ($thumbnail_url): ?>
+      <section class="checkout-banner" style="background: url('<?= $thumbnail_url ?>') center center;">
+    <?php else: ?>
       <section class="checkout-banner checkout-empty-banner">
-    <?php } ?>
+    <?php endif; ?>
 
         <div class="checkout-banner__inner-container">
-          <?php if( function_exists('the_custom_logo') ) {
+          <?php if (function_exists('the_custom_logo')):
             the_custom_logo();
-          } ?>
+          endif; ?>
         </div>
       </section>
 

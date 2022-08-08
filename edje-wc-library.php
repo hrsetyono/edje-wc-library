@@ -5,15 +5,15 @@ Description: WooCommerce library plugins to be used with Edje Theme.
 Plugin URI: http://github.com/hrsetyono/edje-wc-library
 Author: Pixel Studio
 Author URI: https://pixelstudio.id/
-Version: 4.2.3
+Version: 4.3.0
 */
 
 if (!defined('WPINC')) { die; } // exit if accessed directly
 
-define('H_WC_VERSION', '4.2.2');
-define('HOO_DIR', plugins_url('', __FILE__ ));
-define('HOO_PATH', untrailingslashit(plugin_dir_path( __FILE__ )));
-define('HOO_BASE', basename(dirname(__FILE__) ).'/'.basename(__FILE__));
+define('HWC_VERSION', '4.3.0');
+define('HWC_DIR', plugins_url('', __FILE__ ));
+define('HWC_DIST', plugin_dir_url(__FILE__) . 'dist');
+define('HWC_PATH', untrailingslashit(plugin_dir_path( __FILE__ )));
 
 /////
 
@@ -55,6 +55,5 @@ function _h_after_woocommerce_template_loaded() {
  * Enqueue custom WooCommerce assets
  */
 function _h_enqueue_woocommerce_scripts() {
-  $dist = HOO_DIR . '/dist';
-  wp_enqueue_script('edje-wc', $dist . '/edje-wc.js', [], H_WC_VERSION, true);
+  wp_enqueue_script('hwc-public', HWC_DIST . '/hwc-public.js', [], HWC_VERSION, true);
 }

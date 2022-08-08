@@ -4,9 +4,9 @@
   "fields": [
       {
           "key": "field_61c67e72cb76f",
-          "label": "Style",
-          "name": "style",
-          "type": "radio",
+          "label": "Cart Style",
+          "name": "cart_style",
+          "type": "button_group",
           "instructions": "",
           "required": 0,
           "conditional_logic": 0,
@@ -32,7 +32,7 @@
           {
               "param": "widget",
               "operator": "==",
-              "value": "h_cart"
+              "value": "hwc_cart"
           }
       ]
   ],
