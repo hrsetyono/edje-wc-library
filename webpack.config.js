@@ -7,7 +7,7 @@ const outputPath = 'dist';
 const entryPoints = {
   'hwc-public': `${jsPath}/hwc-public.js`,
   'hwc-admin': `${jsPath}/hwc-admin.js`,
-  'h-variations': './module-variations-ui/src/h-variations.js',
+  'hwc-variations': './module-variations-ui/src/hwc-variations.js',
 };
 
 module.exports = {

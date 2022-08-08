@@ -3,10 +3,10 @@
  */
 const hQuantity = {
   init() {
-    const $cartForm = document.querySelector('.woocommerce-cart .woocommerce, form.cart');
-    if ($cartForm) {
-      $cartForm.addEventListener('click', this.changeQuantity);
-    }
+    const $cartForms = document.querySelectorAll('.woocommerce-cart .woocommerce, form.cart');
+    $cartForms.forEach(($f) => {
+      $f.addEventListener('click', this.changeQuantity);
+    });
   },
 
   changeQuantity(e) {
@@ -21,9 +21,9 @@ const hQuantity = {
 
     $field.value = result;
 
-    // trigger change event to check whether to hide (-) button or not
-    const changeEvent = new Event('change');
-    $field.dispatchEvent(changeEvent);
+    // trigger change event for future use
+    // const changeEvent = new Event('change');
+    // $field.dispatchEvent(changeEvent);
 
     // trigger input event to enable "Update Cart" button in Cart page
     const event = new Event('input', { bubbles: true });
