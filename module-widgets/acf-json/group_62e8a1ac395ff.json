@@ -7,7 +7,7 @@
             "label": "Label Logged Out",
             "name": "label_logged_out",
             "type": "text",
-            "instructions": "",
+            "instructions": "Leave empty to not have a label",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -15,8 +15,8 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": "Login",
+            "default_value": "Login",
+            "placeholder": "",
             "prepend": "",
             "append": "",
             "maxlength": ""
@@ -34,8 +34,8 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": "View Profile",
+            "default_value": "View Profile",
+            "placeholder": "",
             "prepend": "",
             "append": "",
             "maxlength": ""
@@ -59,5 +59,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1659412956
+    "modified": 1662369364
 }
