@@ -13,6 +13,9 @@ class HWC_Widget_Cart extends HWC_Widget {
     ]);
   }
 
+  /**
+   * 
+   */
   function widget($args, $instance) {
     $widget_id = 'widget_' . $args['widget_id'];
     $data = [
@@ -26,6 +29,9 @@ class HWC_Widget_Cart extends HWC_Widget {
     echo $args['after_widget'];
   }
 
+  /**
+   * 
+   */
   function render_widget($data) {
     [
       'cart_style' => $cart_style,
